@@ -3368,7 +3368,9 @@
         if (!response.ok) throw new Error(`API ${response.status}`);
         state.mapConfig = await response.json();
         state.areas = Array.isArray(state.mapConfig.areas) ? state.mapConfig.areas : state.areas;
+        console.log("[FluffyGo] mapConfig loaded:", state.mapConfig);
       } catch (error) {
+        console.error("[FluffyGo] loadFrontendConfig failed:", error);
         state.mapConfig = { baidu_map_enabled: false, map_provider: "offline" };
       }
     }
@@ -3569,7 +3571,8 @@
           map.addOverlay(marker);
         });
       } catch (error) {
-        showHomeMapFallback(`${areaLabel()}附近已加载 ${pois.length || 0} 个目的地，地图暂时使用卡片浏览。`);
+        console.error("[FluffyGo] renderHomeMap error:", error, "mapConfig:", state.mapConfig);
+        showHomeMapFallback(`${areaLabel()}附近已加载 ${pois.length || 0} 个目的地，地图暂时使用卡片浏览。(${error.message})`);
       }
     }
 
