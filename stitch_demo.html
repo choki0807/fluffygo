@@ -5508,8 +5508,6 @@
     }
 
     async function init() {
-      // Always bind events first so the UI is interactive
-      bindEvents();
       try {
         const response = await fetch("fluffygo_demo_poi.json", { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -5530,6 +5528,8 @@
           </div>
         `;
       }
+      // Bind events AFTER renderChips so dynamic buttons exist
+      bindEvents();
       // These can run regardless of data load success
       try { await checkBackendHealth(); } catch (_) {}
       try { await loadFrontendConfig(); } catch (_) {}
