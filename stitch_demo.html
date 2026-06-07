@@ -5505,6 +5505,8 @@
     }
 
     async function init() {
+      // Always bind events first so the UI is interactive
+      bindEvents();
       try {
         const response = await fetch("fluffygo_demo_poi.json", { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -5512,12 +5514,7 @@
         const project = state.data.project || {};
         document.getElementById("area-pill").textContent = project.demo_area || "南京新街口";
         renderChips();
-        bindEvents();
         renderCommunityModules();
-        await checkBackendHealth();
-        await loadFrontendConfig();
-        updateAreaTabs();
-        await refreshHomeNearby();
       } catch (error) {
         const panel = document.getElementById("error-panel");
         panel.classList.remove("hidden");
@@ -5530,6 +5527,11 @@
           </div>
         `;
       }
+      // These can run regardless of data load success
+      try { await checkBackendHealth(); } catch (_) {}
+      try { await loadFrontendConfig(); } catch (_) {}
+      try { updateAreaTabs(); } catch (_) {}
+      try { await refreshHomeNearby(); } catch (_) {}
     }
 
     init();
