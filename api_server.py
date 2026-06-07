@@ -10,6 +10,8 @@ import requests
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 
@@ -43,16 +45,19 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://127.0.0.1:8000",
-        "http://localhost:8000",
-        "http://127.0.0.1:8501",
-        "http://localhost:8501",
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve static assets (images, etc.)
+app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+
+
+@app.get("/")
+async def serve_frontend():
+    return FileResponse("stitch_demo.html", media_type="text/html")
 
 
 class PlanRouteRequest(BaseModel):
