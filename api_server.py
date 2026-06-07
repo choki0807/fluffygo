@@ -61,6 +61,11 @@ async def serve_frontend():
     return FileResponse(BASE_DIR / "stitch_demo.html", media_type="text/html")
 
 
+@app.get("/fluffygo_demo_poi.json")
+async def serve_demo_data():
+    return FileResponse(BASE_DIR / "fluffygo_demo_poi.json", media_type="application/json")
+
+
 class PlanRouteRequest(BaseModel):
     user_message: str = Field(..., min_length=1)
     force_route_type: Optional[str] = None
