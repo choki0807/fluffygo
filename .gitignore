@@ -1,0 +1,15 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.log
+local-http-server*.log
+api-server*.log
+data/user_feedback.json
+.DS_Store
+.venv/
+venv/
+node_modules/
+hello_codex.txt
+fluffygo_interview_package/
+fluffygo_interview_package.zip

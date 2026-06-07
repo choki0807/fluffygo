@@ -1,0 +1,3550 @@
+{
+  "project": {
+    "name": "FluffyGo",
+    "demo_area": "南京新街口",
+    "scenario": "核心商圈 2.5 小时短时带宠友好消费路线",
+    "description": "面向城市养狗人在高密度核心商圈中的短时带宠出行需求，生成街区活动空间、宠物友好消费点和宠物服务点组合路线。"
+  },
+  "user_input_example": {
+    "location": "南京新街口",
+    "available_time": "2.5小时",
+    "pet_type": "狗",
+    "pet_size": "中型犬",
+    "budget": 100,
+    "preferences": [
+      "短时散步",
+      "低拥挤度"
+    ],
+    "avoid": [
+      "太拥挤",
+      "太远"
+    ],
+    "commercial_intent": [
+      "咖啡",
+      "轻食",
+      "可选用品补给"
+    ]
+  },
+  "pois": {
+    "activity_spaces": [
+      {
+        "poi_id": "activity_001",
+        "name": "莫愁湖公园-湖心亭",
+        "category": "旅游景点",
+        "address": "南京市建邺区水西门大街132号莫愁湖公园",
+        "distance_m": 1336,
+        "location": {
+          "lat": 32.042792,
+          "lng": 118.770007
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "开放空间",
+            "待确认",
+            "莫愁湖 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_002",
+        "name": "莫愁湖公园-母婴室",
+        "category": "生活服务;其他",
+        "address": "江苏省南京市建邺区水西门大街132号莫愁湖景区南门游客中心内",
+        "distance_m": 1417,
+        "location": {
+          "lat": 32.037646,
+          "lng": 118.769762
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "生活服务",
+            "其他",
+            "开放空间",
+            "待确认",
+            "莫愁湖 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_003",
+        "name": "莫愁湖公园",
+        "category": "旅游景点;其他",
+        "address": "南京市建邺区水西门大街132号",
+        "distance_m": 1477,
+        "location": {
+          "lat": 32.041142,
+          "lng": 118.76843
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "其他",
+            "开放空间",
+            "待确认",
+            "莫愁湖 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_004",
+        "name": "莫愁湖公园-三道桥码头",
+        "category": "交通设施;港口",
+        "address": "南京市建邺区水西门大街132号莫愁湖公园内",
+        "distance_m": 1525,
+        "location": {
+          "lat": 32.039488,
+          "lng": 118.768088
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "交通设施",
+            "港口",
+            "开放空间",
+            "待确认",
+            "莫愁湖 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_005",
+        "name": "莫愁湖公园书画馆",
+        "category": "文化传媒;美术馆",
+        "address": "江苏省南京市建邺区水西门大街132号",
+        "distance_m": 1564,
+        "location": {
+          "lat": 32.0433,
+          "lng": 118.767642
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "文化传媒",
+            "美术馆",
+            "开放空间",
+            "待确认",
+            "莫愁湖 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_006",
+        "name": "乌龙潭公园",
+        "category": "旅游景点;公园",
+        "address": "江苏省南京市鼓楼区广州路217号(省人民医院对面)",
+        "distance_m": 1582,
+        "location": {
+          "lat": 32.051905,
+          "lng": 118.772649
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "新街口 城市公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_007",
+        "name": "南湖公园",
+        "category": "旅游景点;公园",
+        "address": "江苏省南京市建邺区南湖东路与彩虹路交叉口",
+        "distance_m": 1631,
+        "location": {
+          "lat": 32.034024,
+          "lng": 118.769206
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "新街口 城市公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_008",
+        "name": "郑和公园",
+        "category": "旅游景点;公园",
+        "address": "江苏省南京市秦淮区长太平巷35号",
+        "distance_m": 1635,
+        "location": {
+          "lat": 32.03775,
+          "lng": 118.800876
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "玄武湖 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_009",
+        "name": "鼓楼公园",
+        "category": "旅游景点;公园",
+        "address": "江苏省南京市鼓楼区北京西路1-2号",
+        "distance_m": 2637,
+        "location": {
+          "lat": 32.064917,
+          "lng": 118.788487
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "新街口 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_010",
+        "name": "绿地广场",
+        "category": "休闲娱乐;休闲广场",
+        "address": "江苏省南京市鼓楼区鼓楼街88号",
+        "distance_m": 2694,
+        "location": {
+          "lat": 32.065295,
+          "lng": 118.789503
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "休闲娱乐",
+            "休闲广场",
+            "开放空间",
+            "待确认",
+            "新街口 绿地",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_011",
+        "name": "大钟亭公园",
+        "category": "旅游景点;公园",
+        "address": "大钟亭路1号",
+        "distance_m": 2882,
+        "location": {
+          "lat": 32.066753,
+          "lng": 118.791018
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "新街口 城市公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_012",
+        "name": "和平公园-还都塔",
+        "category": "旅游景点;文物古迹",
+        "address": "南京市玄武区北京东路和平公园",
+        "distance_m": 3069,
+        "location": {
+          "lat": 32.063646,
+          "lng": 118.803544
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "文物古迹",
+            "开放空间",
+            "待确认",
+            "新街口 社区公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_013",
+        "name": "和平公园-钟楼",
+        "category": "旅游景点",
+        "address": "南京市玄武区北京东路和平公园内",
+        "distance_m": 3092,
+        "location": {
+          "lat": 32.063847,
+          "lng": 118.803637
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "开放空间",
+            "待确认",
+            "新街口 社区公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_014",
+        "name": "和平公园",
+        "category": "旅游景点;公园",
+        "address": "南京市玄武区北京东路43号",
+        "distance_m": 3101,
+        "location": {
+          "lat": 32.063963,
+          "lng": 118.803606
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "新街口 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_015",
+        "name": "雅居乐公园",
+        "category": "旅游景点;公园",
+        "address": "南京市秦淮区龙蟠南路33号10号",
+        "distance_m": 3345,
+        "location": {
+          "lat": 32.016931,
+          "lng": 118.804579
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "新街口 城市公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_016",
+        "name": "明御河公园",
+        "category": "旅游景点;公园",
+        "address": "南京市秦淮区瑞阳街33号",
+        "distance_m": 3576,
+        "location": {
+          "lat": 32.035185,
+          "lng": 118.8213
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "新街口 城市公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_017",
+        "name": "口袋公园",
+        "category": "旅游景点;公园",
+        "address": "南京市建邺区应天大街南京市公安局建邺分局南苑派出所西北侧",
+        "distance_m": 3843,
+        "location": {
+          "lat": 32.02613,
+          "lng": 118.747573
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "新街口 社区公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_018",
+        "name": "九华山公园",
+        "category": "旅游景点;公园",
+        "address": "南京市玄武区北京东路",
+        "distance_m": 3948,
+        "location": {
+          "lat": 32.06604,
+          "lng": 118.814381
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "新街口 城市公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_019",
+        "name": "西流湾公园",
+        "category": "旅游景点;公园",
+        "address": "中山北路146",
+        "distance_m": 3961,
+        "location": {
+          "lat": 32.076922,
+          "lng": 118.779606
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "新街口 城市公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_020",
+        "name": "白马公园",
+        "category": "旅游景点;公园",
+        "address": "江苏省南京市玄武区白马山庄1号",
+        "distance_m": 4633,
+        "location": {
+          "lat": 32.066769,
+          "lng": 118.823191
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "玄武湖 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_021",
+        "name": "玄武广场",
+        "category": "休闲娱乐;休闲广场",
+        "address": "南京市玄武区玄武巷1号玄武湖公园内梁洲",
+        "distance_m": 4869,
+        "location": {
+          "lat": 32.083327,
+          "lng": 118.799414
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "休闲娱乐",
+            "休闲广场",
+            "开放空间",
+            "待确认",
+            "玄武湖 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_022",
+        "name": "玄武湖景区-情侣园",
+        "category": "旅游景点;公园",
+        "address": "江苏省南京市玄武区龙蟠路100号",
+        "distance_m": 4922,
+        "location": {
+          "lat": 32.076765,
+          "lng": 118.815677
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "旅游景点",
+            "公园",
+            "开放空间",
+            "待确认",
+            "玄武湖 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_023",
+        "name": "新街口步行街",
+        "category": "道路",
+        "address": "江苏省南京市秦淮区",
+        "distance_m": 883,
+        "location": {
+          "lat": 32.046099,
+          "lng": 118.791748
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "商业街区",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "道路",
+            "商业街区",
+            "待确认",
+            "新街口 公园",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      },
+      {
+        "poi_id": "activity_024",
+        "name": "新街口步行街/正洪街(路口)",
+        "category": "道路;路口",
+        "address": "南京市秦淮区新街口步行街",
+        "distance_m": 890,
+        "location": {
+          "lat": 32.046043,
+          "lng": 118.79188
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "商业街区",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "道路",
+            "路口",
+            "商业街区",
+            "待确认",
+            "新街口 步行街",
+            "0-20元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-20元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为遛宠路线中的短时活动、牵引散步或临时停留空间"
+      }
+    ],
+    "consumption_points": [
+      {
+        "poi_id": "consumption_001",
+        "name": "和熟·巴斯克芝士蛋糕(新街口地铁店)",
+        "category": "美食;蛋糕甜品店",
+        "address": "新街口地铁站一号线三号下来右转地铁商铺C42号黄记玉米汁隔壁",
+        "distance_m": 435,
+        "location": {
+          "lat": 32.040912,
+          "lng": 118.788669
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "蛋糕甜品店",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 露台 咖啡",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_002",
+        "name": "多克多蒸气茶DOKDO(新街口店)",
+        "category": "美食;其他",
+        "address": "朝天宫街道石鼓路40号(近丰富路)",
+        "distance_m": 660,
+        "location": {
+          "lat": 32.045723,
+          "lng": 118.789026
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "其他",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 外摆 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_003",
+        "name": "OT另茶(南京新街口金鹰店)",
+        "category": "美食;其他",
+        "address": "新街口商贸街区汉中路101号负一层A-FB1001-1",
+        "distance_m": 755,
+        "location": {
+          "lat": 32.048022,
+          "lng": 118.786319
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "其他",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 露台 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_004",
+        "name": "段氏·川味江湖菜馆(新街口店)",
+        "category": "美食;中餐厅",
+        "address": "汉中路27号友谊广场(负一楼)13号",
+        "distance_m": 786,
+        "location": {
+          "lat": 32.047686,
+          "lng": 118.788118
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "中餐厅",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 外摆 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_005",
+        "name": "古早萬丹传统台湾糕点(新街口店)",
+        "category": "美食;蛋糕甜品店",
+        "address": "地铁一号线新街口站B02号（新街口地铁站12号线负一层,好一朵茉莉花正对面）",
+        "distance_m": 930,
+        "location": {
+          "lat": 32.047362,
+          "lng": 118.79114
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "蛋糕甜品店",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 露台 咖啡",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_006",
+        "name": "小川料理(新街口店)",
+        "category": "美食;外国餐厅",
+        "address": "洪武路西方巷26号（雾造隔壁）",
+        "distance_m": 988,
+        "location": {
+          "lat": 32.037946,
+          "lng": 118.793718
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "外国餐厅",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 外摆 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_007",
+        "name": "Risingcoffee升咖啡(新街口店)",
+        "category": "美食;咖啡厅",
+        "address": "火瓦巷35-1号104室（刀郎烧烤隔壁）",
+        "distance_m": 1136,
+        "location": {
+          "lat": 32.038115,
+          "lng": 118.795465
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "咖啡厅",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 露台 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_008",
+        "name": "85℃ Coffee",
+        "category": "美食;咖啡厅",
+        "address": "江苏省南京市秦淮区仙鹤街4号",
+        "distance_m": 1769,
+        "location": {
+          "lat": 32.025782,
+          "lng": 118.781088
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "咖啡厅",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 露台 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_009",
+        "name": "Alkupera Cafe原点咖啡",
+        "category": "美食;咖啡厅",
+        "address": "汉口路47号二楼（好运智竞馆门牌上楼）",
+        "distance_m": 2011,
+        "location": {
+          "lat": 32.059552,
+          "lng": 118.78543
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "咖啡厅",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 露台 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_010",
+        "name": "醉隐·庭院露台·bar",
+        "category": "美食;酒吧",
+        "address": "马道街37-1号",
+        "distance_m": 2495,
+        "location": {
+          "lat": 32.020557,
+          "lng": 118.793618
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "酒吧",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 露台 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_011",
+        "name": "怒烤天台露营烤串(建邺吾悦店)",
+        "category": "美食;中餐厅",
+        "address": "燕山路建邺吾悦广场5楼（好利来左侧三号影院电梯直达）",
+        "distance_m": 4030,
+        "location": {
+          "lat": 32.0432,
+          "lng": 118.741387
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "外摆/户外",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "中餐厅",
+            "外摆",
+            "户外",
+            "可能宠物友好",
+            "新街口 露台 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_012",
+        "name": "星巴克(南京汉中环亚广场店)",
+        "category": "美食;咖啡厅",
+        "address": "江苏省南京市秦淮区汉中路143号F01-05铺位",
+        "distance_m": 744,
+        "location": {
+          "lat": 32.04813,
+          "lng": 118.78302
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "咖啡厅",
+            "开放空间",
+            "待确认",
+            "新街口 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_013",
+        "name": "德龙咖啡机(苏宁生活广场新街口店)",
+        "category": "购物;家电数码",
+        "address": "南京市秦淮区淮海路苏宁易购二楼",
+        "distance_m": 888,
+        "location": {
+          "lat": 32.043323,
+          "lng": 118.793277
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "家电数码",
+            "开放空间",
+            "待确认",
+            "新街口 广场",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_014",
+        "name": "阿嬷手作(南京德基广场店)",
+        "category": "美食;其他",
+        "address": "新街口街道青石街中山南路18号德基广场一期B119",
+        "distance_m": 1170,
+        "location": {
+          "lat": 32.049701,
+          "lng": 118.791894
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "其他",
+            "开放空间",
+            "待确认",
+            "新街口 茶饮",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_015",
+        "name": "% Arabica阿拉比卡咖啡(德基广场店)",
+        "category": "美食;咖啡厅",
+        "address": "中山路18号德基广场二期负一层C162号商铺",
+        "distance_m": 1244,
+        "location": {
+          "lat": 32.050929,
+          "lng": 118.791214
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "咖啡厅",
+            "开放空间",
+            "待确认",
+            "新街口 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_016",
+        "name": "回味鸭血粉丝汤(荔枝广场店)",
+        "category": "美食;小吃快餐店",
+        "address": "新街口街道北京东路4号荔枝广场2楼",
+        "distance_m": 2605,
+        "location": {
+          "lat": 32.064002,
+          "lng": 118.791829
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "小吃快餐店",
+            "开放空间",
+            "待确认",
+            "新街口 小吃",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_017",
+        "name": "奈雪的茶(紫峰广场店)",
+        "category": "美食;其他",
+        "address": "中山北路6号绿地紫峰广场1F-A03号铺位1号门口",
+        "distance_m": 2848,
+        "location": {
+          "lat": 32.066763,
+          "lng": 118.789129
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "其他",
+            "开放空间",
+            "待确认",
+            "新街口 绿地",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_018",
+        "name": "wagas(绿地紫峰店)",
+        "category": "美食;外国餐厅",
+        "address": "中山北路6号紫峰购物广场一层B01商铺",
+        "distance_m": 2861,
+        "location": {
+          "lat": 32.066901,
+          "lng": 118.788978
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "外国餐厅",
+            "开放空间",
+            "待确认",
+            "新街口 绿地",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_019",
+        "name": "星巴克(南京绿地广场店)",
+        "category": "美食;咖啡厅",
+        "address": "江苏省南京市鼓楼区中山北路6号",
+        "distance_m": 2931,
+        "location": {
+          "lat": 32.067495,
+          "lng": 118.78926
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "咖啡厅",
+            "开放空间",
+            "待确认",
+            "新街口 绿地",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_020",
+        "name": "麦当劳(玄武湖公园店)",
+        "category": "美食;小吃快餐店",
+        "address": "玄武巷1号玄武湖公园内",
+        "distance_m": 4585,
+        "location": {
+          "lat": 32.080616,
+          "lng": 118.79951
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "小吃快餐店",
+            "开放空间",
+            "待确认",
+            "玄武湖 公园",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_021",
+        "name": "慢生活(玄武湖公园店)",
+        "category": "美食;咖啡厅",
+        "address": "环湖路玄武湖公园-情侣园",
+        "distance_m": 4843,
+        "location": {
+          "lat": 32.074831,
+          "lng": 118.817183
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "咖啡厅",
+            "开放空间",
+            "待确认",
+            "玄武湖 公园",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_022",
+        "name": "木小馆家庭厨房(新街口店)",
+        "category": "美食;中餐厅",
+        "address": "江苏省南京市秦淮区王府大街113号",
+        "distance_m": 43,
+        "location": {
+          "lat": 32.041709,
+          "lng": 118.784491
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "中餐厅",
+            "待确认",
+            "新街口 餐厅",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_023",
+        "name": "曼玲粥店(新街口店)",
+        "category": "美食;小吃快餐店",
+        "address": "王府大街139号一层-5-1",
+        "distance_m": 94,
+        "location": {
+          "lat": 32.040689,
+          "lng": 118.783793
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "小吃快餐店",
+            "待确认",
+            "新街口 餐厅",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_024",
+        "name": "潮粤客茶点(王府大街店)",
+        "category": "美食;中餐厅",
+        "address": "王府大街139号-5",
+        "distance_m": 96,
+        "location": {
+          "lat": 32.04068,
+          "lng": 118.783761
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "中餐厅",
+            "待确认",
+            "新街口 餐厅",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_025",
+        "name": "亚朵酒店中餐厅",
+        "category": "美食;中餐厅",
+        "address": "江苏省南京市秦淮区朝天宫街道秣陵路99号（亚朵酒店旁）",
+        "distance_m": 168,
+        "location": {
+          "lat": 32.043008,
+          "lng": 118.78394
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "中餐厅",
+            "待确认",
+            "新街口 餐厅",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_026",
+        "name": "蟹叁寳·蟹家宴·蟹黄捞饭(南京新街口店)",
+        "category": "美食;中餐厅",
+        "address": "丰富路105号",
+        "distance_m": 264,
+        "location": {
+          "lat": 32.041335,
+          "lng": 118.786903
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "中餐厅",
+            "待确认",
+            "新街口 餐厅",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_027",
+        "name": "玉子屋·厚炸猪排(新街口店)",
+        "category": "美食;外国餐厅",
+        "address": "新街口丰富路111号斤也屋",
+        "distance_m": 266,
+        "location": {
+          "lat": 32.041483,
+          "lng": 118.786924
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "外国餐厅",
+            "待确认",
+            "新街口 餐厅",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_028",
+        "name": "骨时候(新街口丰富路店)",
+        "category": "美食;中餐厅",
+        "address": "丰富路58-2号（江苏省儿童康复研究中心对面）",
+        "distance_m": 267,
+        "location": {
+          "lat": 32.040014,
+          "lng": 118.786334
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "中餐厅",
+            "待确认",
+            "新街口 餐厅",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_029",
+        "name": "Blue Whale Coffee·蓝鲸咖啡(新街口店)",
+        "category": "美食;咖啡厅",
+        "address": "南台巷西6号-101-4室",
+        "distance_m": 341,
+        "location": {
+          "lat": 32.043576,
+          "lng": 118.786764
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "咖啡厅",
+            "待确认",
+            "新街口 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_030",
+        "name": "茶百道(新街口店)",
+        "category": "美食;其他",
+        "address": "丰富路181号2室",
+        "distance_m": 432,
+        "location": {
+          "lat": 32.043519,
+          "lng": 118.788017
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "其他",
+            "待确认",
+            "新街口 茶饮",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_031",
+        "name": "百分茶(丰富路店)",
+        "category": "美食;其他",
+        "address": "丰富路201号(新街口地铁站15号口步行360米)",
+        "distance_m": 478,
+        "location": {
+          "lat": 32.043938,
+          "lng": 118.788279
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "其他",
+            "待确认",
+            "新街口 茶饮",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_032",
+        "name": "水之惠鲜鱼料理(王府大街店)",
+        "category": "美食;外国餐厅",
+        "address": "王府大街18号（地铁1/2号线新街口站20号出口步行350m）",
+        "distance_m": 499,
+        "location": {
+          "lat": 32.045638,
+          "lng": 118.786165
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "外国餐厅",
+            "待确认",
+            "新街口 步行街",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_033",
+        "name": "冯三孃跷脚牛肉(新街口店)",
+        "category": "美食;中餐厅",
+        "address": "丰富路203号",
+        "distance_m": 509,
+        "location": {
+          "lat": 32.044226,
+          "lng": 118.788444
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "中餐厅",
+            "待确认",
+            "新街口 餐厅",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_034",
+        "name": "Jack‘s Place杰克地方西餐厅(新街口店)",
+        "category": "美食;外国餐厅",
+        "address": "朝天宫街道王府大街35号(王府大街与石鼓路交叉口)",
+        "distance_m": 520,
+        "location": {
+          "lat": 32.045614,
+          "lng": 118.786735
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "外国餐厅",
+            "待确认",
+            "新街口 餐厅",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_035",
+        "name": "美亦粥(明瓦廊店)",
+        "category": "美食;小吃快餐店",
+        "address": "明瓦廊105号（新街口易记皮肚面馆旁边）",
+        "distance_m": 525,
+        "location": {
+          "lat": 32.042844,
+          "lng": 118.78945
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "小吃快餐店",
+            "待确认",
+            "新街口 小吃",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      },
+      {
+        "poi_id": "consumption_036",
+        "name": "Alimentari Grande意大利餐吧&披萨(南京新街口店)",
+        "category": "美食;外国餐厅",
+        "address": "石鼓路49号1-4",
+        "distance_m": 533,
+        "location": {
+          "lat": 32.045628,
+          "lng": 118.78699
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "待确认",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "外国餐厅",
+            "待确认",
+            "新街口 餐厅",
+            "60-120元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "60-120元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为路线中的咖啡、餐饮、轻食或低客单消费停靠点"
+      }
+    ],
+    "pet_services": [
+      {
+        "poi_id": "service_001",
+        "name": "噗噗宠物自助浴场(新街口店)",
+        "category": "生活服务;宠物服务",
+        "address": "莫愁路329号7-2号楼106室",
+        "distance_m": 345,
+        "location": {
+          "lat": 32.042965,
+          "lng": 118.780862
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "生活服务",
+            "宠物服务",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物店",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      },
+      {
+        "poi_id": "service_002",
+        "name": "相当宠·宠物蛋糕·洗护",
+        "category": "生活服务;宠物服务",
+        "address": "莫愁湖东路16号-6",
+        "distance_m": 996,
+        "location": {
+          "lat": 32.039693,
+          "lng": 118.773742
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "生活服务",
+            "宠物服务",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物洗护",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      },
+      {
+        "poi_id": "service_003",
+        "name": "南京东洲宠物用品有限公司",
+        "category": "公司企业;公司",
+        "address": "江苏省南京市玄武区新街口街道长江路188号德基大厦7楼D座",
+        "distance_m": 1585,
+        "location": {
+          "lat": 32.050989,
+          "lng": 118.796653
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "公司企业",
+            "公司",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物洗护",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      },
+      {
+        "poi_id": "service_004",
+        "name": "微橘宠物生活(五福街店)",
+        "category": "生活服务;宠物服务",
+        "address": "五福街53号",
+        "distance_m": 1611,
+        "location": {
+          "lat": 32.027725,
+          "lng": 118.778784
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "生活服务",
+            "宠物服务",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物洗护",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      },
+      {
+        "poi_id": "service_005",
+        "name": "喵仙屋·猫咪活体售卖·猫咪洗护美容(新街口店)",
+        "category": "生活服务;宠物服务",
+        "address": "长白街68-3号",
+        "distance_m": 2000,
+        "location": {
+          "lat": 32.044938,
+          "lng": 118.80493
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "生活服务",
+            "宠物服务",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物店",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      },
+      {
+        "poi_id": "service_006",
+        "name": "丢丢宠物(一枝园店)",
+        "category": "生活服务;宠物服务",
+        "address": "鸡鹅巷红庙一枝园20号（珠江路百脑汇对面，老如意不夜城旁边）",
+        "distance_m": 2014,
+        "location": {
+          "lat": 32.05448,
+          "lng": 118.799019
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "生活服务",
+            "宠物服务",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物店",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      },
+      {
+        "poi_id": "service_007",
+        "name": "咪噜宠物(木马公寓店)",
+        "category": "生活服务;宠物服务",
+        "address": "丹凤街卫巷1号木马公寓",
+        "distance_m": 2110,
+        "location": {
+          "lat": 32.058316,
+          "lng": 118.794493
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "生活服务",
+            "宠物服务",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物店",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      },
+      {
+        "poi_id": "service_008",
+        "name": "宠物店",
+        "category": "生活服务;宠物服务",
+        "address": "中央路47-8",
+        "distance_m": 3345,
+        "location": {
+          "lat": 32.071111,
+          "lng": 118.790348
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "生活服务",
+            "宠物服务",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物洗护",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      },
+      {
+        "poi_id": "service_009",
+        "name": "MISS DENG宠物洗护沙龙·猫咪CFA猫舍",
+        "category": "生活服务;宠物服务",
+        "address": "雅居乐花园外围商铺公园内婓石咖啡馆旁",
+        "distance_m": 3369,
+        "location": {
+          "lat": 32.01611,
+          "lng": 118.803618
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "生活服务",
+            "宠物服务",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物洗护",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      },
+      {
+        "poi_id": "service_010",
+        "name": "喵仙屋·猫咪活体售卖·猫咪洗护美容(瑞金路店)",
+        "category": "生活服务;宠物服务",
+        "address": "瑞金路52号",
+        "distance_m": 3617,
+        "location": {
+          "lat": 32.037752,
+          "lng": 118.822223
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "生活服务",
+            "宠物服务",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物洗护",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      },
+      {
+        "poi_id": "service_011",
+        "name": "萌喵荟·撸猫·宠物洗护·猫咖(南京河西万达店)",
+        "category": "休闲娱乐;其他",
+        "address": "集庆门大街万达西地二街区220-31号萌喵荟",
+        "distance_m": 4026,
+        "location": {
+          "lat": 32.035815,
+          "lng": 118.741913
+        },
+        "pet_friendly": {
+          "status": "宠物服务相关",
+          "confidence_level": "高",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中宠物服务关键词",
+          "suitable_pet_size": "小型犬/中型犬/猫"
+        },
+        "experience": {
+          "space_type": "宠物服务门店",
+          "crowd_level": "中",
+          "pet_stress_level": "低",
+          "tags": [
+            "休闲娱乐",
+            "其他",
+            "宠物服务门店",
+            "宠物服务相关",
+            "新街口 宠物洗护",
+            "60-150元"
+          ]
+        },
+        "business": {
+          "transaction_action": "电话咨询/到店服务",
+          "estimated_cost": "60-150元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为宠物洗护、用品补给、医疗咨询或到店服务节点"
+      }
+    ],
+    "rainy_day_backups": [
+      {
+        "poi_id": "rainy_001",
+        "name": "豪客来牛排(新街口大洋百货店)",
+        "category": "美食;外国餐厅",
+        "address": "中山南路122号大洋百货五楼",
+        "distance_m": 645,
+        "location": {
+          "lat": 32.044753,
+          "lng": 118.789758
+        },
+        "pet_friendly": {
+          "status": "可能宠物友好",
+          "confidence_level": "中",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "命中外摆/户外/宠物友好关键词",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "外国餐厅",
+            "室内",
+            "商场",
+            "可能宠物友好",
+            "新街口 露台 咖啡",
+            "30-80元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "30-80元"
+        },
+        "risk_note": "高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认；建议确认外摆是否开放及是否允许中型犬",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_002",
+        "name": "苏宁生活广场(新街口店)",
+        "category": "房地产;商业综合体",
+        "address": "淮海路68号",
+        "distance_m": 867,
+        "location": {
+          "lat": 32.043177,
+          "lng": 118.793091
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "小型犬/中型犬"
+        },
+        "experience": {
+          "space_type": "开放空间",
+          "crowd_level": "中",
+          "pet_stress_level": "中",
+          "tags": [
+            "房地产",
+            "商业综合体",
+            "开放空间",
+            "待确认",
+            "新街口 公园",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_003",
+        "name": "环亚广场(新街口店)",
+        "category": "购物;购物中心",
+        "address": "石鼓路33号",
+        "distance_m": 551,
+        "location": {
+          "lat": 32.04487,
+          "lng": 118.788386
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "开放空间或街区类 POI，需人工确认携宠规则",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "购物中心",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 广场",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_004",
+        "name": "川味1号怀旧火锅(新街口大洋百货店)",
+        "category": "美食;中餐厅",
+        "address": "江苏省南京市秦淮区中山南路122号大洋百货五楼",
+        "distance_m": 669,
+        "location": {
+          "lat": 32.044828,
+          "lng": 118.790024
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "中餐厅",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 餐厅",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_005",
+        "name": "洋葱咖喱(大洋百货新街口店)",
+        "category": "美食;小吃快餐店",
+        "address": "中山南路122号大洋百货B1楼",
+        "distance_m": 676,
+        "location": {
+          "lat": 32.045088,
+          "lng": 118.78988
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "小吃快餐店",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 轻食",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_006",
+        "name": "儿童乐园(金鹰国际购物中心新街口店)",
+        "category": "休闲娱乐;游戏场所",
+        "address": "汉中路89号金鹰国际购物中心F6",
+        "distance_m": 683,
+        "location": {
+          "lat": 32.047588,
+          "lng": 118.785108
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "休闲娱乐",
+            "游戏场所",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_007",
+        "name": "Yes Lemon就是柠·手打柠檬茶(南京大洋百货店)",
+        "category": "美食;其他",
+        "address": "中山南路122号B1-B15",
+        "distance_m": 684,
+        "location": {
+          "lat": 32.044994,
+          "lng": 118.790084
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "美食",
+            "其他",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 茶饮",
+            "20-60元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "20-60元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_008",
+        "name": "IREMY艾瑞美时尚假发(新街口金鹰国际购物中心店)",
+        "category": "购物;商铺",
+        "address": "汉中路89号金鹰新街口店A座3楼3049",
+        "distance_m": 697,
+        "location": {
+          "lat": 32.047232,
+          "lng": 118.787093
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "商铺",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_009",
+        "name": "COACH蔻驰(金鹰国际购物中心新街口店)",
+        "category": "购物;商铺",
+        "address": "汉中路89号金鹰新街口店A座1楼1020",
+        "distance_m": 698,
+        "location": {
+          "lat": 32.047287,
+          "lng": 118.786975
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "商铺",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_010",
+        "name": "Hush Puppies(新街口金鹰国际购物中心店)",
+        "category": "购物;商铺",
+        "address": "汉中路89号金鹰国际购物中心F4",
+        "distance_m": 698,
+        "location": {
+          "lat": 32.047287,
+          "lng": 118.786971
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "商铺",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_011",
+        "name": "III YIYINIKO(新街口金鹰国际购物中心店)",
+        "category": "购物;商铺",
+        "address": "汉中路89号金鹰国际购物中心F3",
+        "distance_m": 701,
+        "location": {
+          "lat": 32.047592,
+          "lng": 118.786024
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "商铺",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_012",
+        "name": "松下电器(金鹰国际购物中心新街口店)",
+        "category": "购物;家电数码",
+        "address": "汉中路89号金鹰国际购物中心F7",
+        "distance_m": 701,
+        "location": {
+          "lat": 32.047633,
+          "lng": 118.785826
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "家电数码",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_013",
+        "name": "金鹰国际购物中心(新街口店)",
+        "category": "购物;购物中心",
+        "address": "汉中路89号",
+        "distance_m": 702,
+        "location": {
+          "lat": 32.047573,
+          "lng": 118.786169
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "购物中心",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 商场",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_014",
+        "name": "Avene雅漾(新街口金鹰国际购物中心店)",
+        "category": "购物;商铺",
+        "address": "汉中路89号金鹰国际购物中心F2",
+        "distance_m": 703,
+        "location": {
+          "lat": 32.047728,
+          "lng": 118.785418
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "商铺",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_015",
+        "name": "BOCONER(新街口金鹰国际购物中心店)",
+        "category": "购物;商铺",
+        "address": "汉中路89号金鹰国际购物中心F3",
+        "distance_m": 703,
+        "location": {
+          "lat": 32.047647,
+          "lng": 118.785846
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "商铺",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_016",
+        "name": "樱花国际日语(金鹰国际购物中心新街口店)",
+        "category": "教育培训;培训机构",
+        "address": "江苏省南京市汉中路89号金鹰国际商城24层D座",
+        "distance_m": 703,
+        "location": {
+          "lat": 32.047423,
+          "lng": 118.786733
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "教育培训",
+            "培训机构",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_017",
+        "name": "泰格豪雅(金鹰国际购物中心新街口店)",
+        "category": "购物;商铺",
+        "address": "汉中路89号金鹰国际购物中心F1",
+        "distance_m": 703,
+        "location": {
+          "lat": 32.04771,
+          "lng": 118.785534
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "商铺",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      },
+      {
+        "poi_id": "rainy_018",
+        "name": "KOLON SPORT(新街口金鹰国际购物中心店)",
+        "category": "购物;商铺",
+        "address": "汉中路101号金鹰新街口店B座4楼4013",
+        "distance_m": 704,
+        "location": {
+          "lat": 32.047657,
+          "lng": 118.78586
+        },
+        "pet_friendly": {
+          "status": "待确认",
+          "confidence_level": "低",
+          "evidence_source": "百度地图 Place API + 轻量关键词规则",
+          "evidence_text": "未命中明确宠物友好证据",
+          "suitable_pet_size": "待确认"
+        },
+        "experience": {
+          "space_type": "室内/商场",
+          "crowd_level": "高",
+          "pet_stress_level": "中",
+          "tags": [
+            "购物",
+            "商铺",
+            "室内",
+            "商场",
+            "待确认",
+            "新街口 购物中心",
+            "0-100元"
+          ]
+        },
+        "business": {
+          "transaction_action": "出发前确认",
+          "estimated_cost": "0-100元"
+        },
+        "risk_note": "携宠规则需出发前确认；高峰期人流较大，建议全程牵引并避开 16:00-18:00；室内区域是否允许携宠需确认",
+        "manual_review_required": true,
+        "demo_selected_reason": "适合作为雨天、炎热天气或临时避雨时的备选空间"
+      }
+    ]
+  },
+  "route_templates": [
+    {
+      "route_id": "route_main_001",
+      "route_name": "新街口轻松短逛消费线",
+      "route_type": "main",
+      "estimated_time": "2-2.5小时",
+      "estimated_budget": "60-100元",
+      "pet_friendly_score": 4.0,
+      "pet_stress_level": "中",
+      "stops": [
+        {
+          "order": 1,
+          "poi_id": "activity_001",
+          "role": "短时活动空间",
+          "suggested_stay_time": "30-45分钟",
+          "reason": "适合中型犬短时牵引散步，距离核心消费点较近。"
+        },
+        {
+          "order": 2,
+          "poi_id": "consumption_001",
+          "role": "宠物友好消费点",
+          "suggested_stay_time": "45-60分钟",
+          "reason": "作为散步后的消费停靠点，适合承接低客单本地生活交易。"
+        },
+        {
+          "order": 3,
+          "poi_id": "service_001",
+          "role": "宠物服务/补给点",
+          "suggested_stay_time": "15-30分钟",
+          "reason": "可作为用品补给或护理咨询的可选节点。"
+        }
+      ],
+      "summary": "适合周末下午在新街口进行短时带宠出行，兼顾短暂停留、消费和可选宠物补给。",
+      "risk_summary": "新街口周末人流较大，建议全程牵引并避开 16:00-18:00 高峰。"
+    },
+    {
+      "route_id": "route_low_stress_001",
+      "route_name": "新街口低压力避峰线",
+      "route_type": "low_stress",
+      "estimated_time": "1.5-2小时",
+      "estimated_budget": "40-80元",
+      "pet_friendly_score": 3.8,
+      "pet_stress_level": "低",
+      "stops": [
+        {
+          "order": 1,
+          "poi_id": "activity_001",
+          "role": "短时活动空间",
+          "suggested_stay_time": "20-35分钟",
+          "reason": "优先选择可控的活动空间，减少宠物压力。"
+        },
+        {
+          "order": 2,
+          "poi_id": "consumption_001",
+          "role": "宠物友好消费点",
+          "suggested_stay_time": "30-45分钟",
+          "reason": "保留一个低压力消费停靠点，避免路线过长。"
+        }
+      ],
+      "summary": "适合对拥挤敏感的宠物，减少停留点并优先选择低压力 POI。",
+      "risk_summary": "仍需避开核心商圈高峰，并在进入室内或门店前确认携宠规则。"
+    },
+    {
+      "route_id": "route_rainy_001",
+      "route_name": "新街口雨天友好备选线",
+      "route_type": "rainy_day",
+      "estimated_time": "1.5-2小时",
+      "estimated_budget": "60-100元",
+      "pet_friendly_score": 3.6,
+      "pet_stress_level": "中",
+      "stops": [
+        {
+          "order": 1,
+          "poi_id": "rainy_001",
+          "role": "雨天备选点",
+          "suggested_stay_time": "45-60分钟",
+          "reason": "雨天优先选择室内或半室内空间。"
+        },
+        {
+          "order": 2,
+          "poi_id": "consumption_001",
+          "role": "宠物友好消费点",
+          "suggested_stay_time": "30-45分钟",
+          "reason": "搭配消费点，保留轻消费场景。"
+        },
+        {
+          "order": 3,
+          "poi_id": "service_001",
+          "role": "宠物服务/补给点",
+          "suggested_stay_time": "15-30分钟",
+          "reason": "可作为雨天用品或洗护咨询补给点。"
+        }
+      ],
+      "summary": "适合遇到降雨时快速切换，优先使用雨天备选点并搭配消费或补给节点。",
+      "risk_summary": "室内区域是否允许携宠需提前确认，雨天路面湿滑建议缩短步行距离。"
+    }
+  ],
+  "adjustment_cases": [
+    {
+      "case_id": "adjust_crowded_001",
+      "user_message": "现在太挤了，能不能换一条低压力路线？",
+      "system_strategy": "切换到低压力路线，优先选择商圈边缘、低拥挤度、低宠物压力的 POI。",
+      "target_route_type": "low_stress",
+      "response_summary": "已为你切换为新街口低压力避峰线，减少非必要停留点，并优先选择人流较低的 POI。"
+    },
+    {
+      "case_id": "adjust_rainy_001",
+      "user_message": "如果下雨怎么办？",
+      "system_strategy": "切换到雨天备选路线，优先室内、半室内、商场或宠物用品点。",
+      "target_route_type": "rainy_day",
+      "response_summary": "已为你切换为新街口雨天友好备选线，优先选择可避雨停靠点。"
+    },
+    {
+      "case_id": "adjust_budget_001",
+      "user_message": "我预算只有 60。",
+      "system_strategy": "预算作为硬约束，保留免费活动空间和低客单消费点，移除高消费服务点。",
+      "target_route_type": "main",
+      "response_summary": "已按 60 元预算重新规划，优先免费活动空间和低客单停靠点。"
+    }
+  ]
+}

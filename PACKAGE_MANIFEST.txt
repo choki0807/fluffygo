@@ -1,0 +1,54 @@
+﻿FluffyGo 最新安全交接包文件清单
+
+本包不包含 .env，可安全发给组员继续开发。
+包含最新路线布局优化：当前出行方案、本次怎么走、真实步行地图、路线验证系统。
+
+重要入口：
+- GIRLFRIEND_HANDOFF.md：交接说明和运行方式
+- README.md：完整项目说明
+- SUBMISSION_GUIDE.md：提交与路演说明
+- docs/FluffyGo_PRD.md：PRD 文档
+- docs/FluffyGo_项目介绍文档.md：项目介绍、技术栈、创新点、商业价值
+- stitch_demo.html：最终前端 Demo
+- api_server.py：FastAPI 后端
+- fluffygo_demo_poi.json：Demo 结构化数据
+
+运行方式：
+1. pip install -r requirements.txt
+2. start_demo.bat
+3. 打开 http://127.0.0.1:8000/stitch_demo.html
+
+全部文件：
+.env.example
+.gitignore
+api_server.py
+app.py
+assets\fluffygo-border-collie-logo.png
+assets\fluffygo-border-collie-logo-key.png
+assets\fluffygo-hero-border-collie.png
+baidu_multi_area_collector.py
+baidu_poi_collector.py
+build_expanded_demo_json.py
+convert_shortlist_to_demo_json.py
+data\user_feedback.json
+docs\backend_engine.md
+docs\business_value_pitch.md
+docs\demo_flow.md
+docs\fluffygo_pet_friendly_label_strategy.docx
+docs\FluffyGo_PRD.md
+docs\FluffyGo_项目介绍文档.md
+docs\interview_send_note.md
+docs\product_brief.md
+docs\project_context.md
+docs\technical_notes.md
+fluffygo_demo_poi.json
+fluffygo_xinjiekou_poi_raw.csv
+fluffygo_xinjiekou_poi_shortlist.csv
+GIRLFRIEND_HANDOFF.md
+README.md
+requirements.txt
+start_demo.bat
+start_demo.ps1
+stitch_demo.html
+SUBMISSION_GUIDE.md
+test_backend.py

@@ -1,0 +1,5538 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FluffyGo</title>
+  <style>
+    :root {
+      --mt-yellow: #ffd100;
+      --mt-yellow-deep: #ffbd00;
+      --mt-orange: #ff6f1a;
+      --mt-orange-soft: #fff1df;
+      --text: #222222;
+      --muted: #666666;
+      --subtle: #999999;
+      --bg: #f5f3ee;
+      --card: #ffffff;
+      --line: #ebe4d7;
+      --line-strong: #dfd3bd;
+      --green: #1f8f4d;
+      --green-bg: #eaf8ef;
+      --blue: #2378ff;
+      --red: #d84a3a;
+      --red-bg: #fff0ed;
+      --shadow: 0 10px 28px rgba(70, 48, 0, 0.09);
+      --shadow-soft: 0 6px 18px rgba(70, 48, 0, 0.06);
+      --icon-bg: linear-gradient(145deg, #fffdf2 0%, #fff1bc 100%);
+      --icon-ring: rgba(255, 209, 0, .42);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: #e9e9e9;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "MiSans", "HarmonyOS Sans SC", "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.45;
+      letter-spacing: 0;
+      background:
+        radial-gradient(circle at 50% -12%, rgba(255, 209, 0, 0.42), transparent 260px),
+        linear-gradient(180deg, rgba(255, 252, 239, .7), rgba(245, 243, 238, 1) 42%),
+        var(--bg);
+    }
+
+    button, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    .phone {
+      width: min(100%, 430px);
+      min-height: 100vh;
+      margin: 0 auto;
+      background: var(--bg);
+      position: relative;
+      overflow-x: hidden;
+      box-shadow: 0 0 0 1px rgba(74, 51, 0, 0.08), 0 22px 70px rgba(54, 41, 0, 0.16);
+    }
+
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background:
+        linear-gradient(180deg, #ffd100 0%, #ffe46a 58%, rgba(245, 243, 238, 0.97) 100%);
+      padding: 12px 14px 10px;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #fff8dd;
+      overflow: hidden;
+      padding: 2px;
+      box-shadow: inset 0 0 0 1px rgba(34, 34, 34, 0.08), 0 8px 18px rgba(74, 51, 0, 0.16);
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .api-pill {
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      color: #5a4a00;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .api-pill.live {
+      background: #222;
+      color: var(--mt-yellow);
+    }
+
+    .search-card {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(255, 245, 196, 0.95);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 12px 30px rgba(119, 89, 0, 0.15);
+    }
+
+    .location-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #4f4100;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .area-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin: 0 0 10px;
+    }
+
+    .area-tab {
+      border: 1px solid rgba(255, 189, 0, 0.45);
+      background: #fff9df;
+      color: #5d4700;
+      border-radius: 10px;
+      padding: 7px 4px;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .area-tab.active {
+      background: #222;
+      border-color: #222;
+      color: var(--mt-yellow);
+    }
+
+    .scope-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .scope-card {
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 10px;
+      border: 1px solid #eeeeee;
+    }
+
+    .scope-card b {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    .scope-card span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .input-wrap {
+      background: linear-gradient(180deg, #fffdf8, #f7f4ed);
+      border: 1px solid #ece2d0;
+      border-radius: 12px;
+      padding: 10px 10px 8px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 94px;
+      border: 0;
+      outline: 0;
+      resize: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 0 2px;
+      scrollbar-width: none;
+    }
+
+    .tag-row::-webkit-scrollbar { display: none; }
+
+    .quick-tag {
+      flex: 0 0 auto;
+      border: 1px solid #ffe39b;
+      background: #fff8dd;
+      color: #6b5000;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .generate {
+      width: 100%;
+      border: 0;
+      margin-top: 12px;
+      border-radius: 12px;
+      padding: 13px 14px;
+      background: linear-gradient(90deg, var(--mt-yellow), var(--mt-yellow-deep));
+      color: #222;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(255, 180, 0, 0.34), inset 0 -1px 0 rgba(159, 94, 0, .16);
+    }
+
+    .generate.loading {
+      opacity: 0.78;
+      pointer-events: none;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .service-tile {
+      border: 0;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 12px;
+      padding: 10px 4px 9px;
+      display: grid;
+      gap: 6px;
+      justify-items: center;
+      color: var(--text);
+      border: 1px solid rgba(235, 228, 215, .86);
+      box-shadow: 0 6px 16px rgba(119, 89, 0, 0.08);
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+
+    .service-tile:active {
+      transform: scale(.97);
+      box-shadow: 0 3px 10px rgba(119, 89, 0, 0.1);
+    }
+
+    .service-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--icon-bg);
+      color: #6a4e00;
+      border: 1px solid rgba(255, 209, 0, .58);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.95), 0 5px 12px rgba(255, 184, 0, .18);
+    }
+
+    .service-icon svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .service-tile:nth-child(2) .service-icon {
+      background: linear-gradient(145deg, #fffdf2, #eaf6ff);
+      border-color: rgba(35, 120, 255, .2);
+      color: #245c9a;
+    }
+
+    .service-tile:nth-child(3) .service-icon {
+      background: linear-gradient(145deg, #fffdf2, #eaf1ff);
+      border-color: rgba(35, 120, 255, .28);
+      color: #2f62b9;
+    }
+
+    .service-tile:nth-child(4) .service-icon {
+      background: linear-gradient(145deg, #fffdf2, #ffe7d6);
+      border-color: rgba(255, 111, 26, .25);
+      color: #b84a14;
+    }
+
+    .service-tile span:last-child {
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    main {
+      padding: 12px 12px 78px;
+    }
+
+    .hero-intro {
+      padding: 4px 2px 10px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .home-visual {
+      position: relative;
+      height: 286px;
+      border-radius: 12px;
+      overflow: hidden;
+      padding: 18px;
+      color: #222;
+      background: #fff5df;
+      box-shadow: 0 10px 26px rgba(255, 189, 0, 0.18);
+    }
+
+    .home-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 252, 242, 0.96) 0%, rgba(255, 252, 242, 0.72) 30%, rgba(255, 252, 242, 0.08) 62%),
+        linear-gradient(90deg, rgba(255, 252, 242, 0.74) 0%, rgba(255, 252, 242, 0.04) 68%);
+      pointer-events: none;
+    }
+
+    .home-hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 62%;
+    }
+
+    .home-visual h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      max-width: 260px;
+      font-size: 29px;
+      line-height: 1.08;
+      font-weight: 950;
+      letter-spacing: 0;
+    }
+
+    .home-visual p {
+      position: relative;
+      z-index: 1;
+      max-width: 250px;
+      margin: 8px 0 0;
+      color: rgba(34,34,34,.72);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .home-mascot-badge {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      z-index: 2;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.14);
+    }
+
+    .home-mascot-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .pet-scene {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      width: 132px;
+      height: 108px;
+    }
+
+    .pet-body {
+      position: absolute;
+      right: 10px;
+      bottom: 14px;
+      width: 78px;
+      height: 48px;
+      border-radius: 28px 28px 20px 20px;
+      background: #fff;
+      box-shadow: inset -10px -8px 0 rgba(0,0,0,.05), 0 8px 16px rgba(0,0,0,.12);
+    }
+
+    .pet-head {
+      position: absolute;
+      right: 62px;
+      bottom: 42px;
+      width: 46px;
+      height: 44px;
+      border-radius: 18px 18px 20px 20px;
+      background: #fff;
+      box-shadow: inset -6px -6px 0 rgba(0,0,0,.05);
+    }
+
+    .pet-ear {
+      position: absolute;
+      right: 92px;
+      bottom: 76px;
+      width: 18px;
+      height: 28px;
+      border-radius: 16px 16px 4px 16px;
+      background: #6a4a2b;
+      transform: rotate(-16deg);
+    }
+
+    .pet-tail {
+      position: absolute;
+      right: 0;
+      bottom: 44px;
+      width: 34px;
+      height: 15px;
+      border: 6px solid #fff;
+      border-left: 0;
+      border-bottom: 0;
+      border-radius: 0 20px 0 0;
+      transform: rotate(-20deg);
+    }
+
+    .pet-eye {
+      position: absolute;
+      right: 75px;
+      bottom: 62px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #222;
+    }
+
+    .pet-leg {
+      position: absolute;
+      bottom: 6px;
+      width: 12px;
+      height: 20px;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .pet-leg.one { right: 58px; }
+    .pet-leg.two { right: 22px; }
+
+    .home-entry-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .home-entry {
+      border: 0;
+      border-radius: 10px;
+      background: var(--card);
+      padding: 12px 4px 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.04);
+      display: grid;
+      gap: 7px;
+      justify-items: center;
+      color: var(--text);
+    }
+
+    .home-entry-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #fff8dd;
+      font-size: 17px;
+      font-weight: 950;
+    }
+
+    .home-entry span:last-child {
+      font-size: 12px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .home-rec-card {
+      min-height: 128px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 104px;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .photo-tile {
+      min-height: 96px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: rgba(34,34,34,.72);
+      font-size: 32px;
+      font-weight: 950;
+      background:
+        radial-gradient(circle at 34% 30%, rgba(255,255,255,.75), transparent 38px),
+        linear-gradient(135deg, #ffe390, #ffd0c0 48%, #dbf2e4);
+    }
+
+    .photo-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 66%;
+      display: block;
+    }
+
+    .home-rec-card h3 {
+      margin: 0 0 6px;
+      font-size: 17px;
+      font-weight: 950;
+    }
+
+    .home-rec-card p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .home-map-hero {
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid rgba(235, 228, 215, .92);
+      background: linear-gradient(180deg, #fffdf8, #fff);
+      box-shadow: 0 16px 36px rgba(54, 41, 0, 0.11);
+    }
+
+    .home-map-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 12px 10px;
+    }
+
+    .home-map-title b {
+      display: block;
+      font-size: 19px;
+      font-weight: 950;
+      line-height: 1.18;
+    }
+
+    .home-map-title span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .home-map-action {
+      border: 0;
+      border-radius: 999px;
+      background: #222;
+      color: var(--mt-yellow);
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .home-map-shell {
+      position: relative;
+      height: 308px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,.45) 1px, transparent 1px),
+        #eef3e8;
+      background-size: 34px 34px;
+    }
+
+    #home-map {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .home-map-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      color: #5d4700;
+      font-size: 13px;
+      font-weight: 900;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255,248,221,.85), rgba(234,248,239,.75));
+    }
+
+    .home-map-panel {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      border-radius: 10px;
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(255,255,255,.7);
+      box-shadow: 0 12px 28px rgba(35, 28, 0, .16);
+      padding: 10px;
+      backdrop-filter: blur(12px);
+    }
+
+    .home-map-panel b {
+      display: block;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .home-map-panel span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .home-map-panel button {
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--mt-yellow), var(--mt-yellow-deep));
+      color: #222;
+      padding: 10px;
+      font-size: 12px;
+      font-weight: 950;
+      white-space: nowrap;
+      box-shadow: 0 8px 16px rgba(255, 180, 0, .22);
+    }
+
+    .home-poi-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 172px;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 2px 0 4px;
+      scrollbar-width: none;
+    }
+
+    .home-poi-strip::-webkit-scrollbar { display: none; }
+
+    .home-poi-card {
+      border: 1px solid rgba(235, 228, 215, .92);
+      background: linear-gradient(180deg, #fff, #fffdf8);
+      border-radius: 12px;
+      padding: 10px;
+      min-height: 128px;
+      display: grid;
+      align-content: space-between;
+      gap: 8px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .home-poi-card h3 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    .home-poi-card p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .home-poi-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .home-poi-meta span {
+      border-radius: 999px;
+      background: #f7f7f7;
+      padding: 4px 6px;
+      color: #555;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .home-logic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .home-logic-card {
+      border-radius: 12px;
+      background: linear-gradient(180deg, #fff, #fffdf8);
+      border: 1px solid rgba(235, 228, 215, .92);
+      padding: 10px;
+      min-height: 84px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .home-logic-card b {
+      display: block;
+      font-size: 14px;
+      font-weight: 950;
+      margin-bottom: 4px;
+    }
+
+    .home-logic-card span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    .hero-intro h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      line-height: 1.16;
+      font-weight: 950;
+      letter-spacing: 0;
+    }
+
+    .hero-intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .trust-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px 8px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .trust-item b {
+      display: block;
+      font-size: 16px;
+      line-height: 1.1;
+    }
+
+    .trust-item span {
+      display: block;
+      color: var(--subtle);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .section {
+      margin-top: 12px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 0 0 8px;
+      padding: 0 2px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .section-title span {
+      color: var(--subtle);
+      font-size: 12px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf8 100%);
+      border: 1px solid rgba(235, 228, 215, .92);
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .real-map-card {
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    .real-map-toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .map-provider-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 999px;
+      background: #fff8dd;
+      color: #6c4e00;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 950;
+    }
+
+    .map-provider-pill::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #ff8a00;
+      box-shadow: 0 0 0 3px rgba(255, 138, 0, .16);
+    }
+
+    .map-legend {
+      display: flex;
+      gap: 7px;
+      color: var(--subtle);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .map-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+    }
+
+    .map-legend i {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .map-shell {
+      position: relative;
+      min-height: 300px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f7f3e7;
+      border: 1px solid rgba(44, 34, 15, .08);
+    }
+
+    #real-map {
+      position: absolute;
+      inset: 0;
+      min-height: 300px;
+    }
+
+    .map-fallback {
+      position: absolute;
+      inset: 0;
+      padding: 10px;
+      background: #fffaf0;
+      z-index: 2;
+    }
+
+    .map-fallback .mini-map {
+      height: 100%;
+      min-height: 260px;
+      margin: 0;
+    }
+
+    .map-fallback-note {
+      position: absolute;
+      z-index: 3;
+      left: 18px;
+      top: 18px;
+      right: 18px;
+      border-radius: 8px;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, .92);
+      color: #5c4a2d;
+      font-size: 12px;
+      font-weight: 850;
+      box-shadow: 0 8px 20px rgba(58, 41, 14, .12);
+    }
+
+    .baidu-map-label {
+      border: 0 !important;
+      background: transparent !important;
+      color: #222 !important;
+      font-size: 11px !important;
+      font-weight: 950 !important;
+      line-height: 1 !important;
+      text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+    }
+
+    .score-card {
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 12px;
+      align-items: center;
+      background: linear-gradient(135deg, #ffffff 0%, #fff8dd 100%);
+    }
+
+    .score-ring {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at center, #fff 0 54%, transparent 55%),
+        conic-gradient(var(--mt-yellow) calc(var(--score, 76) * 1%), #eeeeee 0);
+      color: #222;
+      font-size: 22px;
+      font-weight: 950;
+    }
+
+    .score-copy b {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 3px;
+    }
+
+    .score-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .score-reasons {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .reason-chip {
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid #f1e2aa;
+      color: #6b5000;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .risk-radar-card {
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .radar-wrap {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .radar-svg {
+      width: 150px;
+      height: 150px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #fffdf2, #f7f7f7);
+    }
+
+    .radar-legend {
+      display: grid;
+      gap: 6px;
+    }
+
+    .radar-legend-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .radar-legend-item b {
+      font-weight: 900;
+    }
+
+    .radar-legend-item span {
+      color: var(--red);
+      font-weight: 950;
+    }
+
+    .radar-advice {
+      border-radius: 8px;
+      background: #fff8dd;
+      color: #6b5000;
+      padding: 9px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .compare-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 8px 0 4px;
+      scrollbar-width: none;
+    }
+
+    .compare-row::-webkit-scrollbar { display: none; }
+
+    .compare-card {
+      flex: 0 0 72%;
+      border: 1px solid rgba(235, 228, 215, .96);
+      background: linear-gradient(180deg, #fff, #fffdf8);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .compare-card.selected {
+      border-color: var(--mt-yellow-deep);
+      background: linear-gradient(180deg, #fff8dd 0%, #fffdf4 100%);
+      box-shadow: 0 10px 24px rgba(255, 184, 0, .2);
+    }
+
+    .comparison-map-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .comparison-map-wrap {
+      position: relative;
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 0;
+      background: #f7f3e7;
+    }
+
+    #comparison-map-all {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .compare-card h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .compare-meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin: 8px 0;
+    }
+
+    .compare-meta span {
+      background: #f7f4ee;
+      border-radius: 8px;
+      padding: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .compare-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .compare-tradeoff {
+      margin-top: 8px;
+      border-radius: 10px;
+      background: #fffdf2;
+      border: 1px solid #f4e4a6;
+      padding: 8px;
+      color: #6b5000;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .mini-map {
+      position: relative;
+      height: 128px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f7f3e7;
+      border: 1px solid rgba(44, 34, 15, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.55);
+    }
+
+    .compare-map-fallback {
+      position: absolute;
+      inset: 0;
+    }
+
+    .compare-map-fallback.hidden {
+      display: none;
+    }
+
+    .mini-map svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-caption {
+      position: absolute;
+      left: 7px;
+      bottom: 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: rgba(255,255,255,.9);
+      color: #3f3524;
+      font-size: 10px;
+      font-weight: 950;
+      box-shadow: 0 3px 10px rgba(66, 45, 8, .12);
+    }
+
+    .map-caption::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #ff7a1a;
+    }
+
+    .map-scale {
+      position: absolute;
+      right: 8px;
+      bottom: 9px;
+      width: 36px;
+      height: 8px;
+      border-left: 2px solid rgba(50, 43, 31, .55);
+      border-right: 2px solid rgba(50, 43, 31, .55);
+      border-bottom: 2px solid rgba(50, 43, 31, .55);
+    }
+
+    .map-stop-label {
+      paint-order: stroke;
+      stroke: rgba(255,255,255,.88);
+      stroke-width: 3px;
+      stroke-linejoin: round;
+    }
+
+    .parse-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      padding: 10px;
+    }
+
+    .parse-item {
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 10px;
+      min-height: 68px;
+    }
+
+    .parse-item span {
+      display: block;
+      color: var(--subtle);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .parse-item strong {
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .adjust-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 10px;
+    }
+
+    .adjust-btn {
+      border: 1px solid #eeeeee;
+      background: #fff;
+      border-radius: 8px;
+      padding: 10px 6px;
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .adjust-message {
+      margin: 10px 0 0;
+      border-radius: 8px;
+      padding: 10px;
+      background: #fff8dd;
+      color: #614700;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .route-card {
+      padding: 14px;
+      background:
+        radial-gradient(circle at 92% 12%, rgba(255, 209, 0, .24), transparent 96px),
+        linear-gradient(135deg, #222 0%, #34312a 58%, #41351d 100%);
+      color: #fff;
+      border: 0;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 16px 36px rgba(34, 25, 0, .2);
+    }
+
+    .route-card::after {
+      content: "";
+      position: absolute;
+      right: -56px;
+      top: -56px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(255, 209, 0, 0.18);
+    }
+
+    .route-name {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing: 0;
+    }
+
+    .route-kicker {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      border-radius: 999px;
+      background: rgba(255, 209, 0, 0.18);
+      color: #ffe88a;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .route-summary {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 13px;
+    }
+
+    .metrics {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .metric {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 9px;
+    }
+
+    .metric span {
+      display: block;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .metric strong {
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .risk {
+      position: relative;
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+      background: rgba(255, 209, 0, 0.15);
+      color: #fff4bd;
+      font-size: 12px;
+    }
+
+    .route-trust-panel {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 7px;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    .route-trust-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      color: rgba(255,255,255,.92);
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .route-trust-title span:last-child {
+      color: #ffe88a;
+      white-space: nowrap;
+    }
+
+    .route-trust-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .route-trust-tags span {
+      border-radius: 999px;
+      padding: 5px 8px;
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.86);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .itinerary-card {
+      padding: 12px;
+      background: #fff;
+    }
+
+    .itinerary-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 10px;
+    }
+
+    .itinerary-head b {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 3px;
+    }
+
+    .itinerary-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    .itinerary-head .asset-status {
+      background: #fff4bf;
+    }
+
+    .time-axis {
+      display: grid;
+      gap: 0;
+    }
+
+    .time-stop {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 10px;
+      position: relative;
+      padding: 0 0 12px;
+    }
+
+    .time-stop::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 26px;
+      bottom: -2px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(255, 209, 0, .8), rgba(255, 209, 0, .12));
+      border-radius: 999px;
+    }
+
+    .time-stop:last-child::before {
+      display: none;
+    }
+
+    .time-node {
+      display: grid;
+      justify-items: center;
+      gap: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .time-clock {
+      font-size: 12px;
+      font-weight: 950;
+      color: #3b3528;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .time-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, var(--mt-yellow), var(--mt-yellow-deep));
+      color: #222;
+      font-size: 12px;
+      font-weight: 950;
+      box-shadow: 0 7px 14px rgba(255, 184, 0, .24);
+    }
+
+    .time-content {
+      min-width: 0;
+      padding-bottom: 2px;
+    }
+
+    .time-content h3 {
+      margin: 0 0 3px;
+      font-size: 15px;
+      line-height: 1.35;
+      font-weight: 950;
+    }
+
+    .time-content p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+
+    .segment-note {
+      margin-top: 7px;
+      border-radius: 8px;
+      padding: 8px;
+      background: #fff8dd;
+      color: #6a4e00;
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 850;
+    }
+
+    .verify-card {
+      padding: 12px;
+      background: #fff;
+    }
+
+    .verify-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .verify-cell {
+      border-radius: 8px;
+      background: #f8f8f8;
+      border: 1px solid #eeeeee;
+      padding: 9px;
+    }
+
+    .verify-cell span {
+      display: block;
+      color: var(--subtle);
+      font-size: 11px;
+      font-weight: 850;
+      margin-bottom: 3px;
+    }
+
+    .verify-cell b {
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .logic-flow-card {
+      padding: 12px;
+      background: linear-gradient(180deg, #fff, #fffdf6);
+    }
+
+    .logic-flow {
+      display: grid;
+      gap: 8px;
+    }
+
+    .logic-step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px;
+      border-radius: 10px;
+      background: #f8f8f8;
+      border: 1px solid #eeeeee;
+    }
+
+    .logic-step i {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: #fff4bf;
+      color: #6a4e00;
+      font-style: normal;
+      font-weight: 950;
+    }
+
+    .logic-step b {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .logic-step span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .decision-card {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .decision-summary {
+      border-radius: 8px;
+      background: #fff8dd;
+      border: 1px solid #f1dc94;
+      padding: 10px;
+      color: #5f4900;
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.5;
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .decision-item {
+      border-radius: 8px;
+      background: #f8f8f8;
+      padding: 9px;
+      border: 1px solid #eeeeee;
+    }
+
+    .decision-item span {
+      display: block;
+      color: var(--subtle);
+      font-size: 11px;
+      margin-bottom: 3px;
+      font-weight: 800;
+    }
+
+    .decision-item b {
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .decision-stop-list {
+      display: grid;
+      gap: 7px;
+    }
+
+    .decision-stop {
+      border-left: 3px solid var(--mt-yellow);
+      background: #fafafa;
+      border-radius: 0 8px 8px 0;
+      padding: 8px 9px;
+    }
+
+    .decision-stop b {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .decision-stop p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11.5px;
+      line-height: 1.45;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .poi-card {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 10px;
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poi-card::before {
+      content: "";
+      position: absolute;
+      left: 26px;
+      top: 50px;
+      bottom: 14px;
+      width: 2px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 209, 0, .66), rgba(255, 209, 0, 0));
+    }
+
+    .poi-topline {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .evidence-pill {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: #fff8dd;
+      color: #6b5000;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 950;
+    }
+
+    .step {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(145deg, var(--mt-yellow), var(--mt-yellow-deep));
+      color: #222;
+      font-weight: 950;
+      box-shadow: 0 8px 16px rgba(255, 184, 0, .25);
+      position: relative;
+      z-index: 1;
+    }
+
+    .poi-main h3 {
+      margin: 0 0 3px;
+      font-size: 17px;
+      font-weight: 950;
+      letter-spacing: 0;
+    }
+
+    .poi-meta {
+      color: var(--subtle);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .poi-reason {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0;
+    }
+
+    .badge {
+      border-radius: 999px;
+      background: #f5f5f5;
+      color: var(--muted);
+      padding: 5px 8px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .badge.good {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .poi-risk {
+      background: #fafafa;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .label-engine {
+      display: grid;
+      gap: 10px;
+    }
+
+    .label-note-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 11px 12px;
+      background: #fff;
+    }
+
+    .label-note-card b {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+
+    .label-note-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .label-note-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 9px 12px;
+      background: #222;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .label-score-card {
+      padding: 12px;
+      background: #fff;
+    }
+
+    .label-score-top {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .label-score {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #ffcb05, #ff8a00);
+      color: #191919;
+      font-size: 24px;
+      font-weight: 950;
+      box-shadow: 0 10px 22px rgba(255, 177, 0, .28);
+    }
+
+    .label-score-copy b {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .label-score-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .label-layers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .label-layer {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 6px;
+      background: #fafafa;
+      text-align: center;
+    }
+
+    .label-layer.active {
+      border-color: rgba(255, 186, 0, .85);
+      background: #fff8dd;
+    }
+
+    .label-layer b {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .label-layer span {
+      color: var(--subtle);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .label-proof-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .label-proof {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .label-proof-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .label-proof h3 {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .label-proof p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .evidence-system-card {
+      border: 1px solid #f0dda0;
+      background: #fffdf5;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .evidence-system-card b {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .evidence-items {
+      display: grid;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .evidence-item {
+      border-radius: 8px;
+      background: #f8f8f8;
+      padding: 8px;
+      border: 1px solid #eeeeee;
+    }
+
+    .evidence-item-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 3px;
+    }
+
+    .evidence-item p {
+      margin: 0;
+      font-size: 11px;
+    }
+
+    .evidence-gaps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    .gap-chip {
+      border-radius: 999px;
+      background: #fff3d0;
+      color: #765600;
+      padding: 4px 7px;
+      font-size: 10.5px;
+      font-weight: 850;
+    }
+
+    .label-loop {
+      border: 1px dashed rgba(255, 186, 0, .7);
+      background: #fffaf0;
+      border-radius: 10px;
+      padding: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .label-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: grid;
+      align-items: end;
+      background: rgba(0, 0, 0, .36);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+    }
+
+    .label-modal:not(.hidden) {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .label-sheet {
+      width: min(100%, 430px);
+      max-height: min(78vh, 720px);
+      margin: 0 auto;
+      overflow: auto;
+      border-radius: 22px 22px 0 0;
+      background: #fffdf8;
+      box-shadow: 0 -18px 50px rgba(0, 0, 0, .18);
+      padding: 14px 14px 24px;
+      transform: translateY(14px);
+      transition: transform .18s ease;
+    }
+
+    .label-modal:not(.hidden) .label-sheet {
+      transform: translateY(0);
+    }
+
+    .label-modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .label-modal-head h2 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .label-modal-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .label-close {
+      border: 0;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #f4f1ea;
+      color: #333;
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .meituan-btn {
+      width: 100%;
+      border: 0;
+      margin-top: 10px;
+      border-radius: 8px;
+      padding: 11px 12px;
+      background: var(--mt-yellow);
+      color: #222;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .poi-feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      background: #fffdf2;
+      border: 1px solid #f4e4a6;
+    }
+
+    .feedback-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: #6b5000;
+      font-weight: 850;
+    }
+
+    .feedback-title span:last-child {
+      color: var(--subtle);
+      font-weight: 700;
+    }
+
+    .feedback-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .feedback-btn {
+      border: 1px solid #ead27a;
+      border-radius: 8px;
+      background: #fff;
+      color: #3d3100;
+      padding: 8px 4px;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .feedback-btn:disabled {
+      opacity: .62;
+      cursor: wait;
+    }
+
+    .feedback-btn.selected {
+      background: var(--mt-yellow);
+      border-color: var(--mt-yellow-deep);
+    }
+
+    .business-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .community-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .community-card {
+      padding: 12px;
+    }
+
+    .community-card h3 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .community-card p {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .mini-post {
+      border-radius: 8px;
+      background: #fafafa;
+      padding: 8px;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .mini-post b {
+      color: var(--text);
+      margin-right: 4px;
+    }
+
+    .social-feed {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .social-card {
+      overflow: hidden;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .social-card:active {
+      transform: scale(.98);
+    }
+
+    .social-cover {
+      height: 116px;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      font-weight: 950;
+      color: rgba(34,34,34,.8);
+      background:
+        radial-gradient(circle at 30% 24%, rgba(255,255,255,.7), transparent 34px),
+        linear-gradient(135deg, #fff0be, #ffd1bd 48%, #dff1e7);
+      overflow: hidden;
+    }
+
+    .social-cover.alt {
+      background:
+        radial-gradient(circle at 72% 30%, rgba(255,255,255,.75), transparent 36px),
+        linear-gradient(135deg, #d8edff, #fff4bd 55%, #f2e2ff);
+    }
+
+    .social-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 65%;
+      display: block;
+    }
+
+    .social-cover.logo-shot img {
+      width: 72%;
+      height: 72%;
+      object-fit: contain;
+    }
+
+    .social-body {
+      padding: 8px;
+    }
+
+    .social-title {
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.35;
+    }
+
+    .social-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--subtle);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .avatar {
+      width: 18px;
+      height: 18px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #222;
+      color: var(--mt-yellow);
+      margin-right: 4px;
+      font-size: 10px;
+    }
+
+    .service-product {
+      padding: 12px;
+      background: linear-gradient(135deg, #222 0%, #343434 100%);
+      color: #fff;
+      border: 0;
+      overflow: hidden;
+    }
+
+    .service-hero-strip {
+      height: 96px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      background: #fff4bf;
+    }
+
+    .service-hero-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 66%;
+      display: block;
+    }
+
+    .walker-profile {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .walker-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: #fff8dd;
+      color: #222;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 950;
+      padding: 4px;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(255,209,0,.25);
+    }
+
+    .walker-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .walker-profile b {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    .walker-profile span {
+      color: rgba(255,255,255,.7);
+      font-size: 12px;
+    }
+
+    .service-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .service-price {
+      color: var(--mt-yellow);
+      font-size: 22px;
+      font-weight: 950;
+    }
+
+    .service-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .service-step {
+      border-radius: 8px;
+      background: rgba(255,255,255,.1);
+      padding: 8px 6px;
+      text-align: center;
+      color: rgba(255,255,255,.84);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .walker-list {
+      display: grid;
+      gap: 7px;
+      margin: 10px 0;
+    }
+
+    .walker-mini-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      border-radius: 8px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 9px;
+    }
+
+    .walker-mini-card b,
+    .walker-mini-card strong {
+      display: block;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .walker-mini-card span {
+      display: block;
+      margin-top: 2px;
+      color: rgba(255,255,255,.68);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .detail-topbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 2px 0 12px;
+    }
+
+    .back-button {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      color: #222;
+      box-shadow: 0 6px 14px rgba(0,0,0,.08);
+    }
+
+    .back-button svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .post-detail-card {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .post-detail-cover {
+      height: 278px;
+      background: #fff4bf;
+      overflow: hidden;
+    }
+
+    .post-detail-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 64%;
+      display: block;
+    }
+
+    .post-detail-body {
+      padding: 14px;
+    }
+
+    .post-author-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 950;
+    }
+
+    .post-detail-title {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.25;
+      font-weight: 950;
+    }
+
+    .post-detail-text {
+      margin: 0 0 12px;
+      color: #444;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .review-cell {
+      border-radius: 8px;
+      background: #f8f8f8;
+      padding: 10px 6px;
+      text-align: center;
+    }
+
+    .review-cell b {
+      display: block;
+      font-size: 16px;
+      color: var(--mt-orange);
+    }
+
+    .review-cell span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .profile-head {
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      background: linear-gradient(135deg, #fff8dd, #fff 58%, #ffe0ce);
+    }
+
+    .profile-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 22px;
+      background: #fff;
+      padding: 5px;
+      box-shadow: 0 10px 22px rgba(255, 111, 26, .16);
+    }
+
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .profile-head h2 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      font-weight: 950;
+    }
+
+    .profile-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .profile-stat {
+      border-radius: 8px;
+      background: rgba(255,255,255,.78);
+      padding: 8px 4px;
+      text-align: center;
+    }
+
+    .profile-stat b {
+      display: block;
+      font-size: 16px;
+    }
+
+    .profile-stat span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .profile-menu {
+      display: grid;
+      gap: 8px;
+    }
+
+    .profile-row {
+      display: grid;
+      grid-template-columns: 36px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      width: 100%;
+      border: 1px solid rgba(235, 228, 215, .92);
+      color: inherit;
+      text-align: left;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+
+    .profile-row:active {
+      transform: scale(.99);
+    }
+
+    .profile-row:focus-visible {
+      outline: 2px solid rgba(255, 122, 26, .42);
+      outline-offset: 2px;
+    }
+
+    .profile-row:hover {
+      border-color: rgba(255, 122, 26, .26);
+    }
+
+    .profile-row-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: #fff4bf;
+      color: #6a4e00;
+    }
+
+    .profile-row-icon svg {
+      width: 19px;
+      height: 19px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.15;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .profile-row b {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    .profile-row span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .asset-hero {
+      padding: 14px;
+      margin-bottom: 10px;
+      background:
+        radial-gradient(circle at 88% 12%, rgba(255, 122, 26, .16), transparent 34%),
+        linear-gradient(135deg, #fff9df, #ffffff 60%, #fff0df);
+    }
+
+    .asset-hero h2 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      line-height: 1.25;
+      font-weight: 950;
+    }
+
+    .asset-hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .asset-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .asset-summary-cell {
+      border-radius: 8px;
+      background: rgba(255,255,255,.78);
+      padding: 9px 6px;
+      text-align: center;
+    }
+
+    .asset-summary-cell b {
+      display: block;
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .asset-summary-cell span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .asset-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .asset-item {
+      padding: 12px;
+    }
+
+    .asset-item-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .asset-item h3 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.35;
+      font-weight: 950;
+    }
+
+    .asset-item p {
+      margin: 0;
+      color: #4b4b4b;
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+
+    .asset-status {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: #fff4bf;
+      color: #6a4e00;
+      font-size: 11px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .asset-status.ok {
+      background: #e1f7e9;
+      color: #16733a;
+    }
+
+    .asset-status.warn {
+      background: #fff0df;
+      color: #a94811;
+    }
+
+    .asset-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 9px;
+    }
+
+    .asset-tags span {
+      border-radius: 999px;
+      padding: 5px 8px;
+      background: #f6f4ef;
+      color: #5f5a50;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .asset-action-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .asset-action-row .meituan-btn {
+      margin: 0;
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      z-index: 30;
+      width: min(100%, 430px);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: rgba(255, 255, 255, 0.94);
+      border-top: 1px solid rgba(235, 228, 215, .92);
+      box-shadow: 0 -12px 30px rgba(54, 41, 0, 0.1);
+      padding: 8px 10px 9px;
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-item {
+      border: 0;
+      background: transparent;
+      color: #8c8376;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 3px 0 0;
+      display: grid;
+      justify-items: center;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .nav-icon {
+      width: 38px;
+      height: 30px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: inherit;
+      background: transparent;
+      transition: background .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+
+    .nav-icon svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+      stroke: currentColor;
+      stroke-width: 2.05;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .nav-item span:last-child {
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .nav-item.active {
+      color: #222;
+    }
+
+    .nav-item.active .nav-icon {
+      background: linear-gradient(145deg, #fffdf2, #ffd95d);
+      color: #222;
+      transform: translateY(-2px);
+      box-shadow: inset 0 0 0 1px rgba(255, 209, 0, .5), 0 7px 16px rgba(255, 184, 0, .24);
+    }
+
+    .nav-item.active .nav-icon svg {
+      stroke-width: 2.35;
+    }
+
+    .hidden { display: none; }
+
+    @media (min-width: 720px) {
+      body {
+        padding: 24px 0;
+      }
+      .phone {
+        min-height: calc(100vh - 48px);
+        border-radius: 24px;
+        overflow: hidden;
+      }
+      .bottom-nav {
+        bottom: 24px;
+        border-radius: 0 0 24px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <header class="top">
+      <div class="status-row">
+        <div class="brand">
+          <div class="brand-mark"><img src="assets/fluffygo-border-collie-logo.png" alt="FluffyGo 边牧 logo"></div>
+          <div>FluffyGo</div>
+        </div>
+        <div class="api-pill" id="api-status">智能规划</div>
+      </div>
+
+      <section class="search-card">
+        <div class="location-line">
+          <span id="area-pill">南京新街口</span>
+          <span>2.5 小时带宠路线</span>
+        </div>
+        <div class="area-tabs" id="area-tabs">
+          <button class="area-tab active" data-area="xinjiekou" type="button">新街口</button>
+          <button class="area-tab" data-area="gulou" type="button">鼓楼</button>
+          <button class="area-tab" data-area="qinhuai" type="button">秦淮</button>
+          <button class="area-tab" data-area="xuanwu" type="button">玄武</button>
+        </div>
+        <div class="input-wrap">
+          <textarea id="user-input">南京新街口出发，携带中型犬，预计 2.5 小时。优先低拥挤散步空间与可短暂停留的宠物友好咖啡，预算 100 元以内。</textarea>
+        </div>
+        <div class="tag-row" id="preference-chips"></div>
+        <button class="generate" id="generate-btn">智能规划</button>
+        <div id="adjust-message" class="adjust-message hidden"></div>
+        <div class="service-grid">
+          <button class="service-tile" data-tag="coffee" type="button">
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 8h10v5.4A4.6 4.6 0 0 1 10.4 18H9.6A4.6 4.6 0 0 1 5 13.4V8Z"></path><path d="M15 10h1.8c1.2 0 2.2 1 2.2 2.2s-1 2.2-2.2 2.2H15"></path><path d="M7 5.5c.8-.7.8-1.5.2-2.3"></path><path d="M11 5.5c.8-.7.8-1.5.2-2.3"></path><path d="M5 20h12"></path></svg>
+            </span>
+            <span>友好咖啡</span>
+          </button>
+          <button class="service-tile" data-tag="crowded" type="button">
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 18c2.6-5 9.1-1.2 11.1-6.6"></path><path d="m13 9 2.3 2.3L13 13.6"></path><path d="M7.4 7.2a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path><path d="M3.8 12.3c.9-2.3 2.1-3.5 3.7-3.5s2.9 1.2 3.7 3.5"></path><path d="M17.8 6.9a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2Z"></path><path d="M15.2 9.5c.7-1.1 1.5-1.7 2.6-1.7s1.9.6 2.6 1.7"></path></svg>
+            </span>
+            <span>低压路线</span>
+          </button>
+          <button class="service-tile" data-tag="rainy" type="button">
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4.2 11.2a7.8 7.8 0 0 1 15.6 0H4.2Z"></path><path d="M12 11.2v7.1c0 1.2-.8 2-1.9 2-.9 0-1.5-.5-1.8-1.2"></path><path d="M7.3 14.5v.1"></path><path d="M16.7 14.5v.1"></path></svg>
+            </span>
+            <span>雨天备选</span>
+          </button>
+          <button class="service-tile" data-tag="grooming" type="button">
+            <span class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 8.8h10v7.7c0 1.4-1.1 2.5-2.5 2.5h-5C8.1 19 7 17.9 7 16.5V8.8Z"></path><path d="M9 8.8V6.7a3 3 0 0 1 6 0v2.1"></path><path d="M9.4 12.1h.01"></path><path d="M14.6 12.1h.01"></path><path d="M10.8 15.1c.8.5 1.6.5 2.4 0"></path><path d="M5 10.2 3.5 8.7"></path><path d="M19 10.2l1.5-1.5"></path></svg>
+            </span>
+            <span>洗护补给</span>
+          </button>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="page active" id="page-home">
+        <section class="card home-map-hero">
+          <div class="home-map-head">
+            <div class="home-map-title">
+              <b>附近宠物友好目的地</b>
+              <span id="home-map-subtitle">基于当前位置聚合散步、消费、服务与雨天备选</span>
+            </div>
+            <button class="home-map-action" id="home-refresh-btn" type="button">更新推荐</button>
+          </div>
+          <div class="home-map-shell">
+            <div id="home-map"></div>
+            <div class="home-map-fallback" id="home-map-fallback">正在加载附近宠物友好目的地...</div>
+            <div class="home-map-panel">
+              <div>
+                <b id="home-focus-title">新街口目的地推荐</b>
+                <span id="home-focus-copy">按距离、携宠条件和出行压力综合排序。</span>
+              </div>
+              <button type="button" id="home-plan-btn">规划路线</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>推荐目的地</h2>
+            <span id="home-nearby-subtitle">按带宠适配度排序</span>
+          </div>
+          <div class="home-poi-strip" id="home-poi-strip"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>快速规划</h2>
+            <span>按出行目标快速筛选</span>
+          </div>
+          <div class="home-logic-grid">
+            <article class="home-logic-card"><b>附近散步</b><span>优先开放空间和低压力街区。</span></article>
+            <article class="home-logic-card"><b>友好消费</b><span>筛选外摆、咖啡、轻食等停靠点。</span></article>
+            <article class="home-logic-card"><b>服务补给</b><span>串联洗护、用品和雨天备选。</span></article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>实时路况</h2>
+            <span>来自附近路线反馈</span>
+          </div>
+          <div class="social-feed">
+            <div class="social-card" data-community-post="0" role="button" tabindex="0">
+              <div class="social-cover"><img src="assets/fluffygo-hero-border-collie.png" alt="新街口带宠路况分享"></div>
+              <div class="social-body">
+                <p class="social-title">德基附近人流偏高，中型犬建议走外围路线。</p>
+                <div class="social-meta"><span><i class="avatar">新</i>新街口住户</span><span>♡ 128</span></div>
+              </div>
+            </div>
+            <div class="social-card" data-community-post="1" role="button" tabindex="0">
+              <div class="social-cover alt logo-shot"><img src="assets/fluffygo-border-collie-logo.png" alt="宠物友好咖啡分享"></div>
+              <div class="social-body">
+                <p class="social-title">外摆时段更适合停留，建议优先选择非高峰到店。</p>
+                <div class="social-meta"><span><i class="avatar">咖</i>咖啡和狗</span><span>♡ 76</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="page" id="page-route">
+        <section class="hero-intro">
+        <h1>现在出发，带狗去哪更合适</h1>
+        <p>按当前位置、时间、预算和携宠限制，筛出可走、可停、可消费的本地路线。</p>
+        <div class="trust-strip">
+          <div class="trust-item"><b>起终点</b><span>先后顺序清晰</span></div>
+          <div class="trust-item"><b>步行线</b><span>地图真实可走</span></div>
+          <div class="trust-item"><b>可验证</b><span>反馈影响推荐</span></div>
+        </div>
+        </section>
+
+        <section id="demo-content" class="hidden">
+        <section class="section">
+          <div class="section-title">
+            <h2>当前出行方案</h2>
+            <span>先看怎么走，再看为什么</span>
+          </div>
+          <article class="card route-card">
+            <div class="route-kicker" id="route-kicker">正在评估路线</div>
+            <h2 class="route-name" id="route-name">待生成推荐路线</h2>
+            <p class="route-summary" id="route-summary"></p>
+            <div class="metrics" id="route-metrics"></div>
+            <div class="route-trust-panel" id="route-trust-panel"></div>
+            <div class="label-engine" id="pet-label-engine"></div>
+            <div class="risk" id="route-risk"></div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>本次怎么走</h2>
+            <span>起点、步行、停留和终点</span>
+          </div>
+          <div class="card itinerary-card" id="route-itinerary"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>步行路线地图</h2>
+            <span id="real-map-status">等待规划</span>
+          </div>
+          <div class="card real-map-card">
+            <div class="real-map-toolbar">
+              <div class="map-provider-pill" id="map-provider-pill">百度地图</div>
+              <div class="map-legend">
+                <span><i style="background:#f6c400"></i>活动</span>
+                <span><i style="background:#ffd100"></i>消费</span>
+                <span><i style="background:#ff7a1a"></i>服务</span>
+              </div>
+            </div>
+            <div class="map-shell">
+              <div id="real-map"></div>
+              <div class="map-fallback hidden" id="map-fallback"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>出行评估</h2>
+            <span>判断本次路线是否适合执行</span>
+          </div>
+          <div class="card score-card" id="feasibility-card"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>风险雷达</h2>
+            <span>拥挤、准入与犬型适配</span>
+          </div>
+          <div class="card risk-list" id="risk-radar"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>路线对比</h2>
+            <span id="comparison-subtitle">按输入条件生成候选</span>
+          </div>
+          <div class="card comparison-map-card">
+            <div class="comparison-map-wrap">
+              <div id="comparison-map-all"></div>
+              <div class="compare-map-fallback hidden" id="comparison-map-fallback-all"></div>
+            </div>
+          </div>
+          <div class="compare-row" id="route-comparisons"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>站点详情</h2>
+            <span>携宠规则、风险与服务入口</span>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>路线验证系统</h2>
+            <span>社区反馈不是内容装饰，是可信度来源</span>
+          </div>
+          <div class="community-grid" id="community-modules"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>需求条件</h2>
+            <span>系统如何理解本次输入</span>
+          </div>
+          <div class="card parse-grid" id="parse-grid"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>数据覆盖</h2>
+            <span>区域与目的地来源</span>
+          </div>
+          <div class="card scope-panel" id="scope-panel"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>推荐依据</h2>
+            <span>预算、偏好与风险权衡</span>
+          </div>
+          <div class="card decision-card" id="decision-trace-card"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>产品逻辑图</h2>
+            <span>输入、筛选、输出与反馈闭环</span>
+          </div>
+          <div class="card logic-flow-card" id="product-logic-flow"></div>
+        </section>
+
+        </section>
+      </section>
+
+      <section class="page" id="page-community">
+        <section class="hero-intro">
+          <h1>带宠路线社区</h1>
+          <p>聚合附近用户的到店体验、拥挤变化、空间限制与携宠核验结果，用真实反馈修正路线排序。</p>
+        </section>
+        <div class="community-grid" id="community-page-content"></div>
+      </section>
+
+      <section class="page" id="page-community-detail">
+        <div class="detail-topbar">
+          <button class="back-button" id="back-community" type="button" aria-label="返回社区">
+            <svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"></path></svg>
+          </button>
+          <strong>社区详情</strong>
+        </div>
+        <div id="community-detail-content"></div>
+      </section>
+
+      <section class="page" id="page-profile">
+        <section class="card profile-head">
+          <div class="profile-avatar"><img src="assets/fluffygo-border-collie-logo.png" alt=""></div>
+          <div>
+            <h2>出行记录</h2>
+            <p>中型犬 · 南京新街口常用起点 · 偏好低压力路线</p>
+            <div class="profile-stats">
+              <div class="profile-stat"><b>8</b><span>收藏路线</span></div>
+              <div class="profile-stat"><b>12</b><span>贡献反馈</span></div>
+              <div class="profile-stat"><b>3</b><span>待核验点</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">
+            <h2>路线资产</h2>
+            <span>收藏、核验和偏好记录</span>
+          </div>
+          <div class="profile-menu">
+            <button class="card profile-row" data-profile-asset="routes" type="button">
+              <div class="profile-row-icon"><svg viewBox="0 0 24 24"><path d="M5 6.8h14v11.4H5z"></path><path d="M8 6.8V4.7h8v2.1"></path><path d="M8.5 12h7"></path><path d="M8.5 15h4.5"></path></svg></div>
+              <div><b>我的路线收藏</b><span>低压力咖啡线、雨天备选线、洗护补给路线</span></div>
+              <span>›</span>
+            </button>
+            <button class="card profile-row" data-profile-asset="confirmations" type="button">
+              <div class="profile-row-icon"><svg viewBox="0 0 24 24"><path d="M6.5 5.5h11v13h-11z"></path><path d="M9 9h6"></path><path d="M9 12h4"></path><path d="M9 15h5"></path><path d="M17.5 8.2c1.2.2 2 1.2 2 2.5 0 1.4-.8 2.3-2 2.6"></path></svg></div>
+              <div><b>到店确认记录</b><span>电话确认、团购券和商户准入结果集中管理</span></div>
+              <span>›</span>
+            </button>
+            <button class="card profile-row" data-profile-asset="reviews" type="button">
+              <div class="profile-row-icon"><svg viewBox="0 0 24 24"><path d="M12 4.6 14.2 9l4.8.7-3.5 3.4.8 4.8L12 15.6l-4.3 2.3.8-4.8L5 9.7 9.8 9 12 4.6Z"></path></svg></div>
+              <div><b>路线核验贡献</b><span>上传外摆开放、犬型限制、人流压力等真实反馈</span></div>
+              <span>›</span>
+            </button>
+            <button class="card profile-row" data-profile-asset="pet" type="button">
+              <div class="profile-row-icon"><svg viewBox="0 0 24 24"><path d="M8.3 9.9c.9-1.7 2.1-2.5 3.7-2.5s2.8.8 3.7 2.5"></path><path d="M8.6 10.2c-.9.4-1.5 1.2-1.5 2.3 0 2.4 2.1 4.3 4.9 4.3s4.9-1.9 4.9-4.3c0-1.1-.6-1.9-1.5-2.3"></path><path d="M9.2 16.1 7.9 19"></path><path d="M14.8 16.1 16.1 19"></path></svg></div>
+              <div><b>宠物出行档案</b><span>体型、胆量、牵引习惯会影响路线推荐</span></div>
+              <span>›</span>
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <section class="page" id="page-profile-detail">
+        <div class="detail-topbar">
+          <button class="back-button" id="back-profile-detail" type="button" aria-label="返回个人页">
+            <svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"></path></svg>
+          </button>
+          <strong id="profile-detail-title">路线资产</strong>
+        </div>
+        <div id="profile-detail-content"></div>
+      </section>
+
+      <section id="error-panel" class="card section hidden"></section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="FluffyGo 主要功能">
+      <button class="nav-item active" data-tab="home" type="button">
+        <span class="nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M4.5 10.8 12 4.7l7.5 6.1"></path>
+            <path d="M6.6 10.2v8.1c0 .9.6 1.5 1.5 1.5h7.8c.9 0 1.5-.6 1.5-1.5v-8.1"></path>
+            <path d="M10 19.8v-5.1h4v5.1"></path>
+          </svg>
+        </span>
+        <span>首页</span>
+      </button>
+      <button class="nav-item" data-tab="route" type="button">
+        <span class="nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M6.2 17.6c3.4-4.3 7.7 1.5 11.6-4.2"></path>
+            <path d="M6.7 6.2c1.6 0 2.8 1.2 2.8 2.7 0 2-2.8 5.1-2.8 5.1S3.9 10.9 3.9 8.9c0-1.5 1.2-2.7 2.8-2.7Z"></path>
+            <path d="M17.3 3.8c1.6 0 2.8 1.2 2.8 2.7 0 2-2.8 5.1-2.8 5.1s-2.8-3.1-2.8-5.1c0-1.5 1.2-2.7 2.8-2.7Z"></path>
+            <path d="M6.7 8.8h.01"></path>
+            <path d="M17.3 6.4h.01"></path>
+          </svg>
+        </span>
+        <span>路线</span>
+      </button>
+      <button class="nav-item" data-tab="community" type="button">
+        <span class="nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M7.2 8.2h6.4"></path>
+            <path d="M7.2 12h4.6"></path>
+            <path d="M5.7 4.8h10.2c1.4 0 2.4 1 2.4 2.4v5.9c0 1.4-1 2.4-2.4 2.4H10l-4.2 3.2v-3.2h-.1c-1.4 0-2.4-1-2.4-2.4V7.2c0-1.4 1-2.4 2.4-2.4Z"></path>
+            <path d="M17.9 9.2h.6c1.2 0 2.2 1 2.2 2.2v4c0 1.2-1 2.2-2.2 2.2h-.7v2.1l-2.6-2.1h-2.4"></path>
+          </svg>
+        </span>
+        <span>社区</span>
+      </button>
+      <button class="nav-item" data-tab="profile" type="button">
+        <span class="nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 12.2a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6Z"></path>
+            <path d="M5.2 20.1c.8-3.4 3.2-5.2 6.8-5.2s6 1.8 6.8 5.2"></path>
+            <path d="M18.4 6.1 20 4.5"></path>
+            <path d="M19.4 9.1h2.1"></path>
+          </svg>
+        </span>
+        <span>记录</span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="label-modal hidden" id="label-modal" aria-hidden="true">
+    <div class="label-sheet" role="dialog" aria-modal="true" aria-labelledby="label-modal-title">
+      <div class="label-modal-head">
+        <div>
+          <h2 id="label-modal-title">宠物友好标签依据</h2>
+          <p>集中说明准入条件、证据来源与待确认项，主流程默认保持简洁。</p>
+        </div>
+        <button class="label-close" id="label-modal-close" type="button" aria-label="关闭">×</button>
+      </div>
+      <div id="label-modal-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const state = {
+      data: null,
+      routeType: "main",
+      generated: false,
+      parsedInput: null,
+      backendPlan: null,
+      backendAvailable: false,
+      selectedPostIndex: 0,
+      selectedArea: "xinjiekou",
+      areas: [],
+      mapConfig: null,
+      baiduMapReady: null,
+      baiduMap: null,
+      baiduOverlays: [],
+      homeNearbyPois: [],
+      homeMap: null,
+      homeMapMarkers: [],
+    };
+
+    const API_BASE = "http://127.0.0.1:8001";
+    const routeLabels = {
+      main: "主路线",
+      balanced: "均衡",
+      budget_saver: "省钱",
+      low_stress: "低压力",
+      rainy_day: "雨天",
+      service_supply: "服务补给",
+      quick_walk: "纯散步",
+    };
+    const routeBaseTypes = {
+      balanced: "main",
+      budget_saver: "main",
+      service_supply: "main",
+      quick_walk: "main",
+    };
+
+    function text(value, fallback = "待补充") {
+      return value === undefined || value === null || value === "" ? fallback : String(value);
+    }
+
+    function listText(value) {
+      return Array.isArray(value) ? value.join("、") : text(value);
+    }
+
+    function setApiStatus(label, live = false) {
+      const node = document.getElementById("api-status");
+      node.textContent = label;
+      node.classList.toggle("live", live);
+    }
+
+    function areaLabel(areaId = state.selectedArea) {
+      const fromConfig = (state.areas || []).find((area) => area.area_id === areaId);
+      const fallback = {
+        xinjiekou: "南京新街口",
+        gulou: "鼓楼区",
+        qinhuai: "秦淮区",
+        xuanwu: "玄武区",
+      };
+      return text(fromConfig?.label || fromConfig?.location || fallback[areaId], "南京新街口");
+    }
+
+    function updateAreaTabs() {
+      document.querySelectorAll("[data-area]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.area === state.selectedArea);
+      });
+      const pill = document.getElementById("area-pill");
+      if (pill) pill.textContent = areaLabel();
+    }
+
+    function syncInputLocation(areaId) {
+      const input = document.getElementById("user-input");
+      if (!input) return;
+      const label = areaLabel(areaId);
+      const prefix = `我现在在${label}`;
+      input.value = input.value
+        .replace(/我现在在(南京新街口|新街口|鼓楼区|秦淮区|玄武区)/, prefix)
+        .replace(/我在(南京新街口|新街口|鼓楼区|秦淮区|玄武区)/, prefix);
+      if (!/南京新街口|新街口|鼓楼区|秦淮区|玄武区/.test(input.value)) {
+        input.value = `${prefix}，${input.value}`;
+      }
+    }
+
+    async function selectArea(areaId) {
+      state.selectedArea = areaId || "xinjiekou";
+      syncInputLocation(state.selectedArea);
+      updateAreaTabs();
+      await refreshHomeNearby();
+      if (state.generated) {
+        await showDemo(true);
+      }
+    }
+
+    async function checkBackendHealth() {
+      try {
+        const response = await fetch(`${API_BASE}/api/health`, { cache: "no-store" });
+        const data = await response.json();
+        state.backendAvailable = Boolean(data.ok);
+        setApiStatus(data.llm_configured ? "LLM 增强" : "在线规划", true);
+      } catch (error) {
+        state.backendAvailable = false;
+        setApiStatus("基础规划", false);
+      }
+    }
+
+    async function requestBackendPlan(userMessage, forceRouteType = null) {
+      const response = await fetch(`${API_BASE}/api/plan-route`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_message: userMessage,
+          force_route_type: forceRouteType,
+          use_llm: true,
+          use_live_data: true,
+          area_id: state.selectedArea || "xinjiekou",
+        }),
+      });
+      if (!response.ok) throw new Error(`API ${response.status}`);
+      return response.json();
+    }
+
+    async function requestNearbyPois() {
+      const keywords = ["公园", "咖啡", "宠物店", "商场"];
+      const areaId = state.selectedArea || "xinjiekou";
+      const results = await Promise.allSettled(keywords.map(async (keyword) => {
+        const response = await fetch(`${API_BASE}/api/live-pois?area_id=${encodeURIComponent(areaId)}&keyword=${encodeURIComponent(keyword)}`, { cache: "no-store" });
+        if (!response.ok) throw new Error(`API ${response.status}`);
+        const payload = await response.json();
+        return (payload.pois || []).map((poi) => ({ ...poi, home_keyword: keyword }));
+      }));
+      const output = [];
+      const seen = new Set();
+      results.forEach((result) => {
+        if (result.status !== "fulfilled") return;
+        result.value.forEach((poi) => {
+          const key = `${poi.name}|${poi.address}`;
+          if (!poi.name || seen.has(key)) return;
+          seen.add(key);
+          output.push(poi);
+        });
+      });
+      return output.slice(0, 16);
+    }
+
+    async function submitPoiFeedback(poiId, poiName, vote) {
+      const response = await fetch(`${API_BASE}/api/poi-feedback`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          poi_id: poiId,
+          poi_name: poiName,
+          vote,
+          source: "mobile_demo",
+        }),
+      });
+      if (!response.ok) throw new Error(`API ${response.status}`);
+      return response.json();
+    }
+
+    async function refreshPlanAfterFeedback() {
+      if (!state.backendAvailable) return;
+      const message = document.getElementById("user-input").value.trim();
+      state.backendPlan = await requestBackendPlan(message, state.routeType);
+      state.routeType = state.backendPlan.selected_route_type || state.routeType;
+      renderParsedInput();
+      renderRoute();
+    }
+
+    async function loadFrontendConfig() {
+      try {
+        const response = await fetch(`${API_BASE}/api/config`, { cache: "no-store" });
+        if (!response.ok) throw new Error(`API ${response.status}`);
+        state.mapConfig = await response.json();
+        state.areas = Array.isArray(state.mapConfig.areas) ? state.mapConfig.areas : state.areas;
+      } catch (error) {
+        state.mapConfig = { baidu_map_enabled: false, map_provider: "offline" };
+      }
+    }
+
+    function getAllPois() {
+      const pois = state.data?.pois || {};
+      return Object.values(pois).flat().filter(Boolean);
+    }
+
+    function findPoiById(poiId) {
+      return getAllPois().find((poi) => poi.poi_id === poiId);
+    }
+
+    function findRoute(routeType) {
+      const baseType = routeBaseTypes[routeType] || routeType;
+      return (state.data?.route_templates || []).find((route) => route.route_type === baseType);
+    }
+
+    function getRouteStopPois(route) {
+      return (route?.stops || []).map((stop) => ({
+        ...stop,
+        poi: stop.poi || findPoiById(stop.poi_id) || {},
+      }));
+    }
+
+    function getPoiPoint(poi) {
+      const location = poi.location || {};
+      const lng = Number(location.lng);
+      const lat = Number(location.lat);
+      if (!Number.isFinite(lng) || !Number.isFinite(lat)) return null;
+      return { lng, lat };
+    }
+
+    function getRouteOriginPoint() {
+      const origin = state.backendPlan?.route_origin;
+      const lng = Number(origin?.lng);
+      const lat = Number(origin?.lat);
+      if (Number.isFinite(lng) && Number.isFinite(lat)) {
+        return {
+          lng,
+          lat,
+          label: text(origin.name, state.backendPlan?.parsed_input?.location || "用户当前位置"),
+          role: text(origin.role, "集合点"),
+          source: text(origin.source, "parsed_user_location"),
+        };
+      }
+      return {
+        lng: 118.7841,
+        lat: 32.0415,
+        label: state.backendPlan?.parsed_input?.location || "南京新街口",
+        role: "集合点",
+        source: "fallback_demo_origin",
+      };
+    }
+
+    function getRouteEndpointPoint() {
+      const endpoint = state.backendPlan?.route_endpoint;
+      const origin = getRouteOriginPoint();
+      const lng = Number(endpoint?.lng);
+      const lat = Number(endpoint?.lat);
+      if (Number.isFinite(lng) && Number.isFinite(lat)) {
+        return {
+          lng,
+          lat,
+          label: text(endpoint.name, `${origin.label}返程点`),
+          role: text(endpoint.role, "返程点"),
+          source: text(endpoint.source, origin.source),
+        };
+      }
+      return {
+        lng: origin.lng,
+        lat: origin.lat,
+        label: `${origin.label}返程点`,
+        role: "返程点",
+        source: origin.source,
+      };
+    }
+
+    function selectedAreaCenter() {
+      const area = (state.areas || []).find((item) => item.area_id === state.selectedArea);
+      const center = area?.center || {};
+      const lng = Number(center.lng);
+      const lat = Number(center.lat);
+      if (Number.isFinite(lng) && Number.isFinite(lat)) {
+        return { lng, lat, label: areaLabel() };
+      }
+      const fallback = {
+        xinjiekou: { lng: 118.7841, lat: 32.0415, label: "南京新街口" },
+        gulou: { lng: 118.7697, lat: 32.0664, label: "鼓楼区" },
+        qinhuai: { lng: 118.7947, lat: 32.0187, label: "秦淮区" },
+        xuanwu: { lng: 118.8489, lat: 32.0504, label: "玄武区" },
+      };
+      return fallback[state.selectedArea] || fallback.xinjiekou;
+    }
+
+    function fallbackNearbyPois() {
+      const all = getAllPois();
+      const preferred = all.filter((poi) => /公园|绿地|咖啡|宠物|商场|商业街|购物/.test(`${text(poi.name)}${text(poi.category)}${listText(poi.experience?.tags || [])}`));
+      return preferred.slice(0, 12).map((poi) => ({ ...poi, home_keyword: "样例" }));
+    }
+
+    function homePoiRole(poi) {
+      const value = `${text(poi.home_keyword)} ${text(poi.name)} ${text(poi.category)} ${text(poi.pet_friendly?.status)}`;
+      if (/宠物店|宠物洗护|宠物用品|宠物医院|宠物服务/.test(value)) return "宠物服务";
+      if (/商场|购物中心|雨天/.test(value)) return "雨天备选";
+      if (/咖啡|餐饮|轻食/.test(value)) return "友好消费";
+      return "散步活动";
+    }
+
+    function homeRoleColor(role) {
+      return {
+        "散步活动": "#f6c400",
+        "友好消费": "#ffd100",
+        "宠物服务": "#ff7a1a",
+        "雨天备选": "#2378ff",
+      }[role] || "#222";
+    }
+
+    function renderHomePoiCards() {
+      const node = document.getElementById("home-poi-strip");
+      if (!node) return;
+      const pois = state.homeNearbyPois?.length ? state.homeNearbyPois : fallbackNearbyPois();
+      node.innerHTML = pois.slice(0, 10).map((poi, index) => {
+        const role = homePoiRole(poi);
+        const pet = poi.pet_friendly || {};
+        const exp = poi.experience || {};
+        return `
+          <article class="home-poi-card" data-home-poi-index="${index}">
+            <div>
+              <div class="home-poi-meta">
+                <span style="background:${homeRoleColor(role)}22;color:#222">${role}</span>
+                <span>${text(poi.distance_m, "-")}m</span>
+              </div>
+              <h3>${text(poi.name)}</h3>
+              <p>${text(poi.address, poi.category)}</p>
+            </div>
+            <div class="home-poi-meta">
+              <span>${text(pet.status, "待确认")}</span>
+              <span>${text(exp.pet_stress_level, "中")}压力</span>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function showHomeMapFallback(message) {
+      const fallback = document.getElementById("home-map-fallback");
+      if (!fallback) return;
+      fallback.classList.remove("hidden");
+      fallback.textContent = message;
+    }
+
+    async function renderHomeMap() {
+      const mapNode = document.getElementById("home-map");
+      const fallback = document.getElementById("home-map-fallback");
+      if (!mapNode || !fallback) return;
+      const pois = (state.homeNearbyPois?.length ? state.homeNearbyPois : fallbackNearbyPois())
+        .filter((poi) => {
+          const point = getPoiPoint(poi);
+          return point && Number.isFinite(point.lng) && Number.isFinite(point.lat);
+        })
+        .slice(0, 12);
+      const center = selectedAreaCenter();
+      document.getElementById("home-map-subtitle").textContent = `基于${areaLabel()}当前位置聚合散步、消费、服务与雨天备选`;
+      document.getElementById("home-focus-title").textContent = `${areaLabel()}推荐目的地 ${pois.length || 0} 个`;
+      document.getElementById("home-focus-copy").textContent = pois.length
+        ? "选择目的地后，将结合宠物体型、距离与风险生成路线。"
+        : "暂无实时目的地结果，已展示精选候选。";
+
+      try {
+        await loadBaiduMapScript();
+        fallback.classList.add("hidden");
+        const map = state.homeMap || new BMap.Map(mapNode, { enableMapClick: false });
+        state.homeMap = map;
+        map.clearOverlays();
+        map.centerAndZoom(new BMap.Point(center.lng, center.lat), 14);
+        if (typeof map.enableScrollWheelZoom === "function") map.enableScrollWheelZoom(false);
+
+        const originMarker = new BMap.Marker(
+          new BMap.Point(center.lng, center.lat),
+          { icon: createBaiduIcon({ color: "#222", label: "我" }) },
+        );
+        map.addOverlay(originMarker);
+
+        pois.forEach((poi, index) => {
+          const point = getPoiPoint(poi);
+          const role = homePoiRole(poi);
+          const marker = new BMap.Marker(
+            new BMap.Point(point.lng, point.lat),
+            { icon: createBaiduIcon({ color: homeRoleColor(role), label: String(index + 1) }) },
+          );
+          marker.addEventListener("click", () => {
+            const title = document.getElementById("home-focus-title");
+            const copy = document.getElementById("home-focus-copy");
+            title.textContent = text(poi.name);
+            copy.textContent = `${role} · ${text(poi.address, poi.category)} · ${text(poi.distance_m, "-")}m`;
+          });
+          map.addOverlay(marker);
+        });
+      } catch (error) {
+        showHomeMapFallback(`${areaLabel()}附近已加载 ${pois.length || 0} 个目的地，地图暂时使用卡片浏览。`);
+      }
+    }
+
+    async function refreshHomeNearby() {
+      const subtitle = document.getElementById("home-nearby-subtitle");
+      if (subtitle) subtitle.textContent = "正在更新附近目的地...";
+      try {
+        state.homeNearbyPois = await requestNearbyPois();
+      } catch (error) {
+        state.homeNearbyPois = [];
+      }
+      if (!state.homeNearbyPois.length) {
+        state.homeNearbyPois = fallbackNearbyPois();
+      }
+      renderHomePoiCards();
+      await renderHomeMap();
+      if (subtitle) {
+        const liveCount = state.homeNearbyPois.filter((poi) => poi.source_api === "baidu_place_v2").length;
+        subtitle.textContent = liveCount ? `已同步附近目的地 ${liveCount} 个` : "精选目的地候选";
+      }
+    }
+
+    async function planFromHomePoi(index) {
+      const poi = state.homeNearbyPois?.[Number(index)];
+      const input = document.getElementById("user-input");
+      const role = poi ? homePoiRole(poi) : "附近目的地";
+      const targetName = poi ? text(poi.name) : "附近宠物友好目的地";
+      const intentText = role === "宠物服务"
+        ? `${areaLabel()}出发，携带中型犬，计划顺路前往${targetName}完成洗护或用品补给，预算 150 元以内。`
+        : role === "雨天备选"
+          ? `${areaLabel()}出发，携带中型犬，雨天优先选择${targetName}这类半室内或可避雨空间，预计 2 小时。`
+          : role === "友好消费"
+            ? `${areaLabel()}出发，携带中型犬，计划在${targetName}附近短暂停留，预算 100 元以内，优先避开高拥挤点位。`
+            : `${areaLabel()}出发，携带中型犬，优先前往${targetName}附近散步，排除咖啡与额外消费点。`;
+      if (input) input.value = intentText;
+      await showDemo(true);
+    }
+
+    function setRealMapStatus(message) {
+      const node = document.getElementById("real-map-status");
+      if (node) node.textContent = message;
+    }
+
+    function showMapFallback(route, message = "地图服务暂未连通，已展示路线示意图") {
+      const fallback = document.getElementById("map-fallback");
+      if (!fallback) return;
+      fallback.classList.remove("hidden");
+      fallback.innerHTML = `
+        <div class="map-fallback-note">${message}</div>
+        ${renderMiniMap(route?.route_type || state.routeType || "main", route || {})}
+      `;
+      setRealMapStatus("路线示意图");
+    }
+
+    function hideMapFallback() {
+      const fallback = document.getElementById("map-fallback");
+      if (fallback) {
+        fallback.classList.add("hidden");
+        fallback.innerHTML = "";
+      }
+    }
+
+    function loadBaiduMapScript() {
+      if (window.BMap && typeof window.BMap.Map === "function") return Promise.resolve();
+      if (state.baiduMapReady) return state.baiduMapReady;
+      const ak = state.mapConfig?.baidu_map_ak;
+      if (!ak) return Promise.reject(new Error("缺少百度地图 AK"));
+
+      state.baiduMapReady = new Promise((resolve, reject) => {
+        const existing = document.querySelector("script[data-baidu-map]");
+        let timeout;
+        const fail = (error) => {
+          window.clearTimeout(timeout);
+          state.baiduMapReady = null;
+          reject(error);
+        };
+        timeout = window.setTimeout(() => fail(new Error("百度地图加载超时")), 9000);
+        const waitForConstructor = (count = 0) => {
+          if (window.BMap && typeof window.BMap.Map === "function") {
+            window.clearTimeout(timeout);
+            resolve();
+            return;
+          }
+          if (count >= 20) {
+            fail(new Error("百度地图对象未就绪"));
+            return;
+          }
+          window.setTimeout(() => waitForConstructor(count + 1), 120);
+        };
+        window.__fluffygoBaiduMapReady = () => {
+          waitForConstructor();
+        };
+        if (existing) {
+          waitForConstructor();
+          return;
+        }
+        const script = document.createElement("script");
+        script.dataset.baiduMap = "true";
+        script.src = `https://api.map.baidu.com/api?v=3.0&ak=${encodeURIComponent(ak)}&callback=__fluffygoBaiduMapReady`;
+        script.onerror = () => {
+          fail(new Error("地图组件加载失败"));
+        };
+        document.head.appendChild(script);
+      });
+      return state.baiduMapReady;
+    }
+
+    function mapRoleStyle(role, index, total) {
+      if (role === "集合点" || role === "出发点") return { color: "#1f1f1f", label: "起" };
+      if (role === "返程点" || role === "终点") return { color: "#ff7a1a", label: "终" };
+      if (index === total - 1 && total > 1) return { color: "#ff7a1a", label: "终" };
+      if (role === "宠物服务/补给点") return { color: "#ff7a1a", label: "洗" };
+      if (role === "雨天备选点") return { color: "#3b82f6", label: "备" };
+      if (role === "宠物友好消费点") return { color: "#ffd100", label: "消" };
+      return { color: "#f6c400", label: "游" };
+    }
+
+    function isReturnPoint(point) {
+      return text(point?.role).includes("返程") || text(point?.name).includes("返程点");
+    }
+
+    function routeStopMapLabel(role, name = "") {
+      const value = `${text(role, "")} ${text(name, "")}`;
+      if (/服务|补给|洗护|用品/.test(value)) return "服务补给";
+      if (/雨天|商场|室内|备选/.test(value)) return "雨天备选";
+      if (/咖啡|餐饮|轻食|消费/.test(value)) return "友好咖啡";
+      if (/公园|绿地|广场|商业街|活动|散步/.test(value)) return "活动空间";
+      const cleaned = text(name, "途经点").replace(/[（(].*?[）)]/g, "");
+      return cleaned.length > 8 ? cleaned.slice(0, 8) : cleaned;
+    }
+
+    function createBaiduIcon(style) {
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="42" viewBox="0 0 36 42">
+          <filter id="s" x="-30%" y="-20%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#3a2a0b" flood-opacity=".28"/>
+          </filter>
+          <path filter="url(#s)" d="M18 40S6 27.5 6 17.5C6 10.6 11.4 5 18 5s12 5.6 12 12.5C30 27.5 18 40 18 40Z" fill="${style.color}" stroke="#fff" stroke-width="3"/>
+          <circle cx="18" cy="17.5" r="8" fill="rgba(255,255,255,.92)"/>
+          <text x="18" y="21" text-anchor="middle" font-size="8.5" font-weight="900" fill="#202020">${style.label}</text>
+        </svg>
+      `;
+      return new BMap.Icon(`data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`, new BMap.Size(36, 42), {
+        anchor: new BMap.Size(18, 38),
+      });
+    }
+
+    function createRouteMapLabel(map, point, label, isSelected = true) {
+      if (!label || typeof BMap.Label !== "function") return;
+      const markerLabel = new BMap.Label(label, {
+        position: point,
+        offset: new BMap.Size(14, -30),
+      });
+      markerLabel.setStyle({
+        color: isSelected ? "#222" : "#6f675c",
+        backgroundColor: isSelected ? "rgba(255,255,255,.96)" : "rgba(255,255,255,.82)",
+        border: `1px solid ${isSelected ? "rgba(255, 122, 26, .34)" : "rgba(80,70,55,.14)"}`,
+        borderRadius: "999px",
+        padding: "4px 7px",
+        fontSize: "11px",
+        fontWeight: "900",
+        boxShadow: isSelected ? "0 4px 12px rgba(54,41,0,.16)" : "none",
+        maxWidth: "132px",
+        whiteSpace: "nowrap",
+      });
+      map.addOverlay(markerLabel);
+    }
+
+    function drawGuidePolyline(map, path, dashed = false, options = {}) {
+      if (!path || path.length < 2 || typeof BMap.Polyline !== "function") return;
+      const color = options.color || "#ff8a00";
+      const opacity = options.opacity ?? 0.92;
+      const weight = options.weight || 4.4;
+      const haloColor = options.haloColor || "#ffffff";
+      const haloOpacity = options.haloOpacity ?? 0.7;
+      const haloWeight = options.haloWeight || Math.max(weight + 3, 7);
+      const halo = new BMap.Polyline(path, {
+        strokeColor: haloColor,
+        strokeWeight: haloWeight,
+        strokeOpacity: haloOpacity,
+        strokeStyle: dashed ? "dashed" : "solid",
+      });
+      const line = new BMap.Polyline(path, {
+        strokeColor: color,
+        strokeWeight: weight,
+        strokeOpacity: opacity,
+        strokeStyle: dashed ? "dashed" : "solid",
+      });
+      map.addOverlay(halo);
+      map.addOverlay(line);
+    }
+
+    function extractWalkingPath(walking) {
+      if (typeof walking.getResults !== "function") return [];
+      const results = walking.getResults();
+      if (!results || typeof results.getPlan !== "function") return [];
+      const plan = results.getPlan(0);
+      if (!plan || typeof plan.getNumRoutes !== "function" || typeof plan.getRoute !== "function") return [];
+      const path = [];
+      for (let routeIndex = 0; routeIndex < plan.getNumRoutes(); routeIndex += 1) {
+        const route = plan.getRoute(routeIndex);
+        if (route && typeof route.getPath === "function") {
+          path.push(...route.getPath());
+        }
+      }
+      return path;
+    }
+
+    function planBaiduWalkingSegments(map, bPoints, options = {}) {
+      if (bPoints.length < 2) return Promise.resolve({ success: 0, failed: 0 });
+      if (typeof BMap.WalkingRoute !== "function") {
+        return Promise.reject(new Error("步行路线规划服务未启用"));
+      }
+
+      const tasks = [];
+      for (let index = 0; index < bPoints.length - 1; index += 1) {
+        tasks.push(new Promise((resolve) => {
+          let settled = false;
+          const finish = (result) => {
+            if (settled) return;
+            settled = true;
+            resolve(result);
+          };
+          const timer = window.setTimeout(() => {
+            drawGuidePolyline(map, [bPoints[index], bPoints[index + 1]], true, options);
+            finish("failed");
+          }, 7000);
+          const walking = new BMap.WalkingRoute(map, {
+            onSearchComplete: () => {
+              window.clearTimeout(timer);
+              const successCode = typeof BMAP_STATUS_SUCCESS !== "undefined" ? BMAP_STATUS_SUCCESS : 0;
+              const ok = typeof walking.getStatus === "function"
+                ? walking.getStatus() === successCode
+                : true;
+              if (ok) {
+                const path = extractWalkingPath(walking);
+                if (path.length >= 2) {
+                  drawGuidePolyline(map, path, false, options);
+                  finish("success");
+                  return;
+                }
+              }
+              drawGuidePolyline(map, [bPoints[index], bPoints[index + 1]], true, options);
+              finish("failed");
+            },
+          });
+          try {
+            walking.search(bPoints[index], bPoints[index + 1]);
+          } catch (error) {
+            window.clearTimeout(timer);
+            drawGuidePolyline(map, [bPoints[index], bPoints[index + 1]], true, options);
+            finish("failed");
+          }
+        }));
+      }
+
+      return Promise.all(tasks).then((results) => ({
+        success: results.filter((result) => result === "success").length,
+        failed: results.filter((result) => result !== "success").length,
+      }));
+    }
+
+    async function renderRealMap(route) {
+      const stops = getRouteStopPois(route);
+      const points = stops.map((stop) => {
+        const point = getPoiPoint(stop.poi);
+        return point ? { ...point, stop } : null;
+      }).filter(Boolean);
+      const origin = getRouteOriginPoint();
+      const routePoints = [
+        {
+          lng: origin.lng,
+          lat: origin.lat,
+          stop: {
+            role: origin.role,
+            suggested_stay_time: "出发",
+            poi: {
+              name: origin.label,
+              address: origin.source === "fallback_demo_origin" ? "系统推荐集合点" : "用户出发位置",
+            },
+          },
+        },
+        ...points,
+      ];
+
+      if (!points.length) {
+        showMapFallback(route, "部分站点缺少经纬度，已展示路线示意图");
+        return;
+      }
+
+      try {
+        await loadBaiduMapScript();
+        hideMapFallback();
+        setRealMapStatus("地图加载中");
+
+        const mapNode = document.getElementById("real-map");
+        if (!state.baiduMap) {
+          state.baiduMap = new BMap.Map(mapNode, { enableMapClick: false });
+          state.baiduMap.centerAndZoom(new BMap.Point(118.7841, 32.0415), 15);
+          state.baiduMap.setCurrentCity("南京");
+          state.baiduMap.enableScrollWheelZoom(true);
+        }
+        const map = state.baiduMap;
+        map.clearOverlays();
+
+        const bPoints = routePoints.map((item) => new BMap.Point(item.lng, item.lat));
+        const centerLng = routePoints.reduce((sum, item) => sum + item.lng, 0) / routePoints.length;
+        const centerLat = routePoints.reduce((sum, item) => sum + item.lat, 0) / routePoints.length;
+        map.centerAndZoom(new BMap.Point(centerLng, centerLat), bPoints.length > 1 ? 14 : 16);
+        if (bPoints.length === 1) {
+          map.centerAndZoom(bPoints[0], 16);
+        }
+
+        const walkingResult = await planBaiduWalkingSegments(map, bPoints);
+        setRealMapStatus(walkingResult.failed
+          ? "步行路线已生成 · 部分路段需确认"
+          : "步行路线已生成");
+
+        routePoints.forEach((item, index) => {
+          const point = bPoints[index];
+          const style = mapRoleStyle(item.stop.role, index, routePoints.length);
+          const marker = new BMap.Marker(point, { icon: createBaiduIcon(style) });
+          map.addOverlay(marker);
+          if (index > 0 && index === routePoints.length - 1) {
+            createRouteMapLabel(map, point, `终 ${routeStopMapLabel(item.stop.role, item.stop.poi.name)}`, true);
+          } else if (index > 0) {
+            createRouteMapLabel(map, point, `${index} ${routeStopMapLabel(item.stop.role, item.stop.poi.name)}`, true);
+          } else if (index === 0) {
+            createRouteMapLabel(map, point, "起点", true);
+          }
+
+          const info = new BMap.InfoWindow(`
+            <b>${text(item.stop.poi.name)}</b><br/>
+            ${text(item.stop.role)}｜${text(item.stop.suggested_stay_time)}<br/>
+            ${text(item.stop.poi.address)}
+          `, { width: 210, height: 88, title: "FluffyGo 路线站点" });
+          marker.addEventListener("click", () => map.openInfoWindow(info, point));
+        });
+
+        window.setTimeout(() => {
+          const mapNode = document.getElementById("real-map");
+          const tileImages = [...(mapNode?.querySelectorAll("img") || [])].filter((img) => {
+            const src = img.src || "";
+            return !src.includes("marker_") && !src.includes("copyright") && img.naturalWidth > 1;
+          });
+          const fallbackVisible = !document.getElementById("map-fallback")?.classList.contains("hidden");
+          if (!fallbackVisible && tileImages.length === 0) {
+            showMapFallback(route, "地图底图未完全加载，已展示路线示意图。");
+          }
+        }, 4200);
+      } catch (error) {
+        showMapFallback(route, `${error.message || "地图加载失败"}，已展示路线示意图`);
+      }
+    }
+
+    function findAdjustment(targetRouteType, caseId) {
+      return (state.data?.adjustment_cases || []).find((item) => {
+        if (caseId) return item.case_id === caseId;
+        return item.target_route_type === targetRouteType;
+      });
+    }
+
+    function parseUserNeed() {
+      const base = state.data?.user_input_example || {};
+      const raw = document.getElementById("user-input").value.trim();
+      const budgetMatch = raw.match(/预算\s*(?:只有|大概|约|在)?\s*(\d+)|(\d+)\s*元以内|(\d+)\s*块/);
+      const budget = Number(budgetMatch?.[1] || budgetMatch?.[2] || budgetMatch?.[3] || base.budget || 100);
+      const timeMatch = raw.match(/(\d+(?:\.\d+)?)\s*(小时|h|H)/);
+
+      const parsed = {
+        location: raw.match(/南京新街口|新街口|鼓楼区|秦淮区|玄武区|德基|夫子庙|老门东|玄武湖/)?.[0]?.replace(/^新街口$/, "南京新街口") || areaLabel() || base.location || "南京新街口",
+        available_time: timeMatch ? `${timeMatch[1]}小时` : base.available_time || "2.5小时",
+        pet_type: raw.includes("猫") ? "猫" : "狗",
+        pet_size: raw.includes("大型") ? "大型犬" : raw.includes("小型") ? "小型犬" : raw.includes("猫") ? "猫" : "中型犬",
+        budget,
+        preferences: [],
+        avoid: [],
+        commercial_intent: [],
+      };
+
+      if (raw.includes("散步") || raw.includes("走走") || raw.includes("遛")) parsed.preferences.push("短时散步");
+      if (raw.includes("公园") || raw.includes("绿地") || raw.includes("草坪") || raw.includes("广场")) {
+        parsed.preferences.push("公园/绿地活动");
+      }
+      const coffeeNegated = /不想.{0,8}咖啡|不要.{0,8}咖啡|不去.{0,8}咖啡|别.{0,8}咖啡|不考虑.{0,8}咖啡/.test(raw);
+      const noConsumption = /不想.{0,8}消费|不要.{0,8}消费|不消费|不花钱|零预算|只散步|纯散步|只想去公园|只去公园|只想逛公园|不买东西/.test(raw);
+      if (coffeeNegated) {
+        parsed.avoid.push("咖啡店");
+      } else if (raw.includes("咖啡")) {
+        parsed.preferences.push("宠物友好咖啡");
+        parsed.commercial_intent.push("咖啡");
+      }
+      if (raw.includes("轻食")) parsed.commercial_intent.push("轻食");
+      if (raw.includes("餐") || raw.includes("饭")) parsed.commercial_intent.push("餐饮");
+      if (raw.includes("洗护") || raw.includes("洗澡") || raw.includes("美容")) parsed.commercial_intent.push("洗护预约");
+      if (raw.includes("用品") || raw.includes("补给") || raw.includes("零食")) parsed.commercial_intent.push("用品补给");
+      if (raw.includes("雨") || raw.includes("室内")) parsed.preferences.push("雨天备选");
+      if (raw.includes("太挤") || raw.includes("低拥挤") || raw.includes("安静") || raw.includes("避峰")) {
+        parsed.preferences.push("低拥挤度");
+        parsed.avoid.push("太拥挤");
+      }
+      if (raw.includes("太远") || raw.includes("近一点") || raw.includes("别太远")) parsed.avoid.push("太远");
+      if (raw.includes("免费") || noConsumption) {
+        parsed.preferences.push("免费/低预算");
+        parsed.avoid.push("消费点");
+      }
+      if (parsed.budget <= 60) parsed.avoid.push("高消费服务点");
+
+      if (!parsed.preferences.length) parsed.preferences = [...(base.preferences || ["短时散步"])];
+      if (!parsed.avoid.length) parsed.avoid = [];
+      if (!parsed.commercial_intent.length && !coffeeNegated && !parsed.avoid.includes("消费点")) {
+        parsed.commercial_intent = [];
+      }
+
+      if (raw.includes("雨") || raw.includes("室内")) {
+        parsed.routeType = "rainy_day";
+        parsed.message = "识别到雨天/室内需求，已优先切换到雨天友好备选线。";
+      } else if (((coffeeNegated || noConsumption) && parsed.preferences.includes("公园/绿地活动")) || parsed.avoid.includes("消费点") || parsed.budget <= 30) {
+        parsed.routeType = "quick_walk";
+        parsed.message = "识别到你更想散步且排除了咖啡/消费点，已切换为纯散步路线。";
+      } else if (parsed.budget <= 60) {
+        parsed.routeType = "budget_saver";
+        parsed.message = "识别到预算降低，已保留免费街区活动空间，优先选择低客单消费点。";
+      } else if (parsed.avoid.includes("太拥挤") || raw.includes("安静")) {
+        parsed.routeType = "low_stress";
+        parsed.message = "识别到低拥挤/避峰需求，已切换到低压力避峰线。";
+      } else {
+        parsed.routeType = "main";
+        parsed.message = "已按默认需求生成新街口轻松短逛咖啡线。";
+      }
+
+      state.parsedInput = parsed;
+      return parsed;
+    }
+
+    async function applyQuickTag(tag) {
+      const input = document.getElementById("user-input");
+      const additions = {
+        crowded: " 优先避开高峰人流，选择低压力路线。",
+        rainy: " 雨天优先室内或半室内备选点。",
+        budget: " 预算控制在 60 元以内。",
+        budget30: " 预算控制在 30 元以内，仅保留必要停留。",
+        park: " 优先公园、绿地等开放活动空间。",
+        noCoffee: " 排除咖啡店与非必要消费点。",
+        grooming: " 最好顺路有宠物洗护或用品补给。",
+        coffee: " 加入宠物友好咖啡停靠点。",
+      };
+      input.value = `${input.value.replace(/\s+/g, " ").trim()}${additions[tag] || ""}`;
+      await showDemo(true);
+    }
+
+    function meituanAction(action) {
+      const value = text(action, "加入路线");
+      if (value.includes("预约洗护") || value.includes("洗护") || value.includes("服务") || value.includes("预约")) return `美团预约：${value}`;
+      if (value.includes("加入") || value.includes("路线")) return `美团路线：${value}`;
+      if (value.includes("备选") || value.includes("详情")) return `美团查看：${value}`;
+      if (value.includes("电话") || value.includes("确认") || value.includes("咨询")) return `美团咨询：${value}`;
+      if (value.includes("团购") || value.includes("咖啡") || value.includes("餐饮")) return `美团查看：${value}`;
+      return `美团动作：${value}`;
+    }
+
+    function renderChips() {
+      const chips = [
+        ["crowded", "避开高峰"],
+        ["rainy", "雨天方案"],
+        ["budget", "60 元预算"],
+        ["budget30", "30 元以内"],
+        ["park", "开放空间"],
+        ["noCoffee", "排除咖啡"],
+        ["grooming", "洗护补给"],
+        ["coffee", "友好咖啡"],
+      ];
+      document.getElementById("preference-chips").innerHTML = chips
+        .map(([key, label]) => `<button class="quick-tag" data-tag="${key}" type="button">${label}</button>`)
+        .join("");
+    }
+
+    function renderParsedInput() {
+      const input = state.backendPlan?.parsed_input || state.parsedInput || parseUserNeed();
+      const rows = [
+        ["出发位置", input.location],
+        ["可用时间", input.available_time],
+        ["宠物", `${text(input.pet_type)}｜${text(input.pet_size)}`],
+        ["预算", `${text(input.budget, 100)} 元`],
+        ["偏好", listText(input.preferences || [])],
+        ["避免项", listText(input.avoid || [])],
+        ["消费意图", listText(input.commercial_intent || [])],
+        ["规划方式", state.backendPlan ? "在线规划" : "基础规划"],
+      ];
+
+      document.getElementById("parse-grid").innerHTML = rows.map(([label, value]) => `
+        <div class="parse-item">
+          <span>${label}</span>
+          <strong>${text(value)}</strong>
+        </div>
+      `).join("");
+      renderScopePanel();
+    }
+
+    function renderScopePanel() {
+      const node = document.getElementById("scope-panel");
+      if (!node) return;
+      const area = state.backendPlan?.selected_area || state.backendPlan?.area || {};
+      const live = state.backendPlan?.live_data || {};
+      const groupCounts = live.group_counts || {};
+      const liveText = live.used
+        ? `已同步附近目的地 ${text(live.poi_count, 0)} 个`
+        : (live.enabled ? "附近目的地暂无实时结果，展示精选候选" : "精选目的地候选");
+      node.innerHTML = `
+        <div class="scope-card">
+          <b>${text(area.label, areaLabel())}</b>
+          <span>${text(area.district, "南京核心城区")} · 覆盖半径 ${text(area.radius_m, "3000")}m</span>
+        </div>
+        <div class="scope-card">
+          <b>${liveText}</b>
+          <span>活动 ${text(groupCounts.activity_spaces, 0)} · 消费 ${text(groupCounts.consumption_points, 0)} · 服务 ${text(groupCounts.pet_services, 0)} · 雨天 ${text(groupCounts.rainy_day_backups, 0)}</span>
+        </div>
+      `;
+    }
+
+    function minutesFromStay(value, fallback = 35) {
+      const match = text(value, "").match(/(\d+)(?:\s*-\s*(\d+))?/);
+      if (!match) return fallback;
+      const first = Number(match[1]);
+      const second = Number(match[2] || match[1]);
+      return Math.round((first + second) / 2);
+    }
+
+    function formatClock(date) {
+      return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+    }
+
+    function routeWalkMinutes(index, stopCount) {
+      if (index === 0) return 12;
+      if (index === stopCount - 1) return 10;
+      return 8;
+    }
+
+    function petAccessSummary(stop, poi) {
+      const policy = stop.pet_access_policy || poi.pet_access_policy || {};
+      const pet = poi.pet_friendly || {};
+      const accessType = text(policy.access_type, pet.status || "携宠规则待核验");
+      const scope = text(policy.allowed_scope, /咖啡|餐饮|商场/.test(`${poi.category || ""}${poi.name || ""}`) ? "优先外摆/开放区域" : "开放空间停留");
+      const size = text(policy.pet_size_limit, "中型犬需牵引");
+      return { accessType, scope, size };
+    }
+
+    function renderRouteTrust(route) {
+      const node = document.getElementById("route-trust-panel");
+      if (!node) return;
+      const stops = getRouteStopPois(route);
+      const summary = state.backendPlan?.pet_label_summary || {};
+      const score = Number(summary.score || route.pet_friendly_score || 76);
+      const grade = score >= 85 ? "高可信" : score >= 70 ? "可执行，需局部确认" : "谨慎执行";
+      const hasIndoor = stops.some((stop) => {
+        const poi = stop.poi || {};
+        return /商场|室内|餐饮/.test(`${poi.category || ""}${poi.experience?.space_type || ""}${poi.name || ""}`);
+      });
+      const hasService = stops.some((stop) => {
+        const poi = stop.poi || {};
+        return /洗护|用品|补给|宠物服务/.test(`${stop.role || ""}${poi.name || ""}${poi.category || ""}`);
+      });
+      const tags = [
+        `最近验证：${score >= 85 ? "3 天内" : "7 天内"}`,
+        `中型犬：${hasIndoor ? "谨慎" : "适合牵引"}`,
+        hasIndoor ? "到店规则：室内需确认" : "到店规则：开放空间优先",
+        hasService ? "含服务补给点" : "可切换备选路线",
+      ];
+      node.innerHTML = `
+        <div class="route-trust-title">
+          <span>路线可信度</span>
+          <span>${grade}</span>
+        </div>
+        <div class="route-trust-tags">
+          ${tags.map((tag) => `<span>${tag}</span>`).join("")}
+        </div>
+      `;
+    }
+
+    function renderRouteItinerary(route) {
+      const node = document.getElementById("route-itinerary");
+      if (!node) return;
+      const origin = getRouteOriginPoint();
+      const stops = getRouteStopPois(route);
+      const base = new Date();
+      base.setSeconds(0, 0);
+      let cursor = new Date(base);
+      const stopRows = [];
+
+      stopRows.push({
+        time: "现在",
+        marker: "起",
+        title: text(origin.label, "用户当前位置"),
+        desc: `从${text(origin.label, areaLabel())}出发，按当前输入优先避开高拥挤路段。`,
+        note: "出发前确认牵引绳、拾便袋和饮水。"
+      });
+
+      stops.forEach((stop, index) => {
+        const poi = stop.poi || findPoiById(stop.poi_id) || {};
+        const walk = routeWalkMinutes(index, stops.length);
+        cursor = new Date(cursor.getTime() + walk * 60000);
+        const arrive = formatClock(cursor);
+        const stay = minutesFromStay(stop.suggested_stay_time, index === 0 ? 30 : 40);
+        const access = petAccessSummary(stop, poi);
+        const isLast = index === stops.length - 1;
+        stopRows.push({
+          time: arrive,
+          marker: isLast ? "终" : String(index + 1),
+          title: text(poi.name, stop.poi_id),
+          desc: `步行约 ${walk} 分钟到达，停留约 ${stay} 分钟。${text(stop.reason, "按距离、宠物压力和路线角色选择。")}`,
+          note: `${access.accessType}｜${access.scope}｜${access.size}`
+        });
+        cursor = new Date(cursor.getTime() + stay * 60000);
+      });
+
+      const end = stops[stops.length - 1]?.poi || {};
+      node.innerHTML = `
+        <div class="itinerary-head">
+          <div>
+            <b>${text(route.route_name, "本次路线")}</b>
+            <p>${stops.length ? `共 ${stops.length} 个停留点，终点为 ${text(end.name, "最后一个目的地")}。` : "路线生成后展示起点、途经点与终点。"}</p>
+          </div>
+          <span class="asset-status ok">可出发</span>
+        </div>
+        <div class="time-axis">
+          ${stopRows.map((item) => `
+            <div class="time-stop">
+              <div class="time-node">
+                <span class="time-clock">${item.time}</span>
+                <span class="time-dot">${item.marker}</span>
+              </div>
+              <div class="time-content">
+                <h3>${item.title}</h3>
+                <p>${item.desc}</p>
+                <div class="segment-note">${item.note}</div>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderProductLogicFlow() {
+      const node = document.getElementById("product-logic-flow");
+      if (!node) return;
+      const input = state.backendPlan?.parsed_input || state.parsedInput || {};
+      node.innerHTML = `
+        <div class="logic-flow">
+          <div class="logic-step"><i>1</i><div><b>用户输入</b><span>${text(input.location, areaLabel())}、${text(input.pet_size, "中型犬")}、${text(input.available_time, "2.5小时")}、预算 ${text(input.budget, 100)} 元、偏好与避雷项。</span></div></div>
+          <div class="logic-step"><i>2</i><div><b>系统处理</b><span>按 POI 类目、步行距离、宠物友好证据、社区反馈、预算和风险雷达进行排序。</span></div></div>
+          <div class="logic-step"><i>3</i><div><b>路线输出</b><span>给出主路线、备选路线、起止点、停留时间、携宠规则、风险提示和美团交易动作。</span></div></div>
+          <div class="logic-step"><i>4</i><div><b>反馈闭环</b><span>收藏、到店确认、路线评价和异常上报会反哺下一次推荐，让路线更贴合宠物体型和真实规则。</span></div></div>
+        </div>
+      `;
+    }
+
+    function renderRoute() {
+      const route = state.backendPlan?.route || findRoute(state.routeType) || findRoute("main");
+      if (!route) return;
+
+      document.getElementById("route-kicker").textContent = state.backendPlan
+        ? `${state.backendPlan.llm_used ? "LLM 增强规划" : "在线路线规划"} · ${routeLabels[route.route_type] || route.route_type}`
+        : `基础路线规划 · ${routeLabels[route.route_type] || route.route_type}`;
+      document.getElementById("route-name").textContent = route.route_name || "推荐路线";
+      document.getElementById("route-summary").textContent = route.planner_reason
+        ? `${route.summary || ""} ${route.planner_reason}`.trim()
+        : route.summary || "";
+      document.getElementById("route-risk").textContent = route.risk_summary || "携宠规则以商户实际要求为准。";
+
+      const metrics = [
+        ["路线类型", routeLabels[route.route_type] || route.route_type],
+        ["预计时间", route.estimated_time],
+        ["预计预算", route.estimated_budget],
+        ["适配分", route.pet_friendly_score],
+      ];
+
+      document.getElementById("route-metrics").innerHTML = metrics.map(([label, value]) => `
+        <div class="metric">
+          <span>${label}</span>
+          <strong>${text(value)}</strong>
+        </div>
+      `).join("");
+      renderRouteTrust(route);
+      renderRouteItinerary(route);
+
+      document.getElementById("timeline").innerHTML = (route.stops || []).map((stop) => {
+        const poi = stop.poi || findPoiById(stop.poi_id) || {};
+        const pet = poi.pet_friendly || {};
+        const exp = poi.experience || {};
+        const business = poi.business || {};
+        const policy = stop.pet_policy_assessment || {};
+        const accessPolicy = stop.pet_access_policy || poi.pet_access_policy || {};
+        const policyLabel = policy.label || pet.status || "场景待核验";
+        const evidenceLevel = policy.evidence_level || "待补充";
+        const policyBasis = policy.basis || `${text(pet.evidence_source)}｜${text(pet.evidence_text)}`;
+        return `
+          <article class="card poi-card">
+            <div class="step">${text(stop.order, "-")}</div>
+            <div class="poi-main">
+              <div class="poi-topline">
+                <h3>${text(poi.name, stop.poi_id)}</h3>
+                <span class="evidence-pill">${text(evidenceLevel)}</span>
+              </div>
+              <div class="poi-meta">${text(stop.role)}｜${text(stop.suggested_stay_time)}｜${text(poi.address)}</div>
+              <p class="poi-reason">${text(stop.reason)}</p>
+              <div class="badges">
+                <span class="badge good">${text(policyLabel)}</span>
+                <span class="badge">压力 ${text(exp.pet_stress_level)}</span>
+                <span class="badge">人流 ${text(exp.crowd_level)}</span>
+                <span class="badge">${text(poi.distance_m)}m</span>
+              </div>
+              <div class="poi-risk">
+                <b>可携宠条件：</b>${text(accessPolicy.access_type)}｜${text(accessPolicy.allowed_scope)}
+                <br />
+                <b>适合犬型：</b>${text(accessPolicy.pet_size_limit)}｜${text(accessPolicy.verification_status)} ${text(accessPolicy.confidence_percent, "-")}%
+                <br />
+                <b>需确认：</b>${text(accessPolicy.confirmation_question)}
+              </div>
+              <div class="poi-risk">
+                <b>风险：</b>${text(poi.risk_note)}
+                <br />
+                <b>判断依据：</b>${text(policyBasis)}
+              </div>
+              <button class="meituan-btn">${meituanAction(business.transaction_action)}</button>
+              <div class="poi-feedback" data-poi-feedback data-poi-id="${text(poi.poi_id, stop.poi_id)}" data-poi-name="${text(poi.name, stop.poi_id)}">
+                <div class="feedback-title">
+                  <span>到店后反馈</span>
+                  <span>用于更新标签依据</span>
+                </div>
+                <div class="feedback-actions">
+                  <button class="feedback-btn" type="button" data-feedback-vote="可以带狗">可以带狗</button>
+                  <button class="feedback-btn" type="button" data-feedback-vote="只限外摆/小型犬">有限制</button>
+                  <button class="feedback-btn" type="button" data-feedback-vote="不可带宠">不可带宠</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+      bindFeedbackButtons();
+
+      renderPetLabelEngine(route);
+      void renderRealMap(route);
+      renderDecisionTrace(route);
+      renderFeasibility(route);
+      renderRiskRadar(route);
+      renderRouteComparisons();
+      renderCommunityModules();
+      renderProductLogicFlow();
+    }
+
+    function renderDecisionTrace(route) {
+      const trace = state.backendPlan?.decision_trace;
+      const node = document.getElementById("decision-trace-card");
+      if (!node) return;
+
+      if (!trace) {
+        node.innerHTML = `
+          <div class="decision-summary">当前按时间、预算、带宠风险和 POI 类目进行基础排序。</div>
+          <div class="decision-stop-list">
+            ${(route.stops || []).slice(0, 3).map((stop) => `
+              <div class="decision-stop">
+                <b>${text(stop.role)}｜${text(stop.poi?.name || stop.poi_id)}</b>
+                <p>${text(stop.reason, "按路线角色和距离选择。")}</p>
+              </div>
+            `).join("")}
+          </div>
+        `;
+        return;
+      }
+
+      const signals = trace.intent_signals || {};
+      const strongestRisk = trace.strongest_risk || {};
+      const pool = state.backendPlan?.candidate_pool_summary || {};
+      const groups = pool.groups || {};
+      const groupNames = {
+        activity_spaces: "活动空间",
+        consumption_points: "消费点",
+        pet_services: "宠物服务",
+        rainy_day_backups: "雨天备选",
+      };
+      const poolHtml = Object.entries(groups).map(([key, value]) => `
+        <div class="decision-item">
+          <span>${groupNames[key] || key}</span>
+          <b>${text(value.candidate_count, 0)} 候选｜实时来源 ${text(value.live_count, 0)}</b>
+        </div>
+      `).join("");
+      node.innerHTML = `
+        <div class="decision-summary">${text(trace.poi_selection_policy)}。主要风险为「${text(strongestRisk.label)}」，建议：${text(strongestRisk.advice)}</div>
+        <div class="decision-grid">
+          <div class="decision-item"><span>预算约束</span><b>${text(signals.budget)} 元</b></div>
+          <div class="decision-item"><span>宠物条件</span><b>${text(signals.pet_size)}</b></div>
+          <div class="decision-item"><span>偏好</span><b>${listText(signals.preferences || [])}</b></div>
+          <div class="decision-item"><span>避免项</span><b>${listText(signals.avoid || [])}</b></div>
+          ${poolHtml}
+        </div>
+        <div class="decision-stop-list">
+          ${(trace.stop_selection || []).slice(0, 4).map((stop) => `
+            <div class="decision-stop">
+              <b>${text(stop.role)}｜${text(stop.poi_name)}｜分数 ${text(stop.selection_score)}</b>
+              <p>${text(stop.reason)}</p>
+              <p>候选池：${text(stop.selection_meta?.candidate_count, "-")} 个点位，近似最优 ${text(stop.selection_meta?.near_top_count, "-")} 个，本路线采用第 ${text(stop.selection_meta?.ranked_position, "-")} 位。</p>
+            </div>
+          `).join("")}
+        </div>
+        ${(trace.data_gap_notes || []).length ? `<div class="decision-summary">${(trace.data_gap_notes || []).map(text).join("；")}</div>` : ""}
+      `;
+    }
+
+    function bindFeedbackButtons() {
+      document.querySelectorAll("[data-feedback-vote]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const card = button.closest("[data-poi-feedback]");
+          if (!card) return;
+          const poiId = card.dataset.poiId;
+          const poiName = card.dataset.poiName;
+          const vote = button.dataset.feedbackVote;
+          const buttons = card.querySelectorAll("[data-feedback-vote]");
+          buttons.forEach((item) => { item.disabled = true; });
+          try {
+            const result = await submitPoiFeedback(poiId, poiName, vote);
+            button.classList.add("selected");
+            const summary = result.summary || {};
+            showAdjustment(`已记录「${vote}」反馈。该点位累计 ${text(summary.total, 1)} 条反馈，会进入宠物友好标签证据层。`);
+            await refreshPlanAfterFeedback();
+          } catch (error) {
+            showAdjustment("反馈提交暂未完成，请稍后重试。");
+            buttons.forEach((item) => { item.disabled = false; });
+          }
+        });
+      });
+    }
+
+    function fallbackPetLabelSummary(route) {
+      const stops = route.stops || [];
+      const policyCards = stops.map((stop) => {
+        const poi = stop.poi || findPoiById(stop.poi_id) || {};
+        const name = text(poi.name, stop.poi_id);
+        const category = text(poi.category);
+        const isService = /宠物|洗护|用品|医院/.test(`${name}${category}`);
+        const isOpen = /公园|绿地|广场|商业街|步行街|街区/.test(`${name}${category}`);
+        const isIndoor = /商场|购物中心|商业综合体|室内/.test(`${name}${category}`);
+        const label = isService ? "宠物服务门店" : isOpen ? "开放空间适配" : isIndoor ? "室内场景待核验" : "外摆/户外线索";
+        const layer = isService ? "L3" : isOpen ? "L5" : isIndoor ? "L6" : "L4";
+        const score = isService ? 76 : isOpen ? 58 : isIndoor ? 42 : 66;
+        return {
+          layer,
+          label,
+          evidence_level: isService ? "强证据" : isOpen ? "场景适配" : isIndoor ? "待补充" : "场景证据",
+          score,
+          poi_name: name,
+          basis: isService
+            ? "名称或类目命中宠物服务，适合承接服务/补给交易。"
+            : isOpen
+              ? "开放空间更适合作为牵引散步和短暂停留节点。"
+              : isIndoor
+                ? "室内场景规则更敏感，只作为备选候选。"
+                : "命中外摆、露台或户外等开放消费场景线索。",
+          user_feedback: { total: 0, positive: 0, limited: 0, negative: 0, latest: [] },
+          evidence_items: [
+            {
+              source_name: isService ? "POI 类目/商户名称" : isOpen ? "开放空间/街区场景" : isIndoor ? "室内/商场规则风险" : "外摆/户外关键词",
+              signal: isService ? "命中宠物服务类目。" : isOpen ? "开放空间适合散步停留。" : isIndoor ? "室内准入规则敏感。" : "命中开放消费场景线索。",
+              strength: isService ? "strong" : isIndoor ? "weak" : "medium",
+              weight: score,
+              freshness: "static_poi",
+              review_status: isIndoor ? "manual_review_required" : "candidate_pool",
+            },
+          ],
+          evidence_gaps: ["商户后台携宠规则", "近期用户到店验证"],
+          review_status: isIndoor ? "manual_review_required" : isService ? "review_recommended" : "candidate_pool",
+          trust_explanation: isIndoor ? "室内准入规则更敏感，应作为备选并进行二次确认。" : "当前由场景证据支撑，可作为候选推荐。",
+        };
+      });
+      const score = Math.round(policyCards.reduce((sum, item) => sum + item.score, 0) / Math.max(policyCards.length, 1));
+      return {
+        score,
+        grade: score >= 60 ? "可推荐" : "候选推荐",
+        summary: "基于 POI 类目、空间形态和场景线索生成证据分层。",
+        layer_counts: policyCards.reduce((acc, item) => {
+          acc[item.layer] = (acc[item.layer] || 0) + 1;
+          return acc;
+        }, {}),
+        policy_cards: policyCards,
+        evidence_system: {
+          version: "pet_label_evidence_v1",
+          principle: "高可信标签必须由商户确认、用户反馈或强场景证据支撑。",
+          source_layers: [
+            { name: "商户后台确认", priority: 1 },
+            { name: "近期用户反馈", priority: 2 },
+            { name: "POI 类目", priority: 3 },
+            { name: "空间场景", priority: 4 },
+          ],
+        },
+        improvement_loop: ["商户后台确认携宠规则", "用户到店反馈反哺标签", "争议点降权并进入人工复核"],
+      };
+    }
+
+    function userFeedbackText(feedback) {
+      const item = feedback || {};
+      const total = Number(item.total || 0);
+      if (!total) return "暂无到店反馈，仍以规则证据和人工复核为主。";
+      return `近期到店反馈 ${total} 条：可带 ${Number(item.positive || 0)}，有限制 ${Number(item.limited || 0)}，不可带 ${Number(item.negative || 0)}。`;
+    }
+
+    function renderEvidenceSystem(summary) {
+      const system = summary.evidence_system || {};
+      const layers = system.source_layers || [];
+      return `
+        <article class="evidence-system-card">
+          <b>证据体系 ${text(system.version, "pet_label_evidence_v1")}</b>
+          <div>${text(system.principle, "高可信标签必须由商户确认、用户反馈或强场景证据支撑。")}</div>
+          <div class="evidence-gaps">
+            ${layers.slice(0, 6).map((layer) => `<span class="gap-chip">${text(layer.name)}｜P${text(layer.priority)}</span>`).join("")}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderEvidenceItems(items = []) {
+      if (!items.length) return `<div class="evidence-items"><div class="evidence-item"><p>暂无结构化证据项，需要补充商户、用户或运营复核信息。</p></div></div>`;
+      return `
+        <div class="evidence-items">
+          ${items.slice(0, 4).map((item) => `
+            <div class="evidence-item">
+              <div class="evidence-item-head">
+                <span>${text(item.source_name)}</span>
+                <span>${text(item.strength)} · ${text(item.weight)}</span>
+              </div>
+              <p>${text(item.signal)}</p>
+              <p>${text(item.freshness)}｜${text(item.review_status)}</p>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderPetLabelEngine(route) {
+      const summary = state.backendPlan?.pet_label_summary || fallbackPetLabelSummary(route);
+      state.currentPetLabelSummary = summary;
+      const layers = ["L1", "L2", "L3", "L4", "L5", "L6"];
+      const layerNames = {
+        L1: "商户确认",
+        L2: "用户验证",
+        L3: "宠物服务",
+        L4: "外摆线索",
+        L5: "开放空间",
+        L6: "待核验",
+      };
+      const counts = summary.layer_counts || {};
+      const policyCards = summary.policy_cards || [];
+      document.getElementById("pet-label-engine").innerHTML = `
+        <article class="label-note-card">
+          <div>
+            <b>标签证据分 ${text(summary.score, 0)} · ${text(summary.grade, "候选推荐")}</b>
+            <p>${text(summary.summary)} 评分依据已收起，不占用主路线界面。</p>
+          </div>
+          <button class="label-note-btn" id="open-label-modal" type="button">查看依据</button>
+        </article>
+      `;
+      const button = document.getElementById("open-label-modal");
+      if (button) button.addEventListener("click", openLabelModal);
+    }
+
+    function renderPetLabelDetails(summary) {
+      const layers = ["L1", "L2", "L3", "L4", "L5", "L6"];
+      const layerNames = {
+        L1: "商户确认",
+        L2: "用户验证",
+        L3: "宠物服务",
+        L4: "外摆线索",
+        L5: "开放空间",
+        L6: "待核验",
+      };
+      const counts = summary.layer_counts || {};
+      const policyCards = summary.policy_cards || [];
+      return `
+        <article class="card label-score-card">
+          <div class="label-score-top">
+            <div class="label-score">${text(summary.score, 0)}</div>
+            <div class="label-score-copy">
+              <b>${text(summary.grade, "候选推荐")}</b>
+              <p>${text(summary.summary)}</p>
+            </div>
+          </div>
+          <div class="label-layers">
+            ${layers.map((layer) => `
+              <div class="label-layer ${counts[layer] ? "active" : ""}">
+                <b>${layer}</b>
+                <span>${layerNames[layer]}${counts[layer] ? ` · ${counts[layer]}` : ""}</span>
+              </div>
+            `).join("")}
+          </div>
+        </article>
+        ${renderEvidenceSystem(summary)}
+        <div class="label-proof-list">
+          ${policyCards.slice(0, 3).map((item) => `
+            <article class="label-proof">
+              <div class="label-proof-top">
+                <h3>${text(item.poi_name)} · ${text(item.label)}</h3>
+                <span class="evidence-pill">${text(item.layer)}｜${text(item.review_status, item.evidence_level)}</span>
+              </div>
+              <p>${text(item.trust_explanation, item.basis)}</p>
+              <p>${text(item.basis)}</p>
+              ${item.access_policy ? `
+                <div class="evidence-items">
+                  <div class="evidence-item">
+                    <div class="evidence-item-head">
+                      <span>可携宠条件</span>
+                      <span>${text(item.access_policy.verification_status)} · ${text(item.access_policy.confidence_percent, "-")}%</span>
+                    </div>
+                    <p>${text(item.access_policy.access_type)}｜${text(item.access_policy.allowed_scope)}</p>
+                    <p>${text(item.access_policy.pet_size_limit)}｜需确认：${text(item.access_policy.confirmation_question)}</p>
+                  </div>
+                </div>
+              ` : ""}
+              <p>${userFeedbackText(item.user_feedback)}</p>
+              ${renderEvidenceItems(item.evidence_items || [])}
+              <div class="evidence-gaps">
+                ${(item.evidence_gaps || []).slice(0, 5).map((gap) => `<span class="gap-chip">缺口：${text(gap)}</span>`).join("")}
+              </div>
+            </article>
+          `).join("")}
+        </div>
+        <div class="label-loop">
+          ${(summary.improvement_loop || []).map((item, index) => `${index + 1}. ${item}`).join("<br>")}
+        </div>
+      `;
+    }
+
+    function openLabelModal() {
+      const summary = state.currentPetLabelSummary || state.backendPlan?.pet_label_summary;
+      if (!summary) return;
+      document.getElementById("label-modal-content").innerHTML = renderPetLabelDetails(summary);
+      const modal = document.getElementById("label-modal");
+      modal.classList.remove("hidden");
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeLabelModal() {
+      const modal = document.getElementById("label-modal");
+      modal.classList.add("hidden");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    function fallbackFeasibility(route) {
+      const stops = route.stops || [];
+      const score = state.routeType === "low_stress" ? 82 : state.routeType === "rainy_day" ? 76 : 78;
+      return {
+        score,
+        label: score >= 80 ? "适合出发" : "谨慎出发",
+        summary: `今日带宠出行可行性 ${score}/100`,
+        reasons: [`包含 ${stops.length} 个停靠点`, "核心商圈建议避峰", "优先选择强证据或开放空间点位"],
+        primary_suggestion: "优先按推荐路线出发，室内/商场点位以商户实际规则为准。",
+      };
+    }
+
+    function renderFeasibility(route) {
+      const data = state.backendPlan?.feasibility || fallbackFeasibility(route);
+      const score = Number(data.score || 76);
+      document.getElementById("feasibility-card").innerHTML = `
+        <div class="score-ring" style="--score:${score}">${score}</div>
+        <div class="score-copy">
+          <b>${text(data.label, "谨慎出发")}</b>
+          <p>${text(data.summary)}。${text(data.primary_suggestion)}</p>
+        </div>
+        <div class="score-reasons">
+          ${(data.reasons || []).slice(0, 4).map((reason) => `<span class="reason-chip">${reason}</span>`).join("")}
+        </div>
+      `;
+    }
+
+    function fallbackRiskRadar(route) {
+      const highCrowd = state.routeType === "main";
+      return [
+        { label: "人流拥挤", level: highCrowd ? "高" : "中", score: highCrowd ? 82 : 58, advice: "避开 16:00-18:00。" },
+        { label: "室内准入", level: state.routeType === "rainy_day" ? "高" : "中", score: state.routeType === "rainy_day" ? 78 : 55, advice: "室内需确认携宠规则。" },
+        { label: "犬型适配", level: "中", score: 56, advice: "中型犬优先外摆和街区。" },
+        { label: "证据完整度", level: "高", score: 86, advice: "优先使用商户标签、用户反馈和开放空间线索。" },
+      ];
+    }
+
+    function renderRiskRadar(route) {
+      const radar = state.backendPlan?.risk_radar || fallbackRiskRadar(route);
+      const points = radar.slice(0, 6).map((item, index) => {
+        const angle = -90 + index * 60;
+        const radius = 18 + Number(item.score || 50) * 0.46;
+        const x = 75 + Math.cos(angle * Math.PI / 180) * radius;
+        const y = 75 + Math.sin(angle * Math.PI / 180) * radius;
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(" ");
+
+      const axis = radar.slice(0, 6).map((item, index) => {
+        const angle = -90 + index * 60;
+        const x = 75 + Math.cos(angle * Math.PI / 180) * 64;
+        const y = 75 + Math.sin(angle * Math.PI / 180) * 64;
+        const tx = 75 + Math.cos(angle * Math.PI / 180) * 70;
+        const ty = 75 + Math.sin(angle * Math.PI / 180) * 70;
+        return `
+          <line x1="75" y1="75" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="#e8dfc7" stroke-width="1" />
+          <text x="${tx.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-size="9" font-weight="800" fill="#7a6b43">${text(item.label).slice(0, 2)}</text>
+        `;
+      }).join("");
+
+      const topAdvice = [...radar].sort((a, b) => Number(b.score || 0) - Number(a.score || 0))[0];
+
+      document.getElementById("risk-radar").className = "card risk-radar-card";
+      document.getElementById("risk-radar").innerHTML = `
+        <div class="radar-wrap">
+          <svg class="radar-svg" viewBox="0 0 150 150" aria-label="风险雷达六边形图">
+            <polygon points="75,11 130,43 130,107 75,139 20,107 20,43" fill="rgba(255,209,0,.10)" stroke="#eadca9" stroke-width="1.2" />
+            <polygon points="75,31 113,53 113,97 75,119 37,97 37,53" fill="none" stroke="#eee4c5" stroke-width="1" />
+            <polygon points="75,51 96,63 96,87 75,99 54,87 54,63" fill="none" stroke="#f0e8d4" stroke-width="1" />
+            ${axis}
+            <polygon points="${points}" fill="rgba(255, 111, 26, .25)" stroke="#ff6f1a" stroke-width="2.4" />
+            ${points.split(" ").map((point) => {
+              const [x, y] = point.split(",");
+              return `<circle cx="${x}" cy="${y}" r="3.2" fill="#ff6f1a" stroke="#fff" stroke-width="1.5" />`;
+            }).join("")}
+          </svg>
+          <div class="radar-legend">
+            ${radar.slice(0, 6).map((item) => `
+              <div class="radar-legend-item">
+                <b>${text(item.label)}</b>
+                <span>${text(item.level)}</span>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+        <div class="radar-advice">${text(topAdvice?.label)}风险最高：${text(topAdvice?.advice)}</div>
+      `;
+    }
+
+    function fallbackRouteComparisons() {
+      const parsed = state.parsedInput || parseUserNeed();
+      const selected = state.routeType || parsed.routeType || "main";
+      const currentArea = areaLabel();
+      let types = [selected];
+      if (selected === "budget_saver") types.push("quick_walk", "low_stress", "balanced");
+      else if (selected === "quick_walk") types.push("low_stress", "balanced");
+      else if (selected === "rainy_day") types.push("low_stress", "balanced", "budget_saver");
+      else if (selected === "service_supply") types.push("balanced", "low_stress", "budget_saver");
+      else types.push("low_stress", "budget_saver", "rainy_day");
+      types = [...new Set(types)].slice(0, 4);
+      return types.map((type) => {
+        const route = findRoute(type) || {};
+        const customNames = {
+          balanced: `${currentArea}均衡短逛线`,
+          budget_saver: `${currentArea}省钱短逛线`,
+          quick_walk: `${currentArea}纯散步快线`,
+          service_supply: `${currentArea}宠物补给服务线`,
+        };
+        const origin = getRouteOriginPoint();
+        const endpoint = getRouteEndpointPoint();
+        return {
+          route_type: type,
+          route_name: customNames[type] || route.route_name,
+          selected: type === state.routeType,
+          estimated_time: route.estimated_time,
+          estimated_budget: type === "quick_walk" ? "0元" : type === "budget_saver" ? "20-60元" : route.estimated_budget,
+          walking_distance_m: type === "quick_walk" ? 1100 : type === "rainy_day" ? 900 : type === "low_stress" ? 1350 : 1600,
+          preview_points: [
+            { role: "集合点", name: origin.label || currentArea, lat: origin.lat, lng: origin.lng },
+            ...getRouteStopPois(route).map((stop) => ({
+              role: stop.role,
+              name: stop.poi?.name || stop.poi_id,
+              lat: Number(stop.poi?.location?.lat),
+              lng: Number(stop.poi?.location?.lng),
+            })).filter((point) => Number.isFinite(point.lat) && Number.isFinite(point.lng)),
+            { role: "返程点", name: endpoint.label || `${currentArea}返程点`, lat: endpoint.lat, lng: endpoint.lng },
+          ],
+          pet_friendly_score: route.pet_friendly_score,
+          pet_stress_level: route.pet_stress_level,
+          feasibility_score: type === "low_stress" ? 82 : type === "rainy_day" ? 76 : 78,
+          trade_opportunities: (route.stops || []).length,
+          best_for: {
+            main: "周末短逛和咖啡消费",
+            balanced: "预算、时间和消费机会较均衡",
+            budget_saver: "预算有限，保留免费空间和低客单点",
+            quick_walk: "只想散步，不安排消费点",
+            low_stress: "怕拥挤、需要避峰的宠物",
+            rainy_day: "下雨或室内备选",
+            service_supply: "需要洗护、用品或补给",
+          }[type],
+          tradeoff_summary: type === selected ? "与本次输入约束匹配度最高，作为默认推荐。" : "相较默认路线，在预算、距离和服务停靠上存在差异。",
+        };
+      });
+    }
+
+    function renderRouteComparisons() {
+      const comparisons = state.backendPlan?.route_comparisons || fallbackRouteComparisons();
+      const subtitle = document.getElementById("comparison-subtitle");
+      if (subtitle) {
+        subtitle.textContent = `点击候选卡片切换路线`;
+      }
+      document.getElementById("route-comparisons").innerHTML = comparisons.map((item) => `
+        <article class="compare-card ${item.selected ? "selected" : ""}" data-compare-route="${item.route_type}">
+          <h3>${text(item.route_name)}</h3>
+          <p>${text(item.best_for)}</p>
+          <div class="compare-meta">
+            <span>可行性 ${text(item.feasibility_score)}</span>
+            <span>预算 ${text(item.estimated_budget)}</span>
+            <span>距离 ${text(item.walking_distance_m, "-")}m</span>
+            <span>适配 ${text(item.pet_friendly_score)}</span>
+            <span>${comparisonPointLabel(item)} ${text(item.trade_opportunities)}</span>
+          </div>
+          <div class="compare-tradeoff">${text(item.tradeoff_summary, "查看这条路线的取舍。")}</div>
+        </article>
+      `).join("");
+
+      document.querySelectorAll("[data-compare-route]").forEach((card) => {
+        card.addEventListener("click", async () => {
+          await showDemo(true, card.dataset.compareRoute);
+        });
+      });
+      void renderComparisonMaps(comparisons);
+    }
+
+    function showComparisonMapFallback(item) {
+      const fallback = document.getElementById("comparison-map-fallback-all");
+      if (fallback) {
+        fallback.classList.remove("hidden");
+        const selected = (state.backendPlan?.route_comparisons || fallbackRouteComparisons()).find((route) => route.selected) || item || {};
+        fallback.innerHTML = renderMiniMap(selected.route_type || state.routeType || "main", selected);
+      }
+    }
+
+    async function renderComparisonMaps(comparisons) {
+      if (!comparisons?.length) return;
+      try {
+        await loadBaiduMapScript();
+      } catch (error) {
+        showComparisonMapFallback(comparisons.find((item) => item.selected) || comparisons[0]);
+        return;
+      }
+
+      const node = document.getElementById("comparison-map-all");
+      if (!node || !window.BMap) {
+        showComparisonMapFallback(comparisons.find((item) => item.selected) || comparisons[0]);
+        return;
+      }
+      try {
+        const map = new BMap.Map(node, { enableMapClick: false });
+        if (typeof map.disableDragging === "function") map.disableDragging();
+        if (typeof map.disableScrollWheelZoom === "function") map.disableScrollWheelZoom();
+        if (typeof map.disableDoubleClickZoom === "function") map.disableDoubleClickZoom();
+
+        const selectedRoute = comparisons.find((item) => item.selected) || comparisons[0];
+        const selectedPoints = (selectedRoute.preview_points || [])
+          .map((point) => ({ ...point, lng: Number(point.lng), lat: Number(point.lat) }))
+          .filter((point) => !isReturnPoint(point) && Number.isFinite(point.lng) && Number.isFinite(point.lat));
+        if (selectedPoints.length < 2) {
+          showComparisonMapFallback(selectedRoute);
+          return;
+        }
+        const centerLng = selectedPoints.reduce((sum, point) => sum + point.lng, 0) / selectedPoints.length;
+        const centerLat = selectedPoints.reduce((sum, point) => sum + point.lat, 0) / selectedPoints.length;
+        map.centerAndZoom(new BMap.Point(centerLng, centerLat), 15);
+        const viewportPoints = selectedPoints.map((point) => new BMap.Point(point.lng, point.lat));
+        if (typeof map.setViewport === "function") {
+          map.setViewport(viewportPoints, { margins: [48, 28, 48, 28] });
+        }
+
+        const bPoints = selectedPoints.map((point) => new BMap.Point(point.lng, point.lat));
+        const drawTask = planBaiduWalkingSegments(map, bPoints, {
+          color: "#ff7a1a",
+          weight: 5.2,
+          opacity: 0.96,
+          haloColor: "#ffffff",
+          haloOpacity: 0.78,
+          haloWeight: 8,
+        });
+        selectedPoints.forEach((pointData, index) => {
+          const point = new BMap.Point(pointData.lng, pointData.lat);
+          const role = text(pointData.role, index === 0 ? "集合点" : "途经点");
+          const marker = new BMap.Marker(point, { icon: createBaiduIcon(mapRoleStyle(role, index, selectedPoints.length)) });
+          map.addOverlay(marker);
+          if (index === 0) {
+            createRouteMapLabel(map, point, "起点", true);
+          } else if (index === selectedPoints.length - 1) {
+            createRouteMapLabel(map, point, `终 ${routeStopMapLabel(pointData.role, pointData.name)}`, true);
+          } else if (index > 0) {
+            createRouteMapLabel(map, point, `${index} ${routeStopMapLabel(pointData.role, pointData.name)}`, true);
+          }
+        });
+
+        drawTask.then((result) => {
+          if (result.failed) {
+            showComparisonMapFallback(selectedRoute);
+          }
+        }).catch(() => showComparisonMapFallback(selectedRoute));
+      } catch (error) {
+        showComparisonMapFallback(comparisons.find((item) => item.selected) || comparisons[0]);
+        }
+    }
+
+    function comparisonPointLabel(item) {
+      if (item.route_type === "rainy_day") return "备选点";
+      if (item.route_type === "service_supply") return "服务点";
+      if (item.route_type === "quick_walk" || text(item.estimated_budget) === "0元" || /公园|散步|纯散步/.test(text(item.route_name))) return "停留点";
+      return "交易点";
+    }
+
+    function renderMiniMap(routeType, item = {}) {
+      const noCommerce = routeType === "quick_walk" || text(item.estimated_budget) === "0元" || /公园|散步|纯散步/.test(text(item.route_name));
+      const variants = {
+        main: {
+          path: "M34 92 C62 78, 91 80, 114 61 C135 44, 155 42, 188 34",
+          stops: [[34, 92, "起", "公园"], [114, 61, "咖", "消费点"], [188, 34, "补", "补给"]],
+          caption: "新街口核心 2.4km",
+        },
+        balanced: {
+          path: "M30 88 C66 78, 88 55, 122 58 C150 61, 170 48, 196 38",
+          stops: [[30, 88, "起", "活动"], [122, 58, "消", "门店"], [196, 38, "终", "补给"]],
+          caption: "活动+消费+补给",
+        },
+        budget_saver: {
+          path: "M28 90 C66 83, 100 82, 134 72 C158 66, 176 61, 194 58",
+          stops: [[28, 90, "免", "免费"], [134, 72, "低", "低客单"], [194, 58, "终", "近"]],
+          caption: "免费优先 · 少绕路",
+        },
+        quick_walk: {
+          path: "M30 88 C54 68, 78 94, 108 75 C132 60, 156 52, 194 45",
+          stops: [[30, 88, "园", "公园"], [108, 75, "散", "散步"], [194, 45, "休", "休息"]],
+          caption: "纯散步 · 不进店",
+        },
+        service_supply: {
+          path: "M28 90 C62 82, 84 53, 114 50 C148 47, 169 66, 198 82",
+          stops: [[28, 90, "起", "活动"], [114, 50, "洗", "洗护"], [198, 82, "补", "用品"]],
+          caption: "洗护预约 · 顺路补给",
+        },
+        low_stress: {
+          path: "M26 76 C58 101, 104 92, 142 82 C166 76, 184 70, 204 63",
+          stops: [[26, 76, "起", "边缘"], [142, 82, "避", "避峰"], [204, 63, "终", "低压"]],
+          caption: "外围绕行 · 避开核心口",
+        },
+        rainy_day: {
+          path: "M34 44 C68 58, 96 48, 132 62 C157 72, 176 86, 202 91",
+          stops: [[34, 44, "备", "避雨"], [132, 62, "半", "半室内"], [202, 91, "终", "备选"]],
+          caption: "雨天备选 · 需二次确认",
+        },
+      };
+      const walkOnlyMap = {
+        path: "M30 88 C54 68, 78 94, 108 75 C132 60, 156 52, 194 45",
+        stops: [[30, 88, "园", "公园"], [108, 75, "散", "散步"], [194, 45, "休", "休息"]],
+        caption: routeType === "low_stress" ? "低压力散步线" : "纯散步快线",
+      };
+      const map = noCommerce ? walkOnlyMap : (variants[routeType] || variants.main);
+      const stopMarkup = map.stops.map(([x, y, marker, label], index) => {
+        const fill = index === 0 ? "#222222" : index === map.stops.length - 1 ? "#ff6f1a" : "#ffd100";
+        const displayMarker = index === 0 ? "起" : index === map.stops.length - 1 ? "终" : marker;
+        const textFill = marker.length > 1 ? "#1c1c1c" : "#222";
+        const labelX = Math.min(196, Math.max(28, x + (index === map.stops.length - 1 ? -22 : 16)));
+        const labelAnchor = index === map.stops.length - 1 ? "end" : "start";
+        return `
+          <circle cx="${x}" cy="${y}" r="9.5" fill="#fff" opacity=".96" />
+          <circle cx="${x}" cy="${y}" r="7.2" fill="${fill}" stroke="#222" stroke-width="${index === 1 ? 0 : 1.2}" />
+          <text x="${x}" y="${y + 3}" text-anchor="middle" font-size="7.8" font-weight="950" fill="${textFill}">${displayMarker}</text>
+          <text class="map-stop-label" x="${labelX}" y="${y - 9}" text-anchor="${labelAnchor}" font-size="8.5" font-weight="900" fill="#4f422f">${label}</text>
+        `;
+      }).join("");
+      return `
+        <div class="mini-map">
+          <svg viewBox="0 0 220 128" aria-label="${map.caption}">
+            <rect x="0" y="0" width="220" height="128" fill="#f7f3e7" />
+            <path d="M0 32 C42 20, 66 32, 102 22 C144 11, 170 14, 220 4 L220 0 L0 0 Z" fill="#e7f0de" opacity=".9" />
+            <path d="M0 108 C42 97, 85 108, 122 100 C159 92, 186 104, 220 96 L220 128 L0 128 Z" fill="#edf1de" opacity=".86" />
+            <rect x="88" y="32" width="49" height="27" rx="4" fill="#fff0bd" stroke="#ead68a" stroke-width="1" />
+            <rect x="143" y="33" width="42" height="24" rx="4" fill="#fff0bd" stroke="#ead68a" stroke-width="1" />
+            <rect x="46" y="68" width="44" height="24" rx="4" fill="#fff9e8" stroke="#eadfc4" stroke-width="1" />
+            <rect x="154" y="76" width="38" height="20" rx="4" fill="#fff9e8" stroke="#eadfc4" stroke-width="1" />
+            <text x="12" y="23" font-size="9" font-weight="900" fill="#6f8f64">莫愁湖公园</text>
+            <text x="96" y="49" font-size="8.5" font-weight="900" fill="#8b6a00">金鹰/德基</text>
+            <text x="149" y="49" font-size="8.5" font-weight="900" fill="#8b6a00">大洋百货</text>
+            <text x="167" y="112" font-size="8" font-weight="800" fill="#9a907b">新街口商圈</text>
+
+            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M-10 86 C38 76, 82 70, 230 65" stroke="#d7cdb8" stroke-width="12" />
+              <path d="M-10 86 C38 76, 82 70, 230 65" stroke="#fffdf6" stroke-width="8" />
+              <path d="M68 -12 C72 20, 75 62, 86 140" stroke="#d7cdb8" stroke-width="11" />
+              <path d="M68 -12 C72 20, 75 62, 86 140" stroke="#fffdf6" stroke-width="7" />
+              <path d="M12 37 C56 44, 120 38, 230 27" stroke="#ded6c5" stroke-width="8" />
+              <path d="M12 37 C56 44, 120 38, 230 27" stroke="#fffdf8" stroke-width="5" />
+              <path d="M146 -8 C144 30, 138 78, 132 138" stroke="#ded6c5" stroke-width="8" />
+              <path d="M146 -8 C144 30, 138 78, 132 138" stroke="#fffdf8" stroke-width="5" />
+              <path d="M8 115 C62 100, 118 108, 226 91" stroke="#e3dac8" stroke-width="7" />
+              <path d="M8 115 C62 100, 118 108, 226 91" stroke="#fffdf8" stroke-width="4" />
+            </g>
+            <text x="22" y="80" font-size="7.5" font-weight="900" fill="#9b8e78" transform="rotate(-8 22 80)">汉中路</text>
+            <text x="88" y="24" font-size="7.5" font-weight="900" fill="#9b8e78" transform="rotate(82 88 24)">中山南路</text>
+            <text x="156" y="78" font-size="7.5" font-weight="900" fill="#9b8e78" transform="rotate(-5 156 78)">中山东路</text>
+
+            <path d="${map.path}" fill="none" stroke="rgba(48, 37, 20, .22)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="${map.path}" fill="none" stroke="#ff7a1a" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="${map.path}" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 8" opacity=".65" />
+            ${stopMarkup}
+          </svg>
+          <div class="map-caption">${map.caption}</div>
+          <div class="map-scale"></div>
+        </div>
+      `;
+    }
+
+    function fallbackCommunityModules() {
+      return {
+        forum: {
+          title: "路线情报反馈",
+          description: "汇总附近用户的拥挤度、准入规则、外摆状态和宠物压力反馈，反哺路线推荐。",
+          posts: [
+            { user: "今天也遛狗", tag: "路况反馈", content: "德基附近 16:30 后人流偏高，中型犬建议走外围路线。", likes: 128, comments: 24 },
+            { user: "咖啡和狗", tag: "外摆情报", content: "外摆下午更友好，店员说牵引绳和不进室内是关键。", likes: 96, comments: 18 },
+            { user: "玄武湖边走走", tag: "低压路线", content: "玄武湖边晚风舒服，但周末儿童车多，建议靠湖边慢走。", likes: 88, comments: 12 },
+            { user: "小狗不社恐", tag: "路线核验", content: "鼓楼广场西侧入口更宽，适合作为集合点，晚高峰不建议穿过地铁口。", likes: 43, comments: 9 },
+            { user: "雨天也要出门", tag: "雨天备选", content: "商场不是都能进，雨天最好只把商场当集合/避雨备选。", likes: 57, comments: 11 },
+            { user: "老门东散步员", tag: "风险提醒", content: "秦淮游客区拍照点密集，建议缩短牵引距离并避开小吃摊周边。", likes: 64, comments: 15 },
+          ],
+          feedback_actions: ["可以带狗", "只限小型犬", "外摆关闭", "人流偏高", "入口更宽", "方便离开"],
+        },
+      };
+    }
+
+    function getCommunityModules() {
+      return state.backendPlan?.community_modules || fallbackCommunityModules();
+    }
+
+    function getForumPosts() {
+      return getCommunityModules().forum?.posts || fallbackCommunityModules().forum.posts;
+    }
+
+    function postImage(index) {
+      return index % 2 ? "assets/fluffygo-border-collie-logo.png" : "assets/fluffygo-hero-border-collie.png";
+    }
+
+    function renderCommunityPostDetail(index = 0) {
+      const posts = getForumPosts();
+      const post = posts[index] || posts[0] || {};
+      state.selectedPostIndex = index;
+      const user = text(post.user, "带宠用户");
+      const tag = text(post.tag, "实地反馈");
+      const content = text(post.content, "这条带宠反馈还需要更多用户补充。");
+      const title = `${tag}｜${content.replace(/[。.!！?？]$/, "")}`;
+      const detail = index % 2
+        ? "适合出发前进行二次确认：核验外摆开放、犬型限制与停留规则，再决定是否加入路线。这里可以承接电话咨询、团购券和到店反馈。"
+        : "这类信息对核心商圈尤其重要：它能把人流、噪声、地铁口拥堵这些不可见风险，转成路线生成时可用的真实标签。";
+      document.getElementById("community-detail-content").innerHTML = `
+        <article class="card post-detail-card">
+          <div class="post-detail-cover"><img src="${postImage(index)}" alt=""></div>
+          <div class="post-detail-body">
+            <div class="post-author-row">
+              <div class="post-author"><i class="avatar">${user.slice(0, 1)}</i>${user}</div>
+              <span class="badge">${tag}</span>
+            </div>
+            <h2 class="post-detail-title">${title}</h2>
+            <p class="post-detail-text">${content} ${detail}</p>
+            <div class="review-grid">
+              <div class="review-cell"><b>${index === 0 ? "偏高" : "中"}</b><span>人流压力</span></div>
+              <div class="review-cell"><b>${index === 0 ? "中" : "低"}</b><span>宠物压力</span></div>
+              <div class="review-cell"><b>${index === 0 ? "128" : "76"}</b><span>有用反馈</span></div>
+            </div>
+            <div class="badges">
+              <span class="badge good">可反哺 POI 标签</span>
+              <span class="badge">可反哺核验</span>
+              <span class="badge">${index % 2 ? "消费决策" : "路线避峰"}</span>
+            </div>
+            <button class="meituan-btn" style="margin-top:12px">把这条反馈加入路线判断</button>
+          </div>
+        </article>
+      `;
+    }
+
+    function openCommunityPost(index) {
+      renderCommunityPostDetail(Number(index) || 0);
+      switchPage("community-detail");
+    }
+
+    function renderCommunityModules() {
+      const modules = getCommunityModules();
+      const forum = modules.forum || {};
+      const route = state.backendPlan?.route || findRoute(state.routeType) || findRoute("main") || {};
+      const routeStops = getRouteStopPois(route);
+      const restrictedStops = routeStops.filter((stop) => {
+        const poi = stop.poi || {};
+        return /室内|商场|咖啡|餐饮|外摆|洗护/.test(`${stop.role || ""}${poi.name || ""}${poi.category || ""}${poi.experience?.space_type || ""}`);
+      }).length;
+      const normalizeFeedbackAction = (action) => ({
+        "人太多": "人流偏高",
+        "求代溜": "代溜需求",
+      }[text(action)] || text(action));
+      const normalizedPosts = (forum.posts || fallbackCommunityModules().forum.posts).map((post) => ({
+        ...post,
+        tag: text(post.tag, "反馈").replace("实时反馈", "路况反馈"),
+        content: text(post.content).replace("人太多", "人流偏高"),
+      }));
+      const normalizedActions = (forum.feedback_actions || fallbackCommunityModules().forum.feedback_actions).map(normalizeFeedbackAction);
+      const forumHtml = `
+        <article class="card community-card">
+          <h3>路线可信度验证</h3>
+          <p>社区不是普通信息流，而是当前路线的众包校验层：到店准入、人流压力和犬型适配会直接影响排序。</p>
+          <div class="verify-grid">
+            <div class="verify-cell"><span>近 7 天验证</span><b>${Math.max(6, routeStops.length * 3)} 人次</b></div>
+            <div class="verify-cell"><span>需二次确认</span><b>${restrictedStops || 1} 个站点</b></div>
+            <div class="verify-cell"><span>主要反馈</span><b>高峰拥挤 / 外摆规则</b></div>
+            <div class="verify-cell"><span>路线影响</span><b>降权风险点，保留备选</b></div>
+          </div>
+          <div class="social-feed">
+            ${normalizedPosts.slice(0, 6).map((post, index) => `
+              <div class="social-card" data-community-post="${index}" role="button" tabindex="0">
+                <div class="social-cover ${index % 2 ? "alt logo-shot" : ""}">
+                  <img src="${postImage(index)}" alt="">
+                </div>
+                <div class="social-body">
+                  <span class="badge">${text(post.tag, "反馈")}</span>
+                  <p class="social-title">${text(post.content)}</p>
+                  <div class="social-meta">
+                    <span><i class="avatar">${text(post.user).slice(0, 1)}</i>${text(post.user)}</span>
+                    <span>♡ ${text(post.likes, index === 0 ? "128" : index === 1 ? "76" : "42")} · ${text(post.comments, 8)}评</span>
+                  </div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+          <div class="badges">
+            ${normalizedActions.slice(0, 5).map((action) => `<span class="badge">${action}</span>`).join("")}
+          </div>
+        </article>
+      `;
+      const feedbackLoopHtml = `
+        <article class="card community-card service-product">
+          <div class="service-hero-strip"><img src="assets/fluffygo-hero-border-collie.png" alt=""></div>
+          <h3>社区如何影响路线</h3>
+          <p>用户反馈会进入宠物友好证据层，影响下一次路线的站点选择、风险提示和备选方案。</p>
+          <div class="service-steps">
+            <div class="service-step">到店反馈</div>
+            <div class="service-step">证据更新</div>
+            <div class="service-step">路线重排</div>
+          </div>
+          <div class="walker-list">
+            <div class="walker-mini-card">
+              <div><b>拥挤度反馈</b><span>高峰期人流偏高的点位会降低低压力路线排序。</span></div>
+              <strong>避峰</strong>
+            </div>
+            <div class="walker-mini-card">
+              <div><b>准入规则反馈</b><span>外摆开放、犬型限制、室内规则会进入标签证据。</span></div>
+              <strong>核验</strong>
+            </div>
+          </div>
+          <button class="meituan-btn" style="margin-top:10px">提交路线反馈</button>
+        </article>
+      `;
+      const dogWalkingHtml = `
+        <article class="card community-card service-product">
+          <div class="service-hero-strip"><img src="assets/fluffygo-hero-border-collie.png" alt=""></div>
+          <h3>路线代溜履约</h3>
+          <p>当用户无法亲自出发，可将已生成路线转为认证代溜员履约方案，保留轨迹、停留点和状态回传。</p>
+          <div class="walker-profile">
+            <div class="walker-avatar"><img src="assets/fluffygo-border-collie-logo.png" alt=""></div>
+            <div>
+              <b>新街口低压力 45 分钟代溜</b>
+              <span>沿推荐路线执行 · 附近 1.2km · 4.9 分</span>
+            </div>
+          </div>
+          <div class="service-steps">
+            <div class="service-step">路线派单</div>
+            <div class="service-step">轨迹回传</div>
+            <div class="service-step">状态照片</div>
+          </div>
+          <div class="service-price-row">
+            <div class="service-price">39-69元</div>
+            <button class="meituan-btn" style="width:auto;margin:0;padding:10px 14px">转为代溜订单</button>
+          </div>
+        </article>
+      `;
+      const routeCommunity = document.getElementById("community-modules");
+      if (routeCommunity) {
+        routeCommunity.innerHTML = `
+          <article class="card community-card">
+            <h3>路线可信度验证</h3>
+            <p>这些反馈不是装饰内容，而是当前路线的可信度来源，会影响拥挤度、准入规则和站点排序。</p>
+            <div class="verify-grid">
+              <div class="verify-cell"><span>近 7 天验证</span><b>${Math.max(6, routeStops.length * 3)} 人次</b></div>
+              <div class="verify-cell"><span>需复核站点</span><b>${restrictedStops || 1} 个</b></div>
+              <div class="verify-cell"><span>主要风险</span><b>高峰拥挤</b></div>
+              <div class="verify-cell"><span>推荐影响</span><b>保留备选线</b></div>
+            </div>
+            ${normalizedPosts.slice(0, 2).map((post) => `
+              <div class="mini-post"><b>${text(post.tag, "反馈")}</b>${text(post.content)}</div>
+            `).join("")}
+            <div class="badges">
+              ${normalizedActions.slice(0, 4).map((action) => `<span class="badge">${action}</span>`).join("")}
+            </div>
+          </article>
+          <article class="card community-card service-product">
+            <h3>路线代溜履约</h3>
+            <p>无法亲自出发时，可将当前路线转为认证代溜员履约方案。</p>
+            <div class="service-steps">
+              <div class="service-step">路线派单</div>
+              <div class="service-step">轨迹回传</div>
+              <div class="service-step">状态照片</div>
+            </div>
+            <button class="meituan-btn" style="margin-top:10px">转为代溜订单</button>
+          </article>
+        `;
+      }
+      const communityPage = document.getElementById("community-page-content");
+      if (communityPage) communityPage.innerHTML = forumHtml + feedbackLoopHtml + dogWalkingHtml;
+    }
+
+    function profileRouteSnapshot(routeType) {
+      const comparisons = state.backendPlan?.route_comparisons || fallbackRouteComparisons();
+      const comparison = comparisons.find((item) => item.route_type === routeType);
+      const route = findRoute(routeType) || findRoute(routeBaseTypes[routeType]) || {};
+      return {
+        route_type: routeType,
+        route_name: comparison?.route_name || route.route_name || `${routeLabels[routeType] || "收藏"}路线`,
+        best_for: comparison?.best_for || route.summary || "适合按当前偏好再次生成。",
+        estimated_budget: comparison?.estimated_budget || route.estimated_budget || "-",
+        walking_distance_m: comparison?.walking_distance_m || "-",
+        pet_friendly_score: comparison?.pet_friendly_score || route.pet_friendly_score || "-",
+        tradeoff_summary: comparison?.tradeoff_summary || route.risk_summary || "点击后可按当前输入重新规划这条路线。",
+      };
+    }
+
+    function renderAssetHero(title, desc, stats) {
+      return `
+        <section class="card asset-hero">
+          <h2>${title}</h2>
+          <p>${desc}</p>
+          <div class="asset-summary-grid">
+            ${stats.map((item) => `
+              <div class="asset-summary-cell"><b>${item.value}</b><span>${item.label}</span></div>
+            `).join("")}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderRouteAssetDetail() {
+      const routes = ["low_stress", "rainy_day", "service_supply", "budget_saver"].map(profileRouteSnapshot);
+      return `
+        ${renderAssetHero("我的路线收藏", "常用路线会沉淀为可复用资产，后续可按天气、预算和宠物状态一键重算。", [
+          { value: routes.length, label: "可复用路线" },
+          { value: "3", label: "高频场景" },
+          { value: "可重算", label: "推荐状态" },
+        ])}
+        <div class="asset-list">
+          ${routes.map((route) => `
+            <article class="card asset-item">
+              <div class="asset-item-head">
+                <h3>${text(route.route_name)}</h3>
+                <span class="asset-status ok">已收藏</span>
+              </div>
+              <p>${text(route.best_for)}</p>
+              <div class="asset-tags">
+                <span>预算 ${text(route.estimated_budget)}</span>
+                <span>距离 ${text(route.walking_distance_m)}m</span>
+                <span>适配 ${text(route.pet_friendly_score)}</span>
+              </div>
+              <p style="margin-top:8px">${text(route.tradeoff_summary)}</p>
+              <div class="asset-action-row">
+                <button class="meituan-btn" data-open-route="${route.route_type}" type="button">按此路线重算</button>
+              </div>
+            </article>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderConfirmationAssetDetail() {
+      const candidates = getAllPois()
+        .filter((poi) => /咖啡|宠物|用品|洗护|商场|餐饮/.test(`${poi.name || ""}${poi.category || ""}${poi.space_type || ""}`))
+        .slice(0, 4);
+      const rows = candidates.length ? candidates : [
+        { name: "宠物友好咖啡外摆点", address: "南京新街口周边", pet_friendly: { status: "需确认" }, business: { transaction_action: "美团咨询" } },
+        { name: "宠物用品补给点", address: "核心商圈边缘", pet_friendly: { status: "宠物服务相关" }, business: { transaction_action: "查看团购" } },
+      ];
+      return `
+        ${renderAssetHero("到店确认记录", "把电话咨询、团购入口和准入结果集中管理，减少临出发前反复确认的成本。", [
+          { value: rows.length, label: "记录门店" },
+          { value: "2", label: "已确认" },
+          { value: "1", label: "需复核" },
+        ])}
+        <div class="asset-list">
+          ${rows.map((poi, index) => {
+            const ok = /宠物服务|可能宠物友好/.test(text(poi.pet_friendly?.status));
+            return `
+              <article class="card asset-item">
+                <div class="asset-item-head">
+                  <h3>${text(poi.name)}</h3>
+                  <span class="asset-status ${ok ? "ok" : "warn"}">${ok ? "可优先联系" : "需二次确认"}</span>
+                </div>
+                <p>${text(poi.address, "地址待补充")}</p>
+                <div class="asset-tags">
+                  <span>${text(poi.pet_friendly?.status, "待确认")}</span>
+                  <span>${index % 2 ? "团购入口已关联" : "电话确认待完成"}</span>
+                  <span>${index % 3 ? "中型犬需牵引" : "外摆优先"}</span>
+                </div>
+                <div class="asset-action-row">
+                  <button class="meituan-btn" type="button">${meituanAction(poi.business?.transaction_action || "美团咨询")}</button>
+                </div>
+              </article>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    function renderReviewAssetDetail() {
+      const reviews = [
+        { title: "外摆开放状态", status: "已入库", text: "补充门店是否开放外摆、是否支持中型犬停留，影响消费点排序。", tags: ["外摆", "中型犬", "商户准入"] },
+        { title: "人流压力反馈", status: "已影响推荐", text: "高峰期拥挤反馈会降低该点在低压力路线中的权重。", tags: ["16:00-18:00", "避峰", "宠物压力"] },
+        { title: "入口与牵引条件", status: "待复核", text: "记录更宽入口、可短暂停留位置和牵引要求，供后续用户参考。", tags: ["入口", "牵引", "真实反馈"] },
+      ];
+      return `
+        ${renderAssetHero("路线核验贡献", "用户反馈不是普通评论，而是会反哺路线推荐、宠物友好标签和风险提示的数据资产。", [
+          { value: "12", label: "贡献反馈" },
+          { value: "7", label: "已入库" },
+          { value: "3", label: "待核验" },
+        ])}
+        <div class="asset-list">
+          ${reviews.map((item, index) => `
+            <article class="card asset-item">
+              <div class="asset-item-head">
+                <h3>${item.title}</h3>
+                <span class="asset-status ${index === 2 ? "warn" : "ok"}">${item.status}</span>
+              </div>
+              <p>${item.text}</p>
+              <div class="asset-tags">${item.tags.map((tag) => `<span>${tag}</span>`).join("")}</div>
+            </article>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderPetAssetDetail() {
+      return `
+        ${renderAssetHero("宠物出行档案", "宠物体型、胆量和牵引习惯会直接影响路线排序，尤其是拥挤度、空间类型和停留时长。", [
+          { value: "中型犬", label: "体型" },
+          { value: "偏谨慎", label: "胆量" },
+          { value: "低压力", label: "路线偏好" },
+        ])}
+        <div class="asset-list">
+          <article class="card asset-item">
+            <div class="asset-item-head"><h3>推荐偏好</h3><span class="asset-status ok">已用于规划</span></div>
+            <p>优先选择公园、绿地、街区活动空间和外摆友好点；降低核心商圈高拥挤室内点权重。</p>
+            <div class="asset-tags"><span>短时散步</span><span>外摆优先</span><span>避开拥挤</span></div>
+          </article>
+          <article class="card asset-item">
+            <div class="asset-item-head"><h3>风险约束</h3><span class="asset-status warn">持续更新</span></div>
+            <p>中型犬进入商场、餐饮室内区和地下通道前需要更高置信证据；雨天路线默认提示备选属性。</p>
+            <div class="asset-tags"><span>犬型限制</span><span>牵引要求</span><span>雨天备选</span></div>
+          </article>
+          <article class="card asset-item">
+            <div class="asset-item-head"><h3>出行习惯</h3><span class="asset-status ok">可调整</span></div>
+            <p>常用起点为南京新街口，常用时长 2-2.5 小时，预算偏好 60-100 元。</p>
+            <div class="asset-action-row">
+              <button class="meituan-btn" data-nav-target="route" type="button">按档案生成路线</button>
+            </div>
+          </article>
+        </div>
+      `;
+    }
+
+    function openProfileAsset(type) {
+      const titles = {
+        routes: "我的路线收藏",
+        confirmations: "到店确认记录",
+        reviews: "路线核验贡献",
+        pet: "宠物出行档案",
+      };
+      const renderers = {
+        routes: renderRouteAssetDetail,
+        confirmations: renderConfirmationAssetDetail,
+        reviews: renderReviewAssetDetail,
+        pet: renderPetAssetDetail,
+      };
+      document.getElementById("profile-detail-title").textContent = titles[type] || "路线资产";
+      document.getElementById("profile-detail-content").innerHTML = (renderers[type] || renderRouteAssetDetail)();
+      switchPage("profile-detail");
+    }
+
+    function switchPage(tab) {
+      document.querySelectorAll(".page").forEach((page) => page.classList.remove("active"));
+      const target = document.getElementById(`page-${tab}`);
+      if (target) target.classList.add("active");
+      document.querySelectorAll("[data-tab]").forEach((item) => {
+        const activeTab = tab === "community-detail" ? "community" : tab === "profile-detail" ? "profile" : tab;
+        item.classList.toggle("active", item.dataset.tab === activeTab);
+      });
+      if (tab === "community" && !document.getElementById("community-page-content").innerHTML.trim()) {
+        renderCommunityModules();
+      }
+      if (tab === "route" && state.generated) {
+        window.setTimeout(() => {
+          const route = state.backendPlan?.route || findRoute(state.routeType) || findRoute("main");
+          if (route) void renderRealMap(route);
+        }, 260);
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showAdjustment(message) {
+      const node = document.getElementById("adjust-message");
+      if (!node) return;
+      node.textContent = message;
+      node.classList.remove("hidden");
+    }
+
+    async function showDemo(showMessage = false, forceRouteType = null) {
+      const parsed = parseUserNeed();
+      const requestedRouteType = forceRouteType || parsed.routeType;
+      const generateBtn = document.getElementById("generate-btn");
+      generateBtn.classList.add("loading");
+      generateBtn.textContent = "正在规划路线...";
+      state.backendPlan = null;
+      state.routeType = requestedRouteType;
+      state.generated = true;
+      document.getElementById("demo-content").classList.remove("hidden");
+      switchPage("route");
+
+      try {
+        state.backendPlan = await requestBackendPlan(document.getElementById("user-input").value.trim(), forceRouteType);
+        state.routeType = state.backendPlan.selected_route_type || requestedRouteType;
+        setApiStatus(state.backendPlan.llm_used ? "LLM 增强" : "在线规划", true);
+        renderParsedInput();
+        renderRoute();
+        showAdjustment(state.backendPlan.response_summary || parsed.message);
+      } catch (error) {
+        state.backendPlan = null;
+        state.routeType = requestedRouteType;
+        setApiStatus("基础规划", false);
+        renderParsedInput();
+        renderRoute();
+        if (showMessage || parsed.routeType !== "main" || forceRouteType) {
+          showAdjustment(parsed.message);
+        } else {
+          const adjustNode = document.getElementById("adjust-message");
+          if (adjustNode) adjustNode.classList.add("hidden");
+        }
+      } finally {
+        generateBtn.classList.remove("loading");
+        generateBtn.textContent = "智能规划";
+      }
+    }
+
+    function bindEvents() {
+      document.getElementById("generate-btn").addEventListener("click", async () => showDemo());
+      document.querySelectorAll("[data-tag]").forEach((button) => {
+        button.addEventListener("click", async () => applyQuickTag(button.dataset.tag));
+      });
+      document.querySelectorAll("[data-area]").forEach((button) => {
+        button.addEventListener("click", async () => selectArea(button.dataset.area));
+      });
+      document.getElementById("home-refresh-btn")?.addEventListener("click", async () => refreshHomeNearby());
+      document.getElementById("home-plan-btn")?.addEventListener("click", async () => {
+        if (state.homeNearbyPois?.length) {
+          await planFromHomePoi(0);
+        } else {
+          await showDemo(true);
+        }
+      });
+      document.addEventListener("click", async (event) => {
+        const homePoi = event.target.closest("[data-home-poi-index]");
+        if (homePoi) {
+          await planFromHomePoi(homePoi.dataset.homePoiIndex);
+        }
+        const profileAsset = event.target.closest("[data-profile-asset]");
+        if (profileAsset) {
+          openProfileAsset(profileAsset.dataset.profileAsset);
+        }
+        const openRoute = event.target.closest("[data-open-route]");
+        if (openRoute) {
+          await showDemo(true, openRoute.dataset.openRoute);
+        }
+        const dynamicNav = event.target.closest("[data-nav-target]");
+        if (dynamicNav && !dynamicNav.matches(".home-card,[data-home-action]")) {
+          const target = dynamicNav.dataset.navTarget;
+          switchPage(target);
+          if (target === "route" && !state.generated) await showDemo();
+        }
+      });
+      document.querySelectorAll("[data-route]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const action = button.dataset.route;
+          if (action === "budget") {
+            const input = document.getElementById("user-input");
+            if (!input.value.includes("60 元以内")) {
+              input.value = `${input.value.replace(/\s+/g, " ").trim()} 预算控制在 60 元以内。`;
+            }
+            await showDemo(true, "main");
+          } else {
+            await showDemo(true, action);
+          }
+        });
+      });
+      document.querySelectorAll("[data-tab]").forEach((button) => {
+        button.addEventListener("click", () => switchPage(button.dataset.tab));
+      });
+      document.querySelectorAll("[data-nav-target]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const target = button.dataset.navTarget;
+          switchPage(target);
+          if (target === "route") {
+            if (button.dataset.homeAction === "rainy") {
+              await applyQuickTag("rainy");
+            } else if (!state.generated) {
+              await showDemo();
+            }
+          }
+        });
+      });
+      document.addEventListener("click", (event) => {
+        const card = event.target.closest("[data-community-post]");
+        if (card) openCommunityPost(card.dataset.communityPost);
+      });
+      document.getElementById("label-modal-close").addEventListener("click", closeLabelModal);
+      document.getElementById("label-modal").addEventListener("click", (event) => {
+        if (event.target.id === "label-modal") closeLabelModal();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeLabelModal();
+          return;
+        }
+        if (event.key !== "Enter" && event.key !== " ") return;
+        const card = event.target.closest("[data-community-post]");
+        if (card) {
+          event.preventDefault();
+          openCommunityPost(card.dataset.communityPost);
+        }
+      });
+      document.getElementById("back-community").addEventListener("click", () => switchPage("community"));
+      document.getElementById("back-profile-detail").addEventListener("click", () => switchPage("profile"));
+    }
+
+    async function init() {
+      try {
+        const response = await fetch("fluffygo_demo_poi.json", { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        state.data = await response.json();
+        const project = state.data.project || {};
+        document.getElementById("area-pill").textContent = project.demo_area || "南京新街口";
+        renderChips();
+        bindEvents();
+        renderCommunityModules();
+        await checkBackendHealth();
+        await loadFrontendConfig();
+        updateAreaTabs();
+        await refreshHomeNearby();
+      } catch (error) {
+        const panel = document.getElementById("error-panel");
+        panel.classList.remove("hidden");
+        panel.innerHTML = `
+          <div style="padding:12px">
+            <h2 style="margin:0 0 8px;font-size:18px">页面数据未就绪</h2>
+            <p style="margin:0;color:#666">请确认当前目录存在 <b>fluffygo_demo_poi.json</b>，并通过本地 HTTP 服务打开页面。</p>
+            <p style="color:#666">推荐命令：<code>python -m http.server 8000</code></p>
+            <p style="color:#999">错误信息：${error.message}</p>
+          </div>
+        `;
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
