@@ -17,8 +17,9 @@ from pydantic import BaseModel, Field
 
 load_dotenv()
 
-DATA_PATH = Path("fluffygo_demo_poi.json")
-DATA_DIR = Path("data")
+BASE_DIR = Path(__file__).resolve().parent
+DATA_PATH = BASE_DIR / "fluffygo_demo_poi.json"
+DATA_DIR = BASE_DIR / "data"
 FEEDBACK_PATH = DATA_DIR / "user_feedback.json"
 DEFAULT_LLM_URL = "https://api.openai.com/v1/chat/completions"
 SUPPORTED_ROUTE_TYPES = {
@@ -52,12 +53,12 @@ app.add_middleware(
 )
 
 # Serve static assets (images, etc.)
-app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+app.mount("/assets", StaticFiles(directory=BASE_DIR / "assets"), name="assets")
 
 
 @app.get("/")
 async def serve_frontend():
-    return FileResponse("stitch_demo.html", media_type="text/html")
+    return FileResponse(BASE_DIR / "stitch_demo.html", media_type="text/html")
 
 
 class PlanRouteRequest(BaseModel):
